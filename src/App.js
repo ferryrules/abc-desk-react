@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import Company from './Components/Company'
+import Nav from './Components/Nav'
 
 export default class App extends React.Component {
 
@@ -22,6 +23,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <Nav />
         <Company companies={this.state.companies} />
       </div>
     );
