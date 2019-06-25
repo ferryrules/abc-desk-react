@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import Company from './Components/Company'
+
 export default class App extends React.Component {
+
+  state = {
+    companies: []
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/companies/')
+    .then(r=>r.json())
+    .then(companies=>{
+      this.setState({
+        companies
+      })
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Company companies={this.state.companies} />
       </div>
     );
   }
