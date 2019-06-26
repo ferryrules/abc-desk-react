@@ -1,6 +1,5 @@
 export const loginUser = (username, password) => {
   return (dispatch) => {
-    // console.log(process.env.REACT_APP_API_ENDPOINT)
     dispatch({ type: 'AUTHENTICATING_USER' })
 
     fetch(`http://localhost:3000/login`,
