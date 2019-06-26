@@ -13,7 +13,6 @@ const App = props => {
       <Nav />
       <Switch>
         <Route exact path="/" render={() => <Redirect to="/profile" />} />
-
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/login" component={LoginForm} />
         <Route component={NotFound} />
@@ -22,4 +21,4 @@ const App = props => {
   )
 }
 
-export default withRouter(App) //withRouter is a Higher Order Component (HOC) that returns a COPY of App with React router props injected
+export default withRouter(App)

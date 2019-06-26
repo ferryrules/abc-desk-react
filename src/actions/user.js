@@ -1,5 +1,5 @@
 export const loginUser = (username, password) => {
-  return (dispatch) => { //thunk
+  return (dispatch) => {
     // console.log(process.env.REACT_APP_API_ENDPOINT)
     dispatch({ type: 'AUTHENTICATING_USER' })
 
@@ -34,9 +34,8 @@ export const loginUser = (username, password) => {
 }
 
 export const fetchCurrentUser = () => {
-  // takes the token in localStorage and finds out who it belongs to
   return (dispatch) => {
-    dispatch(authenticatingUser()) //tells the app we are fetching
+    dispatch(authenticatingUser())
     fetch(`http://localhost:3000/profile`, {
       method: 'GET',
       headers: {
@@ -58,5 +57,4 @@ export const failedLogin = (errorMsg) => ({
   payload: errorMsg
 })
 
-// tell our app we're currently fetching
 export const authenticatingUser = () => ({ type: 'AUTHENTICATING_USER' })

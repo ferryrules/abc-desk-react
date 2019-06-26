@@ -20,7 +20,6 @@ class Nav extends React.Component {
           <Fragment>
             <Menu.Item as={NavLink} to="/profile" name="Profile" active={pathname === '/profile'} />
             <Menu.Menu position="right">
-              {/* TODO: logout */}
             <Menu.Item to="/logout" name="Logout" onClick={this.logout} />
             </Menu.Menu>
           </Fragment>

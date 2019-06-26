@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
 import { withRouter, Redirect } from 'react-router'
 import { loginUser } from '../actions/user'
 import { Button, Form, Segment, Message } from 'semantic-ui-react'
+// import { bindActionCreators } from 'redux'
 
 class LoginForm extends React.Component {
 
@@ -13,9 +13,9 @@ class LoginForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleLoginSubmit = (e) => { //semantic forms preventDefault for you
-    this.props.loginUser(this.state.username, this.state.password) //comes from mapDispatchToProps
-    this.setState({ username: '', password: '' }) //reset form to initial state
+  handleLoginSubmit = (e) => {
+    this.props.loginUser(this.state.username, this.state.password)
+    this.setState({ username: '', password: '' }) 
   }
 
   render() {
@@ -56,34 +56,11 @@ class LoginForm extends React.Component {
   }
 }
 
-// const mapStateToProps = (reduxStoreState) => {
-//   return {
-//     authenticatingUser: reduxStoreState.usersReducer.authenticatingUser,
-//     failedLogin: reduxStoreState.usersReducer.failedLogin,
-//     error: reduxStoreState.usersReducer.error,
-//     loggedIn: reduxStoreState.usersReducer.loggedIn
-//   }
-// }
-
 const mapStateToProps = ({ usersReducer: { authenticatingUser, failedLogin, error, loggedIn } }) => ({
   authenticatingUser,
   failedLogin,
   error,
   loggedIn
 })
-
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     loginUser: (username, password) => dispatch(loginUser(username, password))
-//   }
-// }
-
-// const connectedToReduxHOC = connect(mapStateToProps, mapDispatchToProps)
-// const connectedToReduxLoginForm = connectedToReduxHOC(LoginForm)
-// const connectedToReduxHOCWithRouterLoginForm = withRouter(connectedToReduxLoginForm)
-//
-// export default connectedToReduxHOCWithRouterLoginForm
-
 
 export default withRouter(connect(mapStateToProps, { loginUser })(LoginForm))

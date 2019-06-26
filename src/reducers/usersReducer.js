@@ -6,17 +6,16 @@ const defaultState = {
   error: null
 }
 
-const usersReducer = /*FUNCTION*/ (state=defaultState, action) => {
+const usersReducer = (state=defaultState, action) => {
   switch (action.type) {
     // TODO: move to types
     case 'SET_CURRENT_USER':
-      //action.payload { username: 'Chandler Bing', bio: 'my user bio', avatar: 'some image url' }
       return { ...state, user: action.payload, loggedIn: true, authenticatingUser: false }
-    case 'AUTHENTICATING_USER': //tells the app we're fetching
+    case 'AUTHENTICATING_USER':
       return { ...state, authenticatingUser: true }
     case 'AUTHENTICATED_USER':
       return { ...state, authenticatingUser: false }
-    case 'FAILED_LOGIN': //for error handling
+    case 'FAILED_LOGIN':
       return {
         ...state,
         failedLogin: true,
@@ -27,9 +26,9 @@ const usersReducer = /*FUNCTION*/ (state=defaultState, action) => {
       return {
         ...state,
         loggedIn: false,
-        failedLogin: true,
-        error: action.payload,
-        authenticatingUser: false
+        // failedLogin: true,
+        // error: action.payload,
+        // authenticatingUser: false
       }
     default:
       return state
