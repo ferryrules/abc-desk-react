@@ -5,12 +5,7 @@ import { Menu } from 'semantic-ui-react'
 
 class Nav extends React.Component {
 
-  logout = (e) => {
-    localStorage.clear()
-  }
-
   render() {
-    console.log(this.props.user.loggedIn);
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
       <Menu pointing secondary>
@@ -19,7 +14,7 @@ class Nav extends React.Component {
             <Menu.Item as={NavLink} to="/profile" name="Profile" active={pathname === '/profile'} />
             <Menu.Menu position="right">
               {/* TODO: logout */}
-            <Menu.Item to="/logout" name="Logout" onClick={this.logout} />
+            <Menu.Item to="/logout" name="Logout" onClick={null} />
             </Menu.Menu>
           </Fragment>
         ) : (
