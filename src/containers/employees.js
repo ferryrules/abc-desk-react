@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
 
-class Company extends React.Component {
+class Employees extends React.Component {
 
   eachEmployee = () => {
     if (this.props.currentCompany.employees) {
@@ -26,13 +26,12 @@ class Company extends React.Component {
   }
 
   render() {
-    console.log("company", this.eachEmployee());
     return (
-      <div>
+      <div className="ui cards">
         {this.eachEmployee()}
       </div>
     )
   }
 }
 
-export default Company
+export default Employees

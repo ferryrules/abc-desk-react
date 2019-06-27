@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Card, List } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
-import Company from '../components/company'
+import Employees from './employees'
 
 class CompanyCards extends React.Component {
 
@@ -58,7 +58,7 @@ class CompanyCards extends React.Component {
       <div className="ui cards">
         {this.state.companies.length > 0 ?
           eachCompany
-        : <Company currentCompany={this.state.currentCompany} />}
+        : <Employees currentCompany={this.state.currentCompany} />}
       </div>
     )
   }
