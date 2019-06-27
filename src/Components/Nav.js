@@ -2,8 +2,6 @@ import React, { Fragment } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
-// import { fetchCurrentUser } from '../actions/user'
-// import LoginForm from './loginForm'
 
 class Nav extends React.Component {
 
@@ -11,16 +9,15 @@ class Nav extends React.Component {
     localStorage.clear()
     this.props.dispatch({ type: 'LOG_OUT' })
   }
-// as={NavLink} to="/companies" name="My Companies" id='myCompanies' active={pathname === '/companies'}
   render() {
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
       <Menu pointing secondary>
         {loggedIn ? (
           <Fragment>
-            <Menu.Item as={NavLink} to="/profile" name="Profile" active={pathname === '/profile'} />
             <Menu.Item><a href="http://localhost:3001/companies">My Companies</a></Menu.Item>
             <Menu.Menu position="right">
+              <Menu.Item as={NavLink} to="/profile" name="Profile" active={pathname === '/profile'} />
             <Menu.Item to="/logout" name="Logout" onClick={this.logout} />
             </Menu.Menu>
           </Fragment>
@@ -35,3 +32,9 @@ class Nav extends React.Component {
 const mapStateToProps = ({ usersReducer: user }) => ({ user })
 
 export default withRouter(connect(mapStateToProps)(Nav))
+
+
+
+// as={NavLink} to="/companies" name="My Companies" id='myCompanies' active={pathname === '/companies'}
+// import { fetchCurrentUser } from '../actions/user'
+// import LoginForm from './loginForm'

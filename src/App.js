@@ -3,7 +3,7 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import Profile from './components/profile'
 import LoginForm from './components/loginForm'
 import Nav from './components/nav'
-import CompanyCards from './components/companyCards'
+import CompanyCards from './containers/companyCards'
 import NotFound from './components/notFound'
 import './App.css'
 
