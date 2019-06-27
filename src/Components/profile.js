@@ -13,7 +13,8 @@ const Profile = ({ email, username, permission, fname, lname }) => (
   </Card>
 )
 
-const mapStateToProps = ({ usersReducer: { user: { email, username, permission, fname, lname } } }) => ({
+const mapStateToProps = ({ usersReducer: { user: { id, email, username, permission, fname, lname } } }) => ({
+  id,
   email,
   username,
   permission,

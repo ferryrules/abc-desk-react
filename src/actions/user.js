@@ -7,7 +7,7 @@ export const loginUser = (username, password) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
         user: {
@@ -38,7 +38,7 @@ export const fetchCurrentUser = () => {
     fetch(`http://localhost:3000/profile`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
       }
     })
       .then(response => response.json())

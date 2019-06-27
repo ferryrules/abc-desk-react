@@ -3,6 +3,7 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import Profile from './components/profile'
 import LoginForm from './components/loginForm'
 import Nav from './components/nav'
+import Company from './components/company'
 import NotFound from './components/notFound'
 import './App.css'
 
@@ -15,6 +16,7 @@ const App = props => {
         <Route exact path="/" render={() => <Redirect to="/profile" />} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/login" component={LoginForm} />
+        <Route exact path="/companies" component={Company} />
         <Route component={NotFound} />
       </Switch>
     </Fragment>
