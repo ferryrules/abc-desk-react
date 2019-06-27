@@ -6,18 +6,29 @@ import withAuth from '../hocs/withAuth'
 class Dashboard extends React.Component {
 
   state = {
-    tickets: [],
     payrollSums: []
   }
 
   render() {
-    console.log("dashboard");
+    console.log("dash props", this.props.companies);
+    console.log("dash props", this.props.tickets);
     return (
       <div>
-        The Dash
+        Dash
       </div>
     )
   }
 }
 
-export default withAuth(connect()(Dashboard))
+const mapStateToProps = ({ usersReducer: { user: { id, email, username, permission, fname, lname, companies, tickets } } }) => ({
+  id,
+  email,
+  username,
+  permission,
+  fname,
+  lname,
+  companies,
+  tickets
+})
+
+export default withAuth(connect(mapStateToProps)(Dashboard))
