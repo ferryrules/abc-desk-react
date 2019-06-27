@@ -6,8 +6,13 @@ import withAuth from '../hocs/withAuth'
 const Profile = ({ email, username, permission, fname, lname }) => (
   <Card>
     <Card.Content>
-      <Card.Header>{username}</Card.Header>
-      <Card.Description>{permission}</Card.Description>
+      <Card.Header>{fname} {lname}</Card.Header>
+      <Card.Meta>{permission}</Card.Meta>
+      <Card.Description>
+        Username: {username}
+        <br />
+        Email: {email}
+      </Card.Description>
     </Card.Content>
   </Card>
 )

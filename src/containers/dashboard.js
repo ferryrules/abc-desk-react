@@ -10,23 +10,24 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log("dash props", this.props.companies);
-    console.log("dash props", this.props.tickets);
+    const { companies, tickets } = this.props
+    console.log("dash companies", this.props.companies);
+    console.log("dash tickets", this.props.tickets);
+    console.log("dash props", this.props);
+    const eachCompany = companies.map(c=>{
+      return c.name
+    })
+    console.log(eachCompany);
     return (
       <div>
         Dash
+        {eachCompany}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ usersReducer: { user: { id, email, username, permission, fname, lname, companies, tickets } } }) => ({
-  id,
-  email,
-  username,
-  permission,
-  fname,
-  lname,
+const mapStateToProps = ({ usersReducer: { user: { companies, tickets } } }) => ({
   companies,
   tickets
 })
