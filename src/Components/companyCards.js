@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Card, List } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
 
-class Company extends React.Component {
+class CompanyCards extends React.Component {
 
   state = {
     companies: [],
@@ -61,4 +61,4 @@ const mapStateToProps = ({ usersReducer: { user: { id, email, username, permissi
   lname
 })
 
-export default withAuth(connect(mapStateToProps)(Company))
+export default withAuth(connect(mapStateToProps)(CompanyCards))
