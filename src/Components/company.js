@@ -1,7 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Card, List } from 'semantic-ui-react'
-import withAuth from '../hocs/withAuth'
+import { Card } from 'semantic-ui-react'
 
 class Company extends React.Component {
 

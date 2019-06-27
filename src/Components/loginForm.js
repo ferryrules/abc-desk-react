@@ -15,13 +15,13 @@ class LoginForm extends React.Component {
 
   handleLoginSubmit = (e) => {
     this.props.loginUser(this.state.username, this.state.password)
-    this.setState({ username: '', password: '' }) 
+    this.setState({ username: '', password: '' })
   }
 
   render() {
     // console.log('%c LOGIN FORM PROPS: ', 'color: red', this.props)
     return this.props.loggedIn ? (
-      <Redirect to="/profile" />
+      <Redirect to="/dashboard" />
     ) : (
       <Segment>
         <Form

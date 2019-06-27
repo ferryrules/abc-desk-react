@@ -7,7 +7,6 @@ const Profile = ({ email, username, permission, fname, lname }) => (
   <Card>
     <Card.Content>
       <Card.Header>{username}</Card.Header>
-
       <Card.Description>{permission}</Card.Description>
     </Card.Content>
   </Card>
