@@ -21,12 +21,14 @@ class Company extends React.Component {
             </Card.Content>
           </Card>
         )
+      }).sort((a,b)=>{
+        return a.props.children.props.children[0].props.children.localeCompare(b.props.children.props.children[0].props.children)
       })
     }
   }
 
   render() {
-    console.log("company", this.props.currentCompany.employees);
+    console.log("company", this.eachEmployee());
     return (
       <div>
         {this.eachEmployee()}

@@ -11,7 +11,7 @@ class Nav extends React.Component {
     localStorage.clear()
     this.props.dispatch({ type: 'LOG_OUT' })
   }
-
+// as={NavLink} to="/companies" name="My Companies" id='myCompanies' active={pathname === '/companies'}
   render() {
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
@@ -19,7 +19,7 @@ class Nav extends React.Component {
         {loggedIn ? (
           <Fragment>
             <Menu.Item as={NavLink} to="/profile" name="Profile" active={pathname === '/profile'} />
-            <Menu.Item as={NavLink} to="/companies" name="My Companies" active={pathname === '/companies'} />
+            <Menu.Item><a href="http://localhost:3001/companies">My Companies</a></Menu.Item>
             <Menu.Menu position="right">
             <Menu.Item to="/logout" name="Logout" onClick={this.logout} />
             </Menu.Menu>
