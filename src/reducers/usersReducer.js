@@ -25,10 +25,7 @@ const usersReducer = (state=defaultState, action) => {
     case 'LOG_OUT':
       return {
         ...state,
-        loggedIn: false,
-        // failedLogin: true,
-        // error: action.payload,
-        // authenticatingUser: false
+        loggedIn: false
       }
     default:
       return state

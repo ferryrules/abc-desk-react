@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Card, List } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
+import Company from './company'
 
 class CompanyCards extends React.Component {
 
@@ -25,11 +26,20 @@ class CompanyCards extends React.Component {
     })
   }
 
+  selectCompany = (e) => {
+    // console.log(e.currentTarget.id);
+    let currentCompany = this.state.companies.find(c=>c.id===parseInt(e.currentTarget.id))
+    this.setState({
+      companies: [],
+      currentCompany
+    })
+  }
+
   render() {
-    console.log(this.props);
+    // console.log(this.state);
     const eachCompany = this.state.companies.map(c=>{
       return (
-        <Card key={c.name} onClick={(e)=>{console.log(e.currentTarget.id)}} id={c.id}>
+        <Card key={c.name} onClick={(e)=>{this.selectCompany(e)}} id={c.id}>
           <Card.Content>
             <Card.Header>{c.name}</Card.Header>
               <Card.Description>
@@ -46,19 +56,12 @@ class CompanyCards extends React.Component {
     })
     return (
       <div className="ui cards">
-        {eachCompany}
+        {this.state.companies.length > 0 ?
+          eachCompany
+        : <Company currentCompany={this.state.currentCompany} />}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ usersReducer: { user: { id, email, username, permission, fname, lname } } }) => ({
-  id,
-  email,
-  username,
-  permission,
-  fname,
-  lname
-})
-
-export default withAuth(connect(mapStateToProps)(CompanyCards))
+export default withAuth(connect()(CompanyCards))
