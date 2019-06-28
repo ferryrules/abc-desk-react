@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Card } from 'semantic-ui-react'
-import Employee from '../components/employee'
+// import Employee from '../components/employee'
 
 class Employees extends React.Component {
 

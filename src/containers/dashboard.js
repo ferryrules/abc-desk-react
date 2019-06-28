@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 // import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 // import { connect } from 'react-redux'
 import withAuth from '../hocs/withAuth'

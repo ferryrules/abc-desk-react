@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Dropdown, Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 class Nav extends React.Component {
 

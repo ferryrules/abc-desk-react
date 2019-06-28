@@ -2,8 +2,14 @@ import React from 'react'
 import { Card } from 'semantic-ui-react'
 
 export default class Company extends React.Component {
+
+  selectCompany = (e) => {
+    console.log(e.currentTarget);
+  }
+
   render() {
     console.log(this.props);
+    console.log(this.state);
     const c = this.props.company
     return (
       <Card key={c.id} onClick={(e)=>{this.selectCompany(e)}} id={c.id}>
@@ -11,9 +17,9 @@ export default class Company extends React.Component {
           <Card.Header>{c.name}</Card.Header>
           <Card.Meta>Employees: {c.employees.length}</Card.Meta>
           <Card.Description>
-            Tickets: {c.tickets.map(t=>{
-              return t.title + ' - ' + t.priority
-            })}
+            Tickets
+            <br />
+            {this.ticketPris}
           </Card.Description>
         </Card.Content>
       </Card>
