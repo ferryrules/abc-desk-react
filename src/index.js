@@ -10,9 +10,10 @@ import 'semantic-ui-css/semantic.min.css'
 
 import App from './App'
 import usersReducer from './reducers/usersReducer' //TODO: move
+import companiesReducer from './reducers/usersReducer' //TODO: move
 import registerServiceWorker from './registerServiceWorker'
 
-const rootReducer = combineReducers({ usersReducer: usersReducer }) //TODO: move this too
+const rootReducer = combineReducers({ usersReducer: usersReducer }, { companiesReducer: companiesReducer }) //TODO: move this too
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk))) //TODO: move this
 
@@ -20,7 +21,7 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router store={store}>
       <App />
     </Router>
   </Provider>,
