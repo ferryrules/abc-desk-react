@@ -19,10 +19,10 @@ const App = props => {
         <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/login" component={LoginForm} />
-        <Route exact path="/companies" component={CompaniesList} />
+        <Route exact path="/dashboard" component={CompaniesList} />
         <Route exact path="/tickets" component={TicketsList} />
         <Route exact path="/employees" component={EmployeesList} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        // <Route exact path="/dashboard" component={Dashboard} />
         <Route component={NotFound} />
       </Switch>
     </Fragment>

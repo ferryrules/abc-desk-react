@@ -17,8 +17,8 @@ class Nav extends React.Component {
       <Menu pointing secondary>
         {loggedIn ? (
           <Fragment>
-            <Menu.Item as={NavLink} to="/dashboard" name="Dashboard" active={pathname === '/dashboard'} />
-            <Menu.Item><a href="http://localhost:3001/companies">Companies</a></Menu.Item>
+            {/*<Menu.Item as={NavLink} to="/dashboard" name="Dashboard" active={pathname === '/dashboard'} />*/}
+            <Menu.Item active={pathname === '/dashboard'}><a href="http://localhost:3001/dashboard">Dashboard</a></Menu.Item>
             <Menu.Menu position="right">
               <Menu.Item as={NavLink} to="/profile" name="Profile" active={pathname === '/profile'} />
               <Menu.Item to="/logout" name="Logout" onClick={this.logout} />

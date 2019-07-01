@@ -1,28 +1,12 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
-import withAuth from '../hocs/withAuth'
+// import withAuth from '../hocs/withAuth'
 // import Ticket from '../components/ticket.js'
 
 class TicketsList extends React.Component{
 
   state = {
-    tickets: [],
     hide: true
-  }
-
-  componentDidMount() {
-    fetch('http://localhost:3000/tickets', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-      }
-    })
-    .then(r=>r.json())
-    .then(tickets=>{
-      this.setState({
-        tickets
-      })
-    })
   }
 
   clearTickets = (t) => {
@@ -32,8 +16,8 @@ class TicketsList extends React.Component{
   }
 
   eachTicket = () => {
-    if (this.state.tickets) {
-      return this.state.tickets.map(t=>{
+    if (this.props.tickets) {
+      return this.props.tickets.map(t=>{
         return (
           <Card key={t.id} onClick={(t)=>{console.log(t.currentTarget.id)}} id={t.id}>
             <Card.Content>
@@ -49,7 +33,6 @@ class TicketsList extends React.Component{
           </Card>
         )
       }).sort((a,b)=>{
-        console.log(a, b);
         return a.props.children[1].props.children[1].localeCompare(b.props.children[1].props.children[1])
       })
     }
@@ -62,7 +45,7 @@ class TicketsList extends React.Component{
   }
 
   render() {
-    console.log("ticketsList", this.state.tickets);
+    console.log("ticketsList", this.props.tickets);
     // const eachTicket = this.props.tickets.map(t=>{
     //   return <Ticket key={t.id} ticket={t} tickets={this.props.tickets} clearTickets={this.clearTickets} />
     // })
@@ -80,4 +63,4 @@ class TicketsList extends React.Component{
   }
 }
 
-export default withAuth(TicketsList)
+export default TicketsList

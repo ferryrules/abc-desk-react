@@ -33,8 +33,8 @@ class Company extends React.Component {
       </Card>
       : (
         <div>
-          <EmployeesList company={c} />
-          <TicketsList tickets={c} />
+          <EmployeesList employees={c.employees} />
+          <TicketsList tickets={c.tickets} />
         </div>
       )
     )

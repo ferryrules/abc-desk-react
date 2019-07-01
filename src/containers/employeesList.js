@@ -1,36 +1,31 @@
 import React from 'react'
+import Employee from '../components/employee'
 // import { connect } from 'react-redux'
-import { Card } from 'semantic-ui-react'
+// import { Card } from 'semantic-ui-react'
 // import { Alert } from "shards-react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
-// import Employee from '../components/employee'
 
 class EmployeesList extends React.Component {
 
   state = {
+    employees: this.props.employees,
     hide: true
   }
 
+  clearEmployees = (emp) => {
+    this.setState({
+      employees: [emp]
+    })
+  }
+
   eachEmployee = () => {
-    if (this.props.company.employees) {
-      return this.props.company.employees.map(e=>{
-        return (
-          <Card key={e.id} onClick={(e)=>{console.log(e.currentTarget.id)}} id={e.id}>
-            <Card.Content>
-              <Card.Header>{e.full_name}</Card.Header>
-              <Card.Meta>{e.active_status ? "Active" : "Terminated"}</Card.Meta>
-              <Card.Description>
-                Pay Type: {e.pay_type}
-                <br />
-                Pay Rate: {e.pay_rate}
-              </Card.Description>
-            </Card.Content>
-          </Card>
-        )
+    if (this.state.employees) {
+      return this.state.employees.map(e=>{
+        return <Employee clearEmployees={this.clearEmployees} employee={e} />
       }).sort((a,b)=>{
-        return a.props.children.props.children[0].props.children.localeCompare(b.props.children.props.children[0].props.children)
+        return a.props.employee.full_name.localeCompare(b.props.employee.full_name)
       })
     }
   }
@@ -56,9 +51,5 @@ class EmployeesList extends React.Component {
     )
   }
 }
-
-// const mapStateToProps = ({ usersReducer: user }) => {
-//   return {user}
-// }
 
 export default EmployeesList
