@@ -1,12 +1,13 @@
 import React from 'react'
+// import Spinner from 'react-bootstrap/Button'
 // import { Card } from 'semantic-ui-react'
+import withAuth from '../hocs/withAuth'
 import Company from '../components/company.js'
 
-export default class CompaniesList extends React.Component{
+class CompaniesList extends React.Component{
 
   state = {
-    companies: [],
-    currentCompany: ''
+    companies: []
   }
 
   componentDidMount() {
@@ -24,9 +25,15 @@ export default class CompaniesList extends React.Component{
     })
   }
 
+  clearCompanies = (c) => {
+    this.setState({
+      companies: [c]
+    })
+  }
+
   render() {
     const eachCompany = this.state.companies.map(c=>{
-      return <Company key={c.id} company={c} />
+      return <Company key={c.id} company={c} companies={this.state.companies} clearCompanies={this.clearCompanies} />
     })
     return (
       <div>
@@ -35,3 +42,5 @@ export default class CompaniesList extends React.Component{
     )
   }
 }
+
+export default withAuth(CompaniesList)

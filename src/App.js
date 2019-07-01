@@ -4,8 +4,9 @@ import Profile from './containers/profile'
 import LoginForm from './components/loginForm'
 import Nav from './containers/nav'
 import CompaniesList from './containers/companiesList'
+import TicketsList from './containers/ticketsList'
 import Dashboard from './containers/dashboard'
-import Employees from './containers/employees'
+import EmployeesList from './containers/employeesList'
 import NotFound from './components/notFound'
 import './App.css'
 
@@ -19,7 +20,8 @@ const App = props => {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/companies" component={CompaniesList} />
-        <Route exact path="/employees" component={Employees} />
+        <Route exact path="/tickets" component={TicketsList} />
+        <Route exact path="/employees" component={EmployeesList} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route component={NotFound} />
       </Switch>

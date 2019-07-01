@@ -18,7 +18,7 @@ class Nav extends React.Component {
         {loggedIn ? (
           <Fragment>
             <Menu.Item as={NavLink} to="/dashboard" name="Dashboard" active={pathname === '/dashboard'} />
-            <Menu.Item as={NavLink} to="/companies" name="Companies" active={pathname === '/companies'} />
+            <Menu.Item><a href="http://localhost:3001/companies">Companies</a></Menu.Item>
             <Menu.Menu position="right">
               <Menu.Item as={NavLink} to="/profile" name="Profile" active={pathname === '/profile'} />
               <Menu.Item to="/logout" name="Logout" onClick={this.logout} />
@@ -43,3 +43,4 @@ export default withRouter(connect(mapStateToProps)(Nav))
 
 // import { fetchCurrentUser } from '../actions/user'
 // import LoginForm from './loginForm'
+// as={NavLink} to="/companies" name="Companies" active={pathname === '/companies'} /
