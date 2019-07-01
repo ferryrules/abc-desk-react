@@ -45,7 +45,7 @@ class TicketsList extends React.Component{
   }
 
   render() {
-    console.log("ticketsList", this.props.tickets);
+    // console.log("ticketsList", this.props.tickets);
     // const eachTicket = this.props.tickets.map(t=>{
     //   return <Ticket key={t.id} ticket={t} tickets={this.props.tickets} clearTickets={this.clearTickets} />
     // })

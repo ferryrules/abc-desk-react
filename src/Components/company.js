@@ -7,7 +7,9 @@ import TicketsList from '../containers/ticketsList'
 class Company extends React.Component {
 
   state = {
-    clicked: true
+    clicked: true,
+    tickets: true,
+    employees: true
   }
 
   selectCompany = (e, c) => {
@@ -17,8 +19,16 @@ class Company extends React.Component {
     })
   }
 
+  toggleTicketsEmployees = (tickets, employees) => {
+    this.setState({
+      tickets,
+      employees
+    })
+  }
+
   render() {
     const c = this.props.company
+    // console.dir(c);
     return (
       this.state.clicked
       ? <Card key={c.id} onClick={(e)=>this.selectCompany(e, c)} id={c.id}>
@@ -31,12 +41,15 @@ class Company extends React.Component {
           </Card.Meta>
         </Card.Content>
       </Card>
-      : (
-        <div>
-          <EmployeesList employees={c.employees} />
-          <TicketsList tickets={c.tickets} />
-        </div>
-      )
+      : this.state.employees && this.state.tickets
+        ? (<div>
+            <EmployeesList toggle={this.toggleTicketsEmployees} employees={c.employees} />
+            <TicketsList toggle={this.toggleTicketsEmployees} tickets={c.tickets} />
+          </div>)
+        : this.state.employees === false && this.state.tickets === true
+          ? <TicketsList toggle={this.toggleTicketsEmployees} tickets={c.tickets} />
+        : <EmployeesList toggle={this.toggleTicketsEmployees} employees={c.employees} />
+
     )
   }
 };
