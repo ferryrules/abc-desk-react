@@ -3,7 +3,6 @@ import React from 'react'
 // import { Card } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
 import Company from '../components/company.js'
-import state from '../state.js'
 
 class CompaniesList extends React.Component{
 
@@ -33,7 +32,7 @@ class CompaniesList extends React.Component{
   }
 
   render() {
-    console.log(state);
+    // console.log(state);
     const eachCompany = this.state.companies.map(c=>{
       return <Company key={c.id} company={c} companies={this.state.companies} clearCompanies={this.clearCompanies} />
     })

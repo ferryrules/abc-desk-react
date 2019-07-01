@@ -1,5 +1,6 @@
 import React from 'react'
 import Employee from '../components/employee'
+// import withAuth from '../hocs/withAuth'
 // import { connect } from 'react-redux'
 // import { Card } from 'semantic-ui-react'
 // import { Alert } from "shards-react";
@@ -40,8 +41,8 @@ class EmployeesList extends React.Component {
     // console.log("employeesList", this.props);
     return (
       <div>
-        <h3 className="ui top attached blue header" onClick={(e)=>this.collapse(e)}>
-          <i className={`dropdown icon ${this.state.hide ? null : 'counterclockwise rotated'}`} />
+        <h3 className="ui top attached blue header">
+          <i className={`dropdown icon ${this.state.hide ? null : 'counterclockwise rotated'}`} onClick={(e)=>this.collapse(e)} />
             Employees
         </h3>
         <div className={`ui cards content transition ${this.state.hide ? 'active' : 'hidden'} attached segment`}>
