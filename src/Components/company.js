@@ -7,7 +7,7 @@ import TicketsList from '../containers/ticketsList'
 // import { withRouter } from 'react-router-dom'
 // import PayrollsList from '../containers/payrollsList'
 
-class CompShow extends React.Component {
+class Company extends React.Component {
 
   state = {
     company: [],
@@ -53,4 +53,4 @@ class CompShow extends React.Component {
   }
 };
 
-export default CompShow
+export default Company
