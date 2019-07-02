@@ -3,46 +3,46 @@ import React from 'react'
 
 class EmployeeForm extends React.Component {
 
-  // state = {
-  //   full_name: this.props.employee.full_name,
-  //   pay_type: this.props.employee.pay_type,
-  //   pay_rate: this.props.employee.pay_rate,
-  //   filing_status: this.props.employee.filing_status,
-  //   w4_allowance: this.props.employee.w4_allowance,
-  //   active_status: this.props.employee.active_status
-  // }
-  //
-  // handleChange = (e) => {
-  //   const {name,value} = e.target
-  //   this.setState({
-  //     [name]: value
-  //   })
-  // }
-  //
-  // handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   fetch(`http://localhost:3000/employees/${this.props.employee.id}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       'full_name': this.state.full_name,
-  //       'pay_type': this.state.pay_type,
-  //       'pay_rate': this.state.pay_rate,
-  //       'filing_status': this.state.filing_status,
-  //       'w4_allowance': this.state.w4_allowance,
-  //       'active_status': this.state.active_status
-  //     })
-  //   })
-  //   .then(r=>r.json())
-  //   .then(employee=>{
-  //     // debugger
-  //     this.props.editEmployee(null,employee)
-  //   })
-  // }
+  state = {
+    full_name: this.props.employee.full_name,
+    pay_type: this.props.employee.pay_type,
+    pay_rate: this.props.employee.pay_rate,
+    filing_status: this.props.employee.filing_status,
+    w4_allowance: this.props.employee.w4_allowance,
+    active_status: this.props.employee.active_status
+  }
+
+  handleChange = (e) => {
+    const {name,value} = e.target
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    fetch(`http://localhost:3000/employees/${this.props.employee.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        'full_name': this.state.full_name,
+        'pay_type': this.state.pay_type,
+        'pay_rate': this.state.pay_rate,
+        'filing_status': this.state.filing_status,
+        'w4_allowance': this.state.w4_allowance,
+        'active_status': this.state.active_status
+      })
+    })
+    .then(r=>r.json())
+    .then(employee=>{
+      // debugger
+      this.props.edit(employee)
+    })
+  }
 
   render() {
     console.log("empForm", this.state)

@@ -7,7 +7,8 @@ import EmployeeForm from '../forms/employeeForm'
 class Employee extends React.Component {
 
   state = {
-    employee: []
+    employee: [],
+    edit: false
   }
 
   componentDidMount() {
@@ -26,15 +27,19 @@ class Employee extends React.Component {
   }
 
   editEmployee = (emp) => {
+    console.log(emp);
+    this.setState({
+      edit: !this.state.edit
+    })
     // this.props.history.push(`${this.props.location.pathname}/edit`)
-    return <EmployeeForm employee={emp} />
   }
 
   render() {
     console.log("employee",this.props);
     const emp = this.state.employee
     return(
-      <div className="cards">
+      !this.state.edit
+      ? (<div className="cards">
         <Card key={emp.id} id={emp.id}>
           <Card.Content>
             <Card.Header>{emp.full_name}</Card.Header>
@@ -51,7 +56,8 @@ class Employee extends React.Component {
             </div>
           </div>
         </Card>
-      </div>
+      </div>)
+      : <EmployeeForm edit={this.editEmployee} employee={emp} />
     )
   }
 }
