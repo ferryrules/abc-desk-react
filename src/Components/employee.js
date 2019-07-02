@@ -11,7 +11,7 @@ class Employee extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000/${this.props.location.pathname}`, {
+    fetch(`http://localhost:3000${this.props.props.props.location.pathname}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -25,8 +25,9 @@ class Employee extends React.Component {
     })
   }
 
-  editEmployee = (clear, reset) => {
-    this.props.history.push(`${this.props.location.pathname}/edit`)
+  editEmployee = (emp) => {
+    // this.props.history.push(`${this.props.location.pathname}/edit`)
+    return <EmployeeForm employee={emp} />
   }
 
   render() {
@@ -45,7 +46,7 @@ class Employee extends React.Component {
             </Card.Description>
           </Card.Content>
           <div className="ui extra content" >
-            <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp, null)}>
+            <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp)}>
               <i className="edit outline icon" />Edit
             </div>
           </div>

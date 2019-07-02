@@ -14,7 +14,7 @@ import NotFound from './components/notFound'
 import './App.css'
 
 const App = props => {
-  console.log('%c APP Props: ', 'color: firebrick', props)
+  // console.log('%c APP Props: ', 'color: firebrick', props)
   return (
     <Fragment>
       <Nav />

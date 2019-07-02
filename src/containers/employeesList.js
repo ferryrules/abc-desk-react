@@ -1,6 +1,7 @@
 import React from 'react'
 import Employee from '../components/employee'
 import withAuth from '../hocs/withAuth'
+import { Card } from 'semantic-ui-react'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
@@ -18,10 +19,25 @@ class EmployeesList extends React.Component {
 
   eachEmployee = () => {
     if (this.props.employees) {
-      return this.props.employees.map(e=>{
-        return <Employee key={e.id} props={this.props} selectEmployee={this.selectEmployee} employee={e} />
+      return this.props.employees.map(emp=>{
+        return <Card key={emp.id} id={emp.id}>
+          <Card.Content>
+            <Card.Header>{emp.full_name}</Card.Header>
+            <Card.Meta>{emp.active_status ? "Active" : "Terminated"}</Card.Meta>
+            <Card.Description>
+              Pay Type: {emp.pay_type}
+              <br />
+              Pay Rate: {emp.pay_rate}
+            </Card.Description>
+          </Card.Content>
+          <div className="ui extra content" >
+            <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp)}>
+              <i className="edit outline icon" />Edit
+            </div>
+          </div>
+        </Card>
       }).sort((a,b)=>{
-        return a.props.employee.full_name.localeCompare(b.props.employee.full_name)
+        return a.props.children[0].props.children[0].props.children.localeCompare(b.props.children[0].props.children[0].props.children)
       })
     }
   }

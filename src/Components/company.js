@@ -12,7 +12,7 @@ class CompShow extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000/${this.props.location.pathname}`, {
+    fetch(`http://localhost:3000${this.props.location.pathname}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
