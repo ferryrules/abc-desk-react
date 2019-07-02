@@ -16,35 +16,6 @@ class EmployeesList extends React.Component {
     this.props.props.history.push(`${this.props.props.location.pathname}/employees/${e.id}`)
   }
 
-  clearOrResetEmployees = (clear, reset) => {
-    // debugger
-    if (clear) {
-      this.state.employees.filter(e=>{
-        if (e.id !== clear.id) {
-          this.state.filtered.push(e)
-        }
-      })
-      this.setState({
-        employees: [clear]
-      }, this.props.toggle(false, true))
-    } else {
-      console.log(this.state.filtered);
-      console.log(reset);
-      // debugger
-      this.setState({
-        employees: [...this.state.filtered, {
-          id: reset.id,
-          full_name: reset.full_name,
-          pay_rate: reset.pay_rate,
-          pay_type: reset.pay_type,
-          active_status: reset.active_status,
-          filing_status: reset.filing_status,
-          w4_allowance: reset.w4_allowance
-        }]
-      }, this.props.toggle(true, true))
-    }
-  }
-
   eachEmployee = () => {
     if (this.props.employees) {
       return this.props.employees.map(e=>{

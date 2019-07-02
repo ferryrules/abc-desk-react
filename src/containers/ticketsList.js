@@ -12,32 +12,6 @@ class TicketsList extends React.Component{
     hide: true
   }
 
-  clearOrResetTickets = (clear, reset) => {
-    // debugger
-    if (clear) {
-      this.state.tickets.filter(t=>{
-        if (t.id !== clear.id) {
-          this.state.filtered.push(t)
-        }
-      })
-      this.setState({
-        tickets: [clear]
-      }, this.props.toggle(true, false))
-    } else {
-      console.log(this.state.filtered);
-      console.log(reset);
-      // debugger
-      this.setState({
-        tickets: [...this.state.filtered, {
-          title: reset.title,
-          category: reset.category,
-          description: reset.description,
-          priority: reset.priority
-        }]
-      }, this.props.toggle(true, true))
-    }
-  }
-
   eachTicket = () => {
     if (this.props.tickets) {
       return this.props.tickets.map(t=>{
