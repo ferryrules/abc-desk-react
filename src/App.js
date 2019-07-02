@@ -3,13 +3,17 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import Profile from './containers/profile'
 import LoginForm from './components/loginForm'
 import Nav from './containers/nav'
-import CompaniesList from './containers/companiesList'
-import Company from './components/company'
 import Dashboard from './containers/dashboard'
-import TicketsList from './containers/ticketsList'
-// import EmployeesList from './containers/employeesList'
+
+import Company from './components/company'
+import CompaniesList from './containers/companiesList'
+
+import Ticket from './components/ticket'
+import TicketForm from './forms/ticketForm'
+
 import EmployeeForm from './forms/employeeForm'
 import Employee from './components/employee'
+
 import NotFound from './components/notFound'
 import './App.css'
 
@@ -24,12 +28,18 @@ const App = props => {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/dashboard" component={Dashboard} />
+
         <Route exact path="/companies" render={()=><CompaniesList {...props}/>} />
         <Route exact path="/companies/:company_id" render={()=><Company {...props}/>} />
-        <Route exact path="/companies/:company_id/tickets" component={TicketsList} />
+
+        <Route exact path="/tickets" render={()=><TicketForm {...props}/>} />
+        <Route exact path="/tickets/:ticket_id" render={()=><Ticket {...props}/>} />
+        <Route exact path="/tickets/:ticket_id/edit" render={()=><TicketForm {...props}/>} />
+
+        <Route exact path="/employees" render={()=><EmployeeForm {...props}/>} />
         <Route exact path="/employees/:employee_id" render={()=><Employee {...props}/>} />
         <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...props}/>} />
-        <Route exact path="/employees" render={()=><EmployeeForm {...props}/>} />
+        
         <Route component={NotFound} />
       </Switch>
     </Fragment>

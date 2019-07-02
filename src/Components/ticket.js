@@ -32,23 +32,11 @@ export default class Ticket extends React.Component {
     return(
       this.state.edit
       ? (<div className="cards">
-          <Card key={tic.id} onClick={(e)=>{this.selectTicket(tic, null)}} id={tic.id}>
-            <Card.Content>
-              <Card.Header>{tic.title}</Card.Header>
-              <Card.Meta>{tic.category}</Card.Meta>
-              <Card.Description>
-                {tic.description}
-              </Card.Description>
-            </Card.Content>
-            <Card.Content>
-              Priority: {tic.priority}
-            </Card.Content>
-            <div className="ui extra content" >
-              <div className="ui basic blue button" onClick={(e)=>this.editTicket(tic, null)}>
-                <i className="edit outline icon" />Edit
-              </div>
-            </div>
-          </Card>
+      <div className="ui extra content" >
+        <div className="ui basic blue button" onClick={(e)=>this.editTicket(tic, null)}>
+          <i className="edit outline icon" />Edit
+        </div>
+      </div>
         </div>)
       : <TicketForm editTicket={this.editTicket} ticket={tic} />
     )

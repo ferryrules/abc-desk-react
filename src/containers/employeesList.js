@@ -1,7 +1,7 @@
 import React from 'react'
 import EmployeeForm from '../forms/employeeForm'
 import withAuth from '../hocs/withAuth'
-import { Card, Button, Icon } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 // import Employee from '../components/employee'
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -52,11 +52,11 @@ class EmployeesList extends React.Component {
   }
 
   render() {
-    console.log("employeeList props", this.props);
+    // console.log("employeeList props", this.props);
     return (
       !this.state.newEmp
       ? (<div>
-          <div className="ui basic green button center floated" id={this.props.company.id} onClick={this.addEmployee}>
+          <div className="ui basic green button" id={this.props.company.id} onClick={this.addEmployee}>
             <i className="icon add circle" />Add Employee
           </div>
           <h3 className="ui fluid button top attached blue header" onClick={(e)=>this.collapse(e)} >
