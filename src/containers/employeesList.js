@@ -1,8 +1,8 @@
 import React from 'react'
-import Employee from '../components/employee'
 import EmployeeForm from '../forms/employeeForm'
 import withAuth from '../hocs/withAuth'
 import { Card } from 'semantic-ui-react'
+// import Employee from '../components/employee'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
@@ -45,14 +45,14 @@ class EmployeesList extends React.Component {
   }
 
   addEmployee = (e) => {
-    console.log(parseInt(e.target.id));
+    // console.log(parseInt(e.target.id));
     this.setState({
       newEmp: !this.state.newEmp
     })
   }
 
   render() {
-    console.log("employeeList props", this.props);
+    // console.log("employeeList props", this.props);
     return (
       !this.state.newEmp
       ? (<div>
@@ -68,7 +68,7 @@ class EmployeesList extends React.Component {
           {this.eachEmployee()}
         </div>
       </div>)
-      : <EmployeeForm />
+      : <EmployeeForm company={this.props.company} addEmp={this.addEmployee}/>
     )
   }
 }

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Card } from 'semantic-ui-react'
-// import { withRouter } from 'react-router-dom'
 import EmployeesList from '../containers/employeesList'
 import TicketsList from '../containers/ticketsList'
+// import { Card } from 'semantic-ui-react'
+// import { withRouter } from 'react-router-dom'
 // import PayrollsList from '../containers/payrollsList'
 
 class CompShow extends React.Component {

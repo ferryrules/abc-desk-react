@@ -27,7 +27,7 @@ class Employee extends React.Component {
   }
 
   editEmployee = (emp) => {
-    console.log(emp);
+    // console.log(emp);
     this.setState({
       edit: !this.state.edit
     })
@@ -35,7 +35,7 @@ class Employee extends React.Component {
   }
 
   render() {
-    // console.log("employee",this.props);
+    console.log("employee",this.props);
     const emp = this.state.employee
     return(
       !this.state.edit
@@ -57,7 +57,7 @@ class Employee extends React.Component {
           </div>
         </Card>
       </div>)
-      : <EmployeeForm edit={this.editEmployee} employee={emp} />
+      : <EmployeeForm edit={this.editEmployee} props={this.props} company={emp.company} employee={emp} />
     )
   }
 }

@@ -10,7 +10,7 @@ class EmployeeForm extends React.Component {
     filing_status: '',
     w4_allowance: '',
     active_status: '',
-    company_id: '' || this.props.company.id
+    company_id: this.props.company.id
   }
 
   componentDidMount() {
@@ -21,8 +21,7 @@ class EmployeeForm extends React.Component {
         pay_rate: this.props.employee.pay_rate,
         filing_status: this.props.employee.filing_status,
         w4_allowance: this.props.employee.w4_allowance,
-        active_status: this.props.employee.active_status,
-        company_id: this.props.employee.company.id
+        active_status: this.props.employee.active_status
       })
     }
   }
@@ -50,13 +49,14 @@ class EmployeeForm extends React.Component {
         'pay_rate': this.state.pay_rate,
         'filing_status': this.state.filing_status,
         'w4_allowance': this.state.w4_allowance,
-        'active_status': this.state.active_status
+        'active_status': this.state.active_status,
+        'company_id': this.state.company_id
       })
     })
     .then(r=>r.json())
     .then(employee=>{
       // debugger
-      this.props.edit(employee)
+      this.props.props.history.push(`/companies/${this.state.company_id}`)
     }))
     : (fetch(`http://localhost:3000/employees`, {
       method: 'POST',
@@ -72,19 +72,20 @@ class EmployeeForm extends React.Component {
         'filing_status': this.state.filing_status,
         'w4_allowance': this.state.w4_allowance,
         'active_status': this.state.active_status,
-        'company_id': this.state.company_id
+        'company_id': parseInt(this.state.company_id)
       })
     })
     .then(r=>r.json())
     .then(employee=>{
       console.log(employee);
       debugger
-      this.props.edit(employee)
+      this.props.addEmp(employee)
     }))
   }
 
   render() {
-    console.log("empForm", this.state)
+    console.log("empForm state", this.state)
+    console.log("empForm props", this.props)
     return(
       <div className="ui equal width form">
         <div className="fields">

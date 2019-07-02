@@ -1,8 +1,7 @@
 import React from 'react'
-// import Spinner from 'react-bootstrap/Button'
 import { Card } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
-import Company from '../components/company.js'
+// import Company from '../components/company.js'
 
 class CompaniesList extends React.Component{
 
@@ -30,7 +29,7 @@ class CompaniesList extends React.Component{
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const eachCompany = this.state.companies.map(c=>{
       return <Card key={c.id} onClick={(e)=>this.selectCompany(c)} id={c.id}>
         <Card.Content>

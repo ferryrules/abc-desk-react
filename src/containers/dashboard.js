@@ -1,9 +1,9 @@
 import React from 'react'
+import withAuth from '../hocs/withAuth'
 // import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 // import { connect } from 'react-redux'
-import withAuth from '../hocs/withAuth'
 // import { Card } from 'semantic-ui-react'
-import CompaniesList from './companiesList.js'
+// import CompaniesList from './companiesList.js'
 
 class Dashboard extends React.Component {
 
