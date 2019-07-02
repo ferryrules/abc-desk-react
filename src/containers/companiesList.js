@@ -32,7 +32,7 @@ class CompaniesList extends React.Component{
   }
 
   render() {
-    // console.log(state);
+    console.log(this.props);
     const eachCompany = this.state.companies.map(c=>{
       return <Company key={c.id} company={c} companies={this.state.companies} clearCompanies={this.clearCompanies} />
     })
