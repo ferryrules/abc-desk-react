@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+ ### Clone [abc-desk-api](https://github.com/ferryrules/abc-desk-api) first!
+
 ## Available Scripts
 
 In the project directory, you can run:
