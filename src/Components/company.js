@@ -27,14 +27,12 @@ class CompShow extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log("compShow", this.props);
     const c = this.state.company
     // console.dir(c);
     return (
       <div>
-        <EmployeesList props={this.props} employees={c.employees} />
-        <TicketsList props={this.props} tickets={c.tickets} />
+        <EmployeesList props={this.props} company={c} employees={c.employees} />
+        <TicketsList props={this.props} company={c} tickets={c.tickets} />
       </div>
     )
   }

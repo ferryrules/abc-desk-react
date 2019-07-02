@@ -4,12 +4,27 @@ import React from 'react'
 class EmployeeForm extends React.Component {
 
   state = {
-    full_name: this.props.employee.full_name,
-    pay_type: this.props.employee.pay_type,
-    pay_rate: this.props.employee.pay_rate,
-    filing_status: this.props.employee.filing_status,
-    w4_allowance: this.props.employee.w4_allowance,
-    active_status: this.props.employee.active_status
+    full_name: '',
+    pay_type: '',
+    pay_rate: '',
+    filing_status: '',
+    w4_allowance: '',
+    active_status: '',
+    company_id: '' || this.props.company.id
+  }
+
+  componentDidMount() {
+    if (this.props.employee) {
+      this.setState({
+        full_name: this.props.employee.full_name,
+        pay_type: this.props.employee.pay_type,
+        pay_rate: this.props.employee.pay_rate,
+        filing_status: this.props.employee.filing_status,
+        w4_allowance: this.props.employee.w4_allowance,
+        active_status: this.props.employee.active_status,
+        company_id: this.props.employee.company.id
+      })
+    }
   }
 
   handleChange = (e) => {
@@ -21,7 +36,8 @@ class EmployeeForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    fetch(`http://localhost:3000/employees/${this.props.employee.id}`, {
+    !!this.props.employee
+    ? (fetch(`http://localhost:3000/employees/${this.props.employee.id}`, {
       method: 'PATCH',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
@@ -41,12 +57,34 @@ class EmployeeForm extends React.Component {
     .then(employee=>{
       // debugger
       this.props.edit(employee)
+    }))
+    : (fetch(`http://localhost:3000/employees`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        'full_name': this.state.full_name,
+        'pay_type': this.state.pay_type,
+        'pay_rate': this.state.pay_rate,
+        'filing_status': this.state.filing_status,
+        'w4_allowance': this.state.w4_allowance,
+        'active_status': this.state.active_status,
+        'company_id': this.state.company_id
+      })
     })
+    .then(r=>r.json())
+    .then(employee=>{
+      console.log(employee);
+      debugger
+      this.props.edit(employee)
+    }))
   }
 
   render() {
     console.log("empForm", this.state)
-    console.log("empForm", this.props)
     return(
       <div className="ui equal width form">
         <div className="fields">

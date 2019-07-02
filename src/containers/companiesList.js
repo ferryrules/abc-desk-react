@@ -25,12 +25,6 @@ class CompaniesList extends React.Component{
     })
   }
 
-  clearCompanies = (c) => {
-    this.setState({
-      companies: [c]
-    })
-  }
-
   selectCompany = (c) => {
     this.props.history.push(`/companies/${c.id}`)
   }

@@ -1,5 +1,6 @@
 import React from 'react'
 import Employee from '../components/employee'
+import EmployeeForm from '../forms/employeeForm'
 import withAuth from '../hocs/withAuth'
 import { Card } from 'semantic-ui-react'
 
@@ -9,11 +10,11 @@ import "shards-ui/dist/css/shards.min.css"
 class EmployeesList extends React.Component {
 
   state = {
-    hide: true
+    hide: true,
+    newEmp: false
   }
 
   selectEmployee = (emp) => {
-    // debugger
     this.props.props.history.push(`/employees/${emp.id}`)
   }
 
@@ -43,22 +44,31 @@ class EmployeesList extends React.Component {
     })
   }
 
+  addEmployee = (e) => {
+    console.log(parseInt(e.target.id));
+    this.setState({
+      newEmp: !this.state.newEmp
+    })
+  }
+
   render() {
     console.log("employeeList props", this.props);
     return (
-      <div>
+      !this.state.newEmp
+      ? (<div>
         <h3 className="ui top attached blue header" onClick={(e)=>this.collapse(e)} >
           <i className={`dropdown icon ${this.state.hide ? null : 'counterclockwise rotated'}`} />
             Employees
         </h3>
-        <div>
+        <button id={this.props.company.id} onClick={this.addEmployee}>
           <i className='icon add circle' />
           Add Employee
-        </div>
+        </button>
         <div className={`ui cards content transition ${this.state.hide ? 'active' : 'hidden'} attached segment`}>
           {this.eachEmployee()}
         </div>
-      </div>
+      </div>)
+      : <EmployeeForm />
     )
   }
 }
