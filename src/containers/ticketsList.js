@@ -1,39 +1,49 @@
 import React from 'react'
-import { Card } from 'semantic-ui-react'
-// import withAuth from '../hocs/withAuth'
-// import Ticket from '../components/ticket.js'
+import Ticket from '../components/ticket.js'
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css"
 
 class TicketsList extends React.Component{
 
   state = {
+    filtered: [],
+    tickets: this.props.tickets,
     hide: true
   }
 
-  clearTickets = (t) => {
-    this.setState({
-      tickets: [t]
-    })
+  clearOrResetTickets = (clear, reset) => {
+    // debugger
+    if (clear) {
+      this.state.tickets.filter(t=>{
+        if (t.id !== clear.id) {
+          this.state.filtered.push(t)
+        }
+      })
+      this.setState({
+        tickets: [clear]
+      }, this.props.toggle(true, false))
+    } else {
+      console.log(this.state.filtered);
+      console.log(reset);
+      // debugger
+      this.setState({
+        tickets: [...this.state.filtered, {
+          title: reset.title,
+          category: reset.category,
+          description: reset.description,
+          priority: reset.priority
+        }]
+      }, this.props.toggle(true, true))
+    }
   }
 
   eachTicket = () => {
     if (this.props.tickets) {
       return this.props.tickets.map(t=>{
-        return (
-          <Card key={t.id} onClick={(t)=>{console.log(t.currentTarget.id)}} id={t.id}>
-            <Card.Content>
-              <Card.Header>{t.title}</Card.Header>
-              <Card.Meta>{t.category}</Card.Meta>
-              <Card.Description>
-                {t.description}
-              </Card.Description>
-            </Card.Content>
-          <Card.Content>
-            Priority: {t.priority}
-          </Card.Content>
-          </Card>
-        )
+        return <Ticket key={t.id} clearOrResetTickets={this.clearOrResetTickets} ticket={t} />
       }).sort((a,b)=>{
-        return a.props.children[1].props.children[1].localeCompare(b.props.children[1].props.children[1])
+        return a.props.ticket.title.localeCompare(b.props.ticket.title)
       })
     }
   }
@@ -45,10 +55,6 @@ class TicketsList extends React.Component{
   }
 
   render() {
-    // console.log("ticketsList", this.props.tickets);
-    // const eachTicket = this.props.tickets.map(t=>{
-    //   return <Ticket key={t.id} ticket={t} tickets={this.props.tickets} clearTickets={this.clearTickets} />
-    // })
     return (
       <div>
         <h3 className="ui top attached header violet" onClick={(e)=>this.collapse(e)}>
