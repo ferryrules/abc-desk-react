@@ -12,15 +12,15 @@ class EmployeesList extends React.Component {
     hide: true
   }
 
-  selectEmployee = (e) => {
+  selectEmployee = (emp) => {
     // debugger
-    this.props.props.history.push(`/employees/${e.id}`)
+    this.props.props.history.push(`/employees/${emp.id}`)
   }
 
   eachEmployee = () => {
     if (this.props.employees) {
       return this.props.employees.map(emp=>{
-        return <Card key={emp.id} id={emp.id}>
+        return <Card key={emp.id} id={emp.id} onClick={(e)=>this.selectEmployee(emp)}>
           <Card.Content>
             <Card.Header>{emp.full_name}</Card.Header>
             <Card.Meta>{emp.active_status ? "Active" : "Terminated"}</Card.Meta>
