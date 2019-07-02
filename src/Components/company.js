@@ -36,7 +36,7 @@ class CompShow extends React.Component {
       newTicket: ticket
     })
   }
-// <EmployeesList newEmpOrTicket={this.newEmpOrTicket} props={this.props} company={c} employees={c.employees} />
+
   render() {
     const c = this.state.company
     return (
