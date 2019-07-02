@@ -38,11 +38,11 @@ class Company extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const c = this.state.company
     return (
       this.state.newEmp
-      ?
-        <EmployeeForm props={this.props} company={c}/>
+      ? <EmployeeForm props={this.props} company={c}/>
       : this.state.newTicket
         ? <TicketForm props={this.props} company={c}/>
       : <div>

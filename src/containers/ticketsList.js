@@ -56,6 +56,7 @@ class TicketsList extends React.Component{
     return (
       !this.state.newTicket
       ? (<div>
+          <br />
           <div className="ui basic green button" id={this.props.company.id} onClick={this.addTicket}>
             <i className="icon add circle" />New Ticket
           </div>
