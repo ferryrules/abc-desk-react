@@ -25,7 +25,7 @@ class TicketsList extends React.Component{
             <Card.Header>{tic.title}</Card.Header>
             <Card.Meta>{tic.category}</Card.Meta>
             <Card.Description>
-              {tic.description}
+              {tic.description.length > 30 ? tic.description.substr(0,30).concat(' ...') : tic.description}
             </Card.Description>
           </Card.Content>
           <Card.Content>

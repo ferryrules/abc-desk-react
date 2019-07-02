@@ -27,11 +27,9 @@ class Employee extends React.Component {
   }
 
   editEmployee = (emp) => {
-    // console.log(emp);
     this.setState({
       edit: !this.state.edit
     })
-    // this.props.history.push(`${this.props.location.pathname}/edit`)
   }
 
   deleteEmployee = (emp) => {
