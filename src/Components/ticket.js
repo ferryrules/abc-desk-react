@@ -1,8 +1,10 @@
 import React from 'react'
+import withAuth from '../hocs/withAuth'
 import { Card } from 'semantic-ui-react'
+
 import TicketForm from '../forms/ticketForm'
 
-export default class Ticket extends React.Component {
+class Ticket extends React.Component {
 
   state = {
     ticket: [],
@@ -24,19 +26,19 @@ export default class Ticket extends React.Component {
     })
   }
 
-  editTicket = (clear, reset) => {
+  editTicket = (ticket) => {
     this.setState({
       edit: !this.state.edit
     })
   }
 
   render() {
-    console.log(this.state);
+    console.log("ticket",this.state);
     const tic = this.state.ticket
     return(
       this.state.edit
       ? (<div className="cards">
-        <Card key={tic.id} onClick={(e)=>{this.selectTicket(tic, null)}} id={tic.id}>
+        <Card key={tic.id} id={tic.id}>
           <Card.Content>
             <Card.Header>{tic.title}</Card.Header>
             <Card.Meta>{tic.category}</Card.Meta>
@@ -48,13 +50,15 @@ export default class Ticket extends React.Component {
             Priority: {tic.priority}
           </Card.Content>
           <div className="ui extra content" >
-            <div className="ui basic blue button" onClick={(e)=>this.editTicket(tic, null)}>
+            <div className="ui basic blue button" onClick={(e)=>this.editTicket(tic)}>
               <i className="edit outline icon" />Edit
             </div>
           </div>
         </Card>
         </div>)
-      : <TicketForm editTicket={this.editTicket} ticket={tic} />
+      : <TicketForm editTicket={this.editTicket} ticket={tic} props={this.props} company={tic.company} />
     )
   }
 }
+
+export default withAuth(Ticket)

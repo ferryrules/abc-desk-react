@@ -1,7 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-
 import { Card } from 'semantic-ui-react'
+
 import EmployeeForm from '../forms/employeeForm'
 
 class Employee extends React.Component {

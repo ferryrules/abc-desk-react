@@ -1,6 +1,7 @@
 import React from 'react'
 import EmployeesList from '../containers/employeesList'
 import EmployeeForm from '../forms/employeeForm'
+import TicketForm from '../forms/ticketForm'
 import TicketsList from '../containers/ticketsList'
 // import { Card } from 'semantic-ui-react'
 // import { withRouter } from 'react-router-dom'
@@ -43,7 +44,7 @@ class CompShow extends React.Component {
       ?
         <EmployeeForm props={this.props} company={c}/>
       : this.state.newTicket
-        ? <TicketsList newEmpOrTicket={this.newEmpOrTicket} props={this.props} company={c} tickets={c.tickets} />
+        ? <TicketForm props={this.props} company={c}/>
       : <div>
           <EmployeesList newEmpOrTicket={this.newEmpOrTicket} props={this.props} company={c} employees={c.employees} />
           <TicketsList newEmpOrTicket={this.newEmpOrTicket} props={this.props} company={c} tickets={c.tickets} />

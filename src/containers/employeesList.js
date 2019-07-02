@@ -73,10 +73,3 @@ class EmployeesList extends React.Component {
 }
 
 export default withAuth(EmployeesList)
-
-
-// <div className="ui extra content" >
-//   <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp)}>
-//     <i className="edit outline icon" />Edit
-//   </div>
-// </div>

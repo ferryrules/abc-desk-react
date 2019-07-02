@@ -4,10 +4,22 @@ import React from 'react'
 class TicketForm extends React.Component {
 
   state = {
-    title: this.props.ticket.title,
-    category: this.props.ticket.category,
-    description: this.props.ticket.description,
-    priority: this.props.ticket.priority
+    title: '',
+    category: '',
+    description: '',
+    priority: '',
+    company_id: this.props.company.id
+  }
+
+  componentDidMount() {
+    if (this.props.ticket) {
+      this.setState({
+        title: this.props.ticket.title,
+        category: this.props.ticket.category,
+        description: this.props.ticket.description,
+        priority: this.props.ticket.priority
+      })
+    }
   }
 
   handleChange = (e) => {
@@ -19,7 +31,8 @@ class TicketForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    fetch(`http://localhost:3000/tickets/${this.props.ticket.id}`, {
+    !!this.props.ticket
+    ? (fetch(`http://localhost:3000/tickets/${this.props.ticket.id}`, {
       method: 'PATCH',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
@@ -30,18 +43,41 @@ class TicketForm extends React.Component {
         'title': this.state.title,
         'category': this.state.category,
         'description': this.state.description,
-        'priority': this.state.priority
+        'priority': this.state.priority,
+        'company_id': this.state.company_id
       })
     })
     .then(r=>r.json())
     .then(ticket=>{
       // debugger
-      this.props.editTicket(null,ticket)
+      this.props.props.history.push(`/companies/${this.state.company_id}`)
+    }))
+    : (fetch(`http://localhost:3000/tickets`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        'title': this.state.title,
+        'category': this.state.category,
+        'description': this.state.description,
+        'priority': this.state.priority,
+        'company_id': this.state.company_id
+      })
     })
+    .then(r=>r.json())
+    .then(ticket=>{
+      // debugger
+      this.props.props.history.push(`/tickets/${ticket.id}`)
+    }))
   }
 
   render() {
-    // console.log("empForm", this.state)
+    console.log("ticForm state", this.state)
+    console.log("ticForm props", this.props)
+    console.log("ticForm comp", this.props.company)
     return(
       <div className="ui equal width form">
         <div className="fields">
@@ -63,7 +99,7 @@ class TicketForm extends React.Component {
         <div className="fields">
           <div className="field">
             <label>Description</label>
-            <input onChange={this.handleChange} type="textarea" placeholder="Description" name="description" value={this.state.description}/>
+            <textarea onChange={this.handleChange} type="textarea" placeholder="Description" name="description" value={this.state.description}/>
           </div>
         </div>
         <button className="ui button" type="submit" onClick={(e)=>this.handleSubmit(e)}>Submit</button>
