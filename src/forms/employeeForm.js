@@ -77,15 +77,15 @@ class EmployeeForm extends React.Component {
     })
     .then(r=>r.json())
     .then(employee=>{
-      console.log(employee);
-      debugger
-      this.props.addEmp(employee)
+      this.props.props.history.push(`/employees/${employee.id}`)
     }))
   }
 
   render() {
     console.log("empForm state", this.state)
     console.log("empForm props", this.props)
+    console.log("empForm comp", this.props.company)
+
     return(
       <div className="ui equal width form">
         <div className="fields">

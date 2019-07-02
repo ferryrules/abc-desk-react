@@ -1,6 +1,5 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-// import Alert from 'react-bootstrap/Alert'
 
 import { Card } from 'semantic-ui-react'
 import EmployeeForm from '../forms/employeeForm'
@@ -48,7 +47,6 @@ class Employee extends React.Component {
     })
     .then(r=>r.json())
     .then(employees=>{
-      // console.log(employees);
       this.props.history.push(`/companies/${this.state.employee.company.id}`)
     })
   }

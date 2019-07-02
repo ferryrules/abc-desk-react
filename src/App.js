@@ -29,6 +29,7 @@ const App = props => {
         <Route exact path="/companies/:company_id/tickets" component={TicketsList} />
         <Route exact path="/employees/:employee_id" render={()=><Employee {...props}/>} />
         <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...props}/>} />
+        <Route exact path="/employees" render={()=><EmployeeForm {...props}/>} />
         <Route component={NotFound} />
       </Switch>
     </Fragment>
