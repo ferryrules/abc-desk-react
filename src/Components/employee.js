@@ -1,5 +1,6 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
+// import Alert from 'react-bootstrap/Alert'
 
 import { Card } from 'semantic-ui-react'
 import EmployeeForm from '../forms/employeeForm'
@@ -34,6 +35,24 @@ class Employee extends React.Component {
     // this.props.history.push(`${this.props.location.pathname}/edit`)
   }
 
+  deleteEmployee = (emp) => {
+    console.log(emp);
+    window.confirm('Are you sure you wish to delete this item?')
+    fetch(`http://localhost:3000${this.props.location.pathname}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
+    .then(r=>r.json())
+    .then(employees=>{
+      // console.log(employees);
+      this.props.history.push(`/companies/${this.state.employee.company.id}`)
+    })
+  }
+
   render() {
     console.log("employee",this.props);
     const emp = this.state.employee
@@ -53,6 +72,9 @@ class Employee extends React.Component {
           <div className="ui extra content" >
             <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp)}>
               <i className="edit outline icon" />Edit
+            </div>
+            <div className="delete-button ui basic red button" onClick={()=>{this.deleteEmployee(emp)} }>
+              <i className="user delete icon" />Delete
             </div>
           </div>
         </Card>
