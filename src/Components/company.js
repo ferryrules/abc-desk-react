@@ -1,27 +1,43 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
 // import { withRouter } from 'react-router-dom'
-// import EmployeesList from '../containers/employeesList'
-// import TicketsList from '../containers/ticketsList'
+import EmployeesList from '../containers/employeesList'
+import TicketsList from '../containers/ticketsList'
+// import PayrollsList from '../containers/payrollsList'
 
-class Company extends React.Component {
+class CompShow extends React.Component {
+
+  state = {
+    company: [],
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:3000/${this.props.location.pathname}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
+    .then(r=>r.json())
+    .then(company=>{
+      this.setState({
+        company
+      })
+    })
+  }
 
   render() {
-    const c = this.props.company
+    console.log(this.state);
+    console.log("compShow", this.props);
+    const c = this.state.company
     // console.dir(c);
     return (
-      <Card key={c.id} onClick={(e)=>this.props.selectCompany(c)} id={c.id}>
-        <Card.Content>
-          <Card.Header>{c.name}</Card.Header>
-          <Card.Meta>Employees: <span className="badge badge-primary">{c.employees.length}</span></Card.Meta>
-          <Card.Meta>
-            Tickets: <span className="badge badge-info">{c.tickets.length}</span>
-            <br />
-          </Card.Meta>
-        </Card.Content>
-      </Card>
+      <div>
+        <EmployeesList props={this.props} employees={c.employees} />
+        <TicketsList props={this.props} tickets={c.tickets} />
+      </div>
     )
   }
 };
 
-export default Company
+export default CompShow

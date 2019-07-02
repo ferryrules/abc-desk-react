@@ -4,7 +4,7 @@ import Profile from './containers/profile'
 import LoginForm from './components/loginForm'
 import Nav from './containers/nav'
 import CompaniesList from './containers/companiesList'
-import CompShow from './components/compShow'
+import Company from './components/company'
 import Dashboard from './containers/dashboard'
 import TicketsList from './containers/ticketsList'
 import EmployeesList from './containers/employeesList'
@@ -23,7 +23,7 @@ const App = props => {
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/companies" render={()=><CompaniesList {...props}/>} />
-        <Route exact path="/companies/:company_id" render={()=><CompShow {...props}/>} />
+        <Route exact path="/companies/:company_id" render={()=><Company {...props}/>} />
         <Route exact path="/companies/:company_id/tickets" component={TicketsList} />
         <Route exact path="/companies/:company_id/employees/:employee_id" render={()=><Employee {...props}/>} />
         <Route exact path="/employees/:employee_id" render={()=><EmployeesList {...props}/>} />
