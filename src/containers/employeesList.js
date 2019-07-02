@@ -30,14 +30,9 @@ class EmployeesList extends React.Component {
               Pay Rate: {emp.pay_rate}
             </Card.Description>
           </Card.Content>
-          <div className="ui extra content" >
-            <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp)}>
-              <i className="edit outline icon" />Edit
-            </div>
-          </div>
         </Card>
       }).sort((a,b)=>{
-        return a.props.children[0].props.children[0].props.children.localeCompare(b.props.children[0].props.children[0].props.children)
+        return a.props.children.props.children[0].props.children.localeCompare(b.props.children.props.children[0].props.children)
       })
     }
   }
@@ -69,3 +64,10 @@ class EmployeesList extends React.Component {
 }
 
 export default withAuth(EmployeesList)
+
+
+// <div className="ui extra content" >
+//   <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp)}>
+//     <i className="edit outline icon" />Edit
+//   </div>
+// </div>
