@@ -4,14 +4,16 @@ import Profile from './containers/profile'
 import LoginForm from './components/loginForm'
 import Nav from './containers/nav'
 import CompaniesList from './containers/companiesList'
+import CompShow from './components/compShow'
 import Dashboard from './containers/dashboard'
 import TicketsList from './containers/ticketsList'
 import EmployeesList from './containers/employeesList'
+import Employee from './components/employee'
 import NotFound from './components/notFound'
 import './App.css'
 
 const App = props => {
-  // console.log('%c APP Props: ', 'color: firebrick', props)
+  console.log('%c APP Props: ', 'color: firebrick', props)
   return (
     <Fragment>
       <Nav />
@@ -20,9 +22,11 @@ const App = props => {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/companies" render={(props)=><CompaniesList {...props}/>} />
+        <Route exact path="/companies" render={()=><CompaniesList {...props}/>} />
+        <Route exact path="/companies/:company_id" render={()=><CompShow {...props}/>} />
         <Route exact path="/companies/:company_id/tickets" component={TicketsList} />
-        <Route exact path="/companies/:company_id/employees" component={EmployeesList} />
+        <Route exact path="/companies/:company_id/employees/:employee_id" render={()=><Employee {...props}/>} />
+        <Route exact path="/employees/:employee_id" render={()=><EmployeesList {...props}/>} />
         <Route component={NotFound} />
       </Switch>
     </Fragment>

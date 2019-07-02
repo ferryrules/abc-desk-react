@@ -31,10 +31,14 @@ class CompaniesList extends React.Component{
     })
   }
 
+  selectCompany = (c) => {
+    this.props.history.push(`/companies/${c.id}`)
+  }
+
   render() {
     console.log(this.props);
     const eachCompany = this.state.companies.map(c=>{
-      return <Company key={c.id} company={c} companies={this.state.companies} clearCompanies={this.clearCompanies} />
+      return <Company key={c.id} company={c} companies={this.state.companies} selectCompany={this.selectCompany} />
     })
     return (
       <div>

@@ -10,7 +10,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <CompaniesList />
+        I'm the Dashboard
       </div>
     )
   }

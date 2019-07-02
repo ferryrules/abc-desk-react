@@ -1,5 +1,6 @@
 import React from 'react'
 import Employee from '../components/employee'
+import withAuth from '../hocs/withAuth'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
@@ -7,9 +8,12 @@ import "shards-ui/dist/css/shards.min.css"
 class EmployeesList extends React.Component {
 
   state = {
-    filtered: [],
-    employees: this.props.employees,
     hide: true
+  }
+
+  selectEmployee = (e) => {
+    // debugger
+    this.props.props.history.push(`${this.props.props.location.pathname}/employees/${e.id}`)
   }
 
   clearOrResetEmployees = (clear, reset) => {
@@ -42,9 +46,9 @@ class EmployeesList extends React.Component {
   }
 
   eachEmployee = () => {
-    if (this.state.employees) {
-      return this.state.employees.map(e=>{
-        return <Employee key={e.id} clearOrResetEmployees={this.clearOrResetEmployees} employee={e} />
+    if (this.props.employees) {
+      return this.props.employees.map(e=>{
+        return <Employee key={e.id} props={this.props} selectEmployee={this.selectEmployee} employee={e} />
       }).sort((a,b)=>{
         return a.props.employee.full_name.localeCompare(b.props.employee.full_name)
       })
@@ -58,6 +62,7 @@ class EmployeesList extends React.Component {
   }
 
   render() {
+    console.log("employeeList props", this.props);
     return (
       <div>
         <h3 className="ui top attached blue header" onClick={(e)=>this.collapse(e)} >
@@ -76,4 +81,4 @@ class EmployeesList extends React.Component {
   }
 }
 
-export default EmployeesList
+export default withAuth(EmployeesList)

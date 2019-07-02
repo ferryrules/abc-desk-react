@@ -1,4 +1,6 @@
 import React from 'react'
+import withAuth from '../hocs/withAuth'
+
 import { Card } from 'semantic-ui-react'
 import EmployeeForm from '../forms/employeeForm'
 
@@ -6,11 +8,6 @@ class Employee extends React.Component {
 
   state = {
     edit: true
-  }
-
-  selectEmployee = (clear, reset) => {
-    // debugger
-    this.props.clearOrResetEmployees(clear, reset)
   }
 
   editEmployee = (clear, reset) => {
@@ -28,11 +25,12 @@ class Employee extends React.Component {
   }
 
   render() {
+    console.log("employee",this.props);
     const emp = this.props.employee
     return(
       this.state.edit
       ? (<div className="cards">
-          <Card key={emp.id} onClick={(e)=>{this.selectEmployee(emp, null)}} id={emp.id}>
+          <Card key={emp.id} onClick={(e)=>{this.props.selectEmployee(emp)}} id={emp.id}>
             <Card.Content>
               <Card.Header>{emp.full_name}</Card.Header>
               <Card.Meta>{emp.active_status ? "Active" : "Terminated"}</Card.Meta>
@@ -54,4 +52,4 @@ class Employee extends React.Component {
   }
 }
 
-export default Employee
+export default withAuth(Employee)
