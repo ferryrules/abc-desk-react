@@ -13,7 +13,7 @@ class EmployeesList extends React.Component {
 
   selectEmployee = (e) => {
     // debugger
-    this.props.props.history.push(`${this.props.props.location.pathname}/employees/${e.id}`)
+    this.props.props.history.push(`/employees/${e.id}`)
   }
 
   eachEmployee = () => {
