@@ -64,6 +64,10 @@ class EmployeesList extends React.Component {
           <i className={`dropdown icon ${this.state.hide ? null : 'counterclockwise rotated'}`} />
             Employees
         </h3>
+        <div>
+          <i className='icon add circle' />
+          Add Employee
+        </div>
         <div className={`ui cards content transition ${this.state.hide ? 'active' : 'hidden'} attached segment`}>
           {this.eachEmployee()}
         </div>

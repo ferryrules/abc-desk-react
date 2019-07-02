@@ -61,6 +61,10 @@ class TicketsList extends React.Component{
           <i className={`dropdown icon ${this.state.hide ? null : 'counterclockwise rotated'}`} />
             Tickets
         </h3>
+        <div>
+          <i className='icon add circle' />
+            New Ticket
+        </div>
         <div className={`ui cards content transition ${this.state.hide ? 'active' : 'hidden'} attached segment`}>
           {this.eachTicket()}
         </div>
