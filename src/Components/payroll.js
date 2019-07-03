@@ -34,6 +34,7 @@ class Payroll extends React.Component {
 
   render() {
     console.log("payroll",this.props);
+    console.log("payroll state",this.state);
     const payr = this.state.payroll
     return(
       !this.state.edit

@@ -41,9 +41,10 @@ class Company extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log("company",this.props);
     const { newEmp, newTicket, newPayroll } = this.state
     const c = this.state.company
+    console.log(c);
     return (
       <div>
       {newEmp ? <EmployeeForm props={this.props} company={c}/> : <EmployeesList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} employees={c.employees} />}
