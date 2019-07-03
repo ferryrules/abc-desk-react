@@ -2,6 +2,7 @@ import React from 'react'
 import PayrollForm from '../forms/payrollForm'
 import withAuth from '../hocs/withAuth'
 import { Card } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 // import Payroll from '../components/payroll'
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -52,7 +53,7 @@ class PayrollsList extends React.Component {
   }
 
   render() {
-    // console.log("payrollList props", this.props);
+    console.log("payrollList props", this.props);
     return (
       !this.state.newPayr
       ? (<div>
@@ -72,4 +73,8 @@ class PayrollsList extends React.Component {
   }
 }
 
-export default withAuth(PayrollsList)
+const mapStateToProps = ({...props}) => {
+  return {...props}
+}
+
+export default withAuth(connect(mapStateToProps)(PayrollsList))

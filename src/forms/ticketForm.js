@@ -29,21 +29,35 @@ class TicketForm extends React.Component {
     })
   }
 
-
-
   handleSubmit = (e) => {
     e.preventDefault()
     !!this.props.ticket
-    ? fetFunc(`http://localhost:3000/tickets/${this.props.ticket.id}`, "PATCH")
-    .then(r=>r.json())
-    .then(ticket=>{
+    ? this.fetFunc(`http://localhost:3000/tickets/${this.props.ticket.id}`, "PATCH", ticket=>{
       this.props.props.history.push(`/companies/${this.state.company_id}`)
     })
-    : (fetFunc(`http://localhost:3000/tickets`, "POST")
-    .then(r=>r.json())
-    .then(ticket=>{
+    : this.fetFunc(`http://localhost:3000/tickets`, "POST", ticket=>{
       this.props.props.history.push(`/tickets/${ticket.id}`)
-    }))
+    })
+  }
+
+  fetFunc = (url, method, then) => {
+    fetch(url, {
+      method: method,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        'title': this.state.title,
+        'category': this.state.category,
+        'description': this.state.description,
+        'priority': this.state.priority,
+        'company_id': this.state.company_id
+      })
+    })
+    .then(r=>r.json())
+    .then(then)
   }
 
   render() {
@@ -82,21 +96,3 @@ class TicketForm extends React.Component {
 }
 
 export default TicketForm
-
-function fetFunc(url, method) {
-  fetch(url, {
-    method: method,
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({
-      'title': this.state.title,
-      'category': this.state.category,
-      'description': this.state.description,
-      'priority': this.state.priority,
-      'company_id': this.state.company_id
-    })
-  })
-}

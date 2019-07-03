@@ -29,48 +29,20 @@ class EmployeeForm extends React.Component {
     })
   }
 
-  fetchHeadersBody = () => {
-    return (
-      {headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        'payroll_status': this.state.payroll_status,
-        'start_date': this.state.start_date,
-        'end_date': this.state.end_date,
-        'check_date': this.state.check_date,
-        'company_id': parseInt(this.state.company_id)
-      })}
-    )
-  }
-
   handleSubmit = (e) => {
     e.preventDefault()
     !!this.props.payroll
-    ? (fetch(`http://localhost:3000/payrolls/${this.props.payroll.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        'payroll_status': this.state.payroll_status,
-        'start_date': this.state.start_date,
-        'end_date': this.state.end_date,
-        'check_date': this.state.check_date,
-        'company_id': this.state.company_id
-      })
-    })
-    .then(r=>r.json())
-    .then(payroll=>{
-      // debugger
+    ? this.fetFunc(`http://localhost:3000/payrolls/${this.props.payroll.id}`, 'PATCH',payroll=>{
       this.props.props.history.push(`/companies/${this.state.company_id}`)
-    }))
-    : (fetch(`http://localhost:3000/payrolls`, {
-      method: 'POST',
+    })
+    : this.fetFunc(`http://localhost:3000/payrolls`, 'POST', payroll=>{
+      this.props.props.history.push(`/payrolls/${payroll.id}`)
+    })
+  }
+
+  fetFunc = (url, method, then) => {
+    fetch(url, {
+      method: method,
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json',
@@ -85,16 +57,14 @@ class EmployeeForm extends React.Component {
       })
     })
     .then(r=>r.json())
-    .then(payroll=>{
-      this.props.props.history.push(`/payrolls/${payroll.id}`)
-    }))
+    .then(then)
   }
 
   render() {
     // console.log("payrForm state", this.state)
     // console.log("payrForm props", this.props)
-    // console.log("payrForm comp", this.props.company)
-    const eachEmp = this.props.payroll.employees.map(e=>{
+    console.log("payrForm comp", this.props.company)
+    const eachEmp = this.props.company.employees.map(e=>{
       return (
         <Table.Row key={`PayrollForm-${e.id}`}>
           <Table.Cell>{e.full_name}</Table.Cell>
