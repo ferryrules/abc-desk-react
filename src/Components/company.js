@@ -43,7 +43,7 @@ class Company extends React.Component {
   }
 
   render() {
-    console.log("company",this.props);
+    // console.log("company",this.props);
     const { newEmp, newTicket, newPayroll } = this.state
     const c = this.state.company
     // console.log(c);

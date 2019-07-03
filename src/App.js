@@ -21,9 +21,31 @@ import NotFound from './components/notFound'
 import './App.css'
 
 class App extends React.Component {
+
+  state ={
+    companies: [],
+    currentCompany: []
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/companies', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
+    .then(r=>r.json())
+    .then(companies=>{
+      this.setState({
+        companies
+      })
+    })
+  }
+
   // console.log('%c APP Props: ', 'color: firebrick', props)
   // <Route exact path="/companies/:company_id/employees/:employee_id" render={()=><Employee {...props}/>} />
   render() {
+    // console.log(this.state);
     return (
       <Fragment>
         <Nav />
@@ -33,20 +55,20 @@ class App extends React.Component {
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/dashboard" component={Dashboard} />
 
-          <Route exact path="/companies" render={()=><CompaniesList {...this.props}/>} />
-          <Route exact path="/companies/:company_id" render={()=><Company {...this.props}/>} />
+          <Route exact path="/companies" render={()=><CompaniesList {...this.props} {...this.state}/>} />
+          <Route exact path="/companies/:company_id" render={()=><Company {...this.props} {...this.state}/>} />
 
-          <Route exact path="/tickets" render={()=><TicketForm {...this.props}/>} />
-          <Route exact path="/tickets/:ticket_id" render={()=><Ticket {...this.props}/>} />
-          <Route exact path="/tickets/:ticket_id/edit" render={()=><TicketForm {...this.props}/>} />
+          <Route exact path="/tickets" render={()=><TicketForm {...this.props} {...this.state}/>} />
+          <Route exact path="/tickets/:ticket_id" render={()=><Ticket {...this.props} {...this.state}/>} />
+          <Route exact path="/tickets/:ticket_id/edit" render={()=><TicketForm {...this.props} {...this.state}/>} />
 
-          <Route exact path="/employees" render={()=><EmployeeForm {...this.props}/>} />
-          <Route exact path="/employees/:employee_id" render={()=><Employee {...this.props}/>} />
-          <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...this.props}/>} />
+          <Route exact path="/employees" render={()=><EmployeeForm {...this.props} {...this.state}/>} />
+          <Route exact path="/employees/:employee_id" render={()=><Employee {...this.props} {...this.state}/>} />
+          <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...this.props} {...this.state}/>} />
 
-          <Route exact path="/payrolls" render={()=><PayrollForm {...this.props}/>} />
-          <Route exact path="/payrolls/:payroll_id" render={()=><Payroll {...this.props}/>} />
-          <Route exact path="/payrolls/:payroll_id/edit" render={()=><PayrollForm {...this.props}/>} />
+          <Route exact path="/payrolls" render={()=><PayrollForm {...this.props} {...this.state}/>} />
+          <Route exact path="/payrolls/:payroll_id" render={()=><Payroll {...this.props} {...this.state}/>} />
+          <Route exact path="/payrolls/:payroll_id/edit" render={()=><PayrollForm {...this.props} {...this.state}/>} />
 
           <Route component={NotFound} />
         </Switch>
