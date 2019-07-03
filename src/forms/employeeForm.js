@@ -39,13 +39,17 @@ class EmployeeForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    !!this.props.employee
-    ? this.fetFunc(`http://localhost:3000/employees/${this.props.employee.id}`, 'PATCH',employee=>{
-      this.props.props.history.push(`/companies/${this.state.company_id}`)
-    })
-    : this.fetFunc(`http://localhost:3000/employees`, 'POST', employee=>{
-      this.props.props.history.push(`/employees/${employee.id}`)
-    })
+    if (!this.state.full_name) {
+      window.confirm(`Please enter a name`)
+    } else {
+      !!this.props.employee
+      ? this.fetFunc(`http://localhost:3000/employees/${this.props.employee.id}`, 'PATCH',employee=>{
+        this.props.props.history.push(`/companies/${this.state.company_id}`)
+      })
+      : this.fetFunc(`http://localhost:3000/employees`, 'POST', employee=>{
+        this.props.props.history.push(`/employees/${employee.id}`)
+      })
+    }
   }
 
   render() {

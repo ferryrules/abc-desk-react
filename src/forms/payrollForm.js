@@ -47,14 +47,19 @@ class EmployeeForm extends React.Component {
   }
 
   handleSubmit = (e) => {
+    const {start_date, end_date, check_date} = this.state
     e.preventDefault()
-    !!this.props.payroll
-    ? this.fetFunc(`http://localhost:3000/payrolls/${this.props.payroll.id}`, 'PATCH',payroll=>{
-      this.props.props.history.push(`/companies/${this.state.company_id}`)
-    })
-    : this.fetFunc(`http://localhost:3000/payrolls`, 'POST', payroll=>{
-      this.props.props.history.push(`/payrolls/${payroll.id}`)
-    })
+    if (!start_date || !end_date || !check_date) {
+      window.confirm(`Please enter all dates`)
+    } else {
+      !!this.props.payroll
+      ? this.fetFunc(`http://localhost:3000/payrolls/${this.props.payroll.id}`, 'PATCH',payroll=>{
+        this.props.props.history.push(`/companies/${this.state.company_id}`)
+      })
+      : this.fetFunc(`http://localhost:3000/payrolls`, 'POST', payroll=>{
+        this.props.props.history.push(`/payrolls/${payroll.id}`)
+      })
+    }
   }
 
   render() {

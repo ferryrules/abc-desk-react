@@ -31,19 +31,23 @@ class TicketForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    !!this.props.ticket
-    ? this.fetFunc(`http://localhost:3000/tickets/${this.props.ticket.id}`, "PATCH", ticket=>{
-      this.props.props.history.push(`/companies/${this.state.company_id}`)
-    })
-    : this.fetFunc(`http://localhost:3000/tickets`, "POST", ticket=>{
-      this.props.props.history.push(`/tickets/${ticket.id}`)
-    })
+    if (!this.state.title) {
+      window.confirm(`Please enter a title`)
+    } else {
+      !!this.props.ticket
+      ? this.fetFunc(`http://localhost:3000/tickets/${this.props.ticket.id}`, "PATCH", ticket=>{
+        this.props.props.history.push(`/companies/${this.state.company_id}`)
+      })
+      : this.fetFunc(`http://localhost:3000/tickets`, "POST", ticket=>{
+        this.props.props.history.push(`/tickets/${ticket.id}`)
+      })
+    }
   }
 
   cancelSubmit = () => {
     this.props.props.history.push(`/companies`)
   }
-  
+
   render() {
     // console.log("ticForm state", this.state)
     // console.log("ticForm props", this.props)
