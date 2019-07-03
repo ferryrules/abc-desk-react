@@ -8,7 +8,8 @@ class EmployeeForm extends React.Component {
     start_date: '',
     end_date: '',
     check_date: '',
-    company_id: this.props.company.id
+    company_id: this.props.company.id,
+    employees: []
   }
 
   componentDidMount() {
@@ -20,6 +21,18 @@ class EmployeeForm extends React.Component {
         check_date: this.props.payroll.check_date
       })
     }
+    fetch(`http://localhost:3000/companies/${this.state.company_id}`, {
+      method: "GET",
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
+    .then(r=>r.json())
+    .then(company=>{
+      this.setState({
+        employees: company.employees
+      })
+    })
   }
 
   handleChange = (e) => {
@@ -45,10 +58,10 @@ class EmployeeForm extends React.Component {
   }
 
   render() {
-    // console.log("payrForm state", this.state)
-    // console.log("payrForm props", this.props)
-    // console.log("payrForm comp", this.props.company)
-    const eachEmp = this.props.company.employees.map(e=>{
+    console.log("payrForm state", this.state)
+    console.log("payrForm props", this.props)
+    console.log("payrForm comp", this.props.company)
+    const eachEmp = this.state.employees.map(e=>{
       return (
         <Table.Row key={`PayrollForm-${e.id}`}>
           <Table.Cell>{e.full_name}</Table.Cell>
@@ -63,7 +76,7 @@ class EmployeeForm extends React.Component {
         <div className="fields">
           <div className="field">
             <label>Payroll Status</label>
-            <input onChange={this.handleChange} type="text" name="payroll_status" placeholder="Status" value={this.state.payroll_status} />
+            <input onChange={this.handleChange} type="text" name="payroll_status" placeholder="Not Started" value={this.state.payroll_status} />
           </div>
         </div>
         <div className="fields">
