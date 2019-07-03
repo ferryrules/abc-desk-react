@@ -23,12 +23,12 @@ class PayrollsList extends React.Component {
       return this.props.payrolls.map(payr=>{
         return <Card key={payr.id} id={payr.id} onClick={(e)=>this.selectPayroll(payr)}>
           <Card.Content>
-            <Card.Header>{payr.full_name}</Card.Header>
-            <Card.Meta>{payr.active_status ? "Active" : "Terminated"}</Card.Meta>
+            <Card.Header>Payroll - {payr.end_date}</Card.Header>
+            <Card.Meta>{payr.payroll_status}</Card.Meta>
             <Card.Description>
-              Pay Type: {payr.pay_type}
+              From {payr.start_date} To {payr.end_date}
               <br />
-              Pay Rate: {payr.pay_rate}
+              Check Date: {payr.check_date}
             </Card.Description>
           </Card.Content>
         </Card>
@@ -52,14 +52,14 @@ class PayrollsList extends React.Component {
   }
 
   render() {
-    // console.log("payrollList props", this.props);
+    console.log("payrollList props", this.props);
     return (
       !this.state.newPayr
       ? (<div>
           <div className="ui basic green button" id={this.props.company.id} onClick={this.addPayroll}>
             <i className="icon add circle" />Add Payroll
           </div>
-          <h3 className="ui fluid button top attached blue header" onClick={(e)=>this.collapse(e)} >
+          <h3 className="ui fluid button top attached green header" onClick={(e)=>this.collapse(e)} >
             <i className={`dropdown icon ${this.state.hide ? null : 'counterclockwise rotated'}`} />
               Payrolls
           </h3>

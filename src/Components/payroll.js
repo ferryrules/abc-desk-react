@@ -41,7 +41,7 @@ class Payroll extends React.Component {
         <Card key={payr.id} id={payr.id}>
           <Card.Content>
             <Card.Header>Payroll</Card.Header>
-            <Card.Meta>{payr.payroll_status ? "Active" : "Terminated"}</Card.Meta>
+            <Card.Meta>{payr.payroll_status}</Card.Meta>
             <Card.Description>
               Start Date: {payr.start_date}
               <br />
@@ -52,7 +52,7 @@ class Payroll extends React.Component {
           </Card.Content>
           <div className="ui extra content" >
             <div className="ui basic blue button" onClick={(e)=>this.editPayroll(payr)}>
-              <i className="edit outline icon" />Edit
+              <i className="edit outline icon" />{payr.payroll_status === 'Not Started' ? 'Start' : 'Resume'}
             </div>
           </div>
         </Card>

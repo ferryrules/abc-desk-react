@@ -48,10 +48,7 @@ class Company extends React.Component {
       <div>
       {newEmp ? <EmployeeForm props={this.props} company={c}/> : <EmployeesList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} employees={c.employees} />}
       {newTicket ? <TicketForm props={this.props} company={c}/> : <TicketsList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} tickets={c.tickets} />}
-      {newPayroll ? <PayrollForm props={this.props} company={c}/> : null}
-
-
-        <PayrollsList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} tickets={c.tickets} />
+      {newPayroll ? <PayrollForm props={this.props} company={c}/> : <PayrollsList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} payrolls={c.payrolls} />}
       </div>
     )
   }
