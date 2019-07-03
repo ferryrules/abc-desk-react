@@ -67,7 +67,7 @@ class PayrollsList extends React.Component {
             {this.eachPayroll()}
           </div>
         </div>)
-      : <PayrollForm company={this.props.company} />
+      : <PayrollForm company={this.props.company} employees={this.props.company.employees}/>
     )
   }
 }
