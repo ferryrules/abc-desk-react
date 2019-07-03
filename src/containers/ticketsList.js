@@ -45,7 +45,7 @@ class TicketsList extends React.Component{
   }
 
   addTicket = (e) => {
-    this.props.newEmpOrTicket(false, true)
+    this.props.newEmpOrTicketOrPayroll(false, true, false)
     this.setState({
       newTicket: !this.state.newTicket
     })

@@ -45,7 +45,7 @@ class EmployeesList extends React.Component {
   }
 
   addEmployee = (e) => {
-    this.props.newEmpOrTicket(true, false)
+    this.props.newEmpOrTicketOrPayroll(true, false, false)
     this.setState({
       newEmp: !this.state.newEmp
     })

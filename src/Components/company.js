@@ -2,6 +2,8 @@ import React from 'react'
 import EmployeesList from '../containers/employeesList'
 import EmployeeForm from '../forms/employeeForm'
 import TicketForm from '../forms/ticketForm'
+import PayrollForm from '../forms/payrollForm'
+import PayrollsList from '../containers/payrollsList'
 import TicketsList from '../containers/ticketsList'
 // import { Card } from 'semantic-ui-react'
 // import { withRouter } from 'react-router-dom'
@@ -30,25 +32,27 @@ class Company extends React.Component {
     })
   }
 
-  newEmpOrTicket = (emp, ticket) => {
+  newEmpOrTicketOrPayroll = (emp, ticket, payr) => {
     this.setState({
       newEmp: emp,
-      newTicket: ticket
+      newTicket: ticket,
+      newPayroll: payr
     })
   }
 
   render() {
     console.log(this.props);
+    const { newEmp, newTicket, newPayroll } = this.state
     const c = this.state.company
     return (
-      this.state.newEmp
-      ? <EmployeeForm props={this.props} company={c}/>
-      : this.state.newTicket
-        ? <TicketForm props={this.props} company={c}/>
-      : <div>
-          <EmployeesList newEmpOrTicket={this.newEmpOrTicket} props={this.props} company={c} employees={c.employees} />
-          <TicketsList newEmpOrTicket={this.newEmpOrTicket} props={this.props} company={c} tickets={c.tickets} />
-        </div>
+      <div>
+      {newEmp ? <EmployeeForm props={this.props} company={c}/> : <EmployeesList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} employees={c.employees} />}
+      {newTicket ? <TicketForm props={this.props} company={c}/> : <TicketsList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} tickets={c.tickets} />}
+      {newPayroll ? <PayrollForm props={this.props} company={c}/> : null}
+
+
+        <PayrollsList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} tickets={c.tickets} />
+      </div>
     )
   }
 };

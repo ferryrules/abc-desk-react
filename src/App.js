@@ -14,6 +14,9 @@ import TicketForm from './forms/ticketForm'
 import EmployeeForm from './forms/employeeForm'
 import Employee from './components/employee'
 
+import PayrollForm from './forms/payrollForm'
+import Payroll from './components/payroll'
+
 import NotFound from './components/notFound'
 import './App.css'
 
@@ -39,7 +42,11 @@ const App = props => {
         <Route exact path="/employees" render={()=><EmployeeForm {...props}/>} />
         <Route exact path="/employees/:employee_id" render={()=><Employee {...props}/>} />
         <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...props}/>} />
-        
+
+        <Route exact path="/payrolls" render={()=><PayrollForm {...props}/>} />
+        <Route exact path="/payrolls/:payroll_id" render={()=><Payroll {...props}/>} />
+        <Route exact path="/payrolls/:payroll_id/edit" render={()=><PayrollForm {...props}/>} />
+
         <Route component={NotFound} />
       </Switch>
     </Fragment>
