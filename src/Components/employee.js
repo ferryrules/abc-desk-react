@@ -19,10 +19,7 @@ class Employee extends React.Component {
       }
     })
     .then(r=>r.json())
-    .then(employee=>{
-      this.setState({
-        employee
-      })
+    .then(employee=>{ this.setState({ employee })
     })
   }
 
@@ -32,21 +29,16 @@ class Employee extends React.Component {
     })
   }
 
-  deleteEmployee = (emp) => {
-    console.log(emp);
-    window.confirm('Are you sure you wish to delete this item?')
-    fetch(`http://localhost:3000${this.props.location.pathname}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-      }
-    })
-    .then(r=>r.json())
-    .then(employees=>{
+  termEmployee = (emp) => {
+
+    let termOrHire = emp.active_status ? { 'active_status': false } : { 'active_status': true }
+
+    window.confirm(`Are you sure you want to ${emp.active_status ? 'terminate' : 'rehire'} this employee?`)
+
+    this.fetFunc(`http://localhost:3000${this.props.location.pathname}`, 'PATCH', termOrHire, employees=>{
       this.props.history.push(`/companies/${this.state.employee.company.id}`)
     })
+
   }
 
   render() {
@@ -69,14 +61,28 @@ class Employee extends React.Component {
             <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp)}>
               <i className="edit outline icon" />Edit
             </div>
-            <div className="delete-button ui basic red button" onClick={()=>{this.deleteEmployee(emp)} }>
-              <i className="user delete icon" />Delete
+            <div className={`delete-button ui basic ${emp.active_status ? 'red' : 'green'} button`} onClick={()=>{this.termEmployee(emp)} }>
+              <i className={`user ${emp.active_status ? 'delete' : 'plus'} icon`} />{emp.active_status ? 'Terminate' : 'Rehire'}
             </div>
           </div>
         </Card>
       </div>)
       : <EmployeeForm edit={this.editEmployee} props={this.props} company={emp.company} employee={emp} />
     )
+  }
+
+  fetFunc = (url, method, body, then) => {
+    fetch(url, {
+      method: method,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
+      body: JSON.stringify(body)
+    })
+    .then(r=>r.json())
+    .then(then)
   }
 }
 

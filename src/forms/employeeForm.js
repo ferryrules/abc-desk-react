@@ -44,28 +44,6 @@ class EmployeeForm extends React.Component {
     })
   }
 
-  fetFunc = (url, method, then) => {
-    fetch(url, {
-      method: method,
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        'full_name': this.state.full_name,
-        'pay_type': this.state.pay_type,
-        'pay_rate': this.state.pay_rate,
-        'filing_status': this.state.filing_status,
-        'w4_allowance': this.state.w4_allowance,
-        'active_status': this.state.active_status,
-        'company_id': parseInt(this.state.company_id)
-      })
-    })
-    .then(r=>r.json())
-    .then(then)
-  }
-
   render() {
     // console.log("empForm state", this.state)
     // console.log("empForm props", this.props)
@@ -105,6 +83,28 @@ class EmployeeForm extends React.Component {
         <button className="ui negative basic button" onClick={(e)=>this.handleSubmit(e)}><i className="undo icon"></i>Cancel</button>
       </div>
     )
+  }
+
+  fetFunc = (url, method, then) => {
+    fetch(url, {
+      method: method,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        'full_name': this.state.full_name,
+        'pay_type': this.state.pay_type,
+        'pay_rate': this.state.pay_rate,
+        'filing_status': this.state.filing_status,
+        'w4_allowance': this.state.w4_allowance,
+        'active_status': this.state.active_status,
+        'company_id': parseInt(this.state.company_id)
+      })
+    })
+    .then(r=>r.json())
+    .then(then)
   }
 }
 
