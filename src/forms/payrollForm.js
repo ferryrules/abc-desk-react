@@ -29,6 +29,23 @@ class EmployeeForm extends React.Component {
     })
   }
 
+  fetchHeadersBody = () => {
+    return (
+      {headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        'payroll_status': this.state.payroll_status,
+        'start_date': this.state.start_date,
+        'end_date': this.state.end_date,
+        'check_date': this.state.check_date,
+        'company_id': parseInt(this.state.company_id)
+      })}
+    )
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     !!this.props.payroll
