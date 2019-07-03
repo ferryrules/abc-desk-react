@@ -42,7 +42,7 @@ class Employee extends React.Component {
 
   }
 
-  goBack = (emp) => {
+  goBack = () => {
     this.props.history.push(`/companies/${this.state.employee.company.id}`)
   }
 
@@ -52,8 +52,8 @@ class Employee extends React.Component {
     return(
       !this.state.edit
       ? (<div className="cards">
-        <div className="ui basic grey button" onClick={(e)=>this.goBack(emp)}>
-          <i class="angle double left icon" />Back
+        <div className="ui basic grey button" onClick={(e)=>this.goBack()}>
+          <i className="angle double left icon" />Back
         </div>
         <Card key={`Employee-${emp.id}`} id={emp.id}>
           <Card.Content>

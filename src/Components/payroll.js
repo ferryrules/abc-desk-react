@@ -27,10 +27,13 @@ class Payroll extends React.Component {
   }
 
   editPayroll = (payr) => {
-    console.log(payr);
     this.setState({
       edit: !this.state.edit
     })
+  }
+
+  goBack = () => {
+    this.props.history.push(`/companies/${this.state.payroll.company.id}`)
   }
 
   render() {
@@ -40,6 +43,9 @@ class Payroll extends React.Component {
     return(
       !this.state.edit
       ? (<div className="cards">
+        <div className="ui basic grey button" onClick={(e)=>this.goBack()}>
+          <i className="angle double left icon" />Back
+        </div>
         <Card key={`payroll-${payr.id}`} id={payr.id}>
           <Card.Content>
             <Card.Header>Payroll</Card.Header>

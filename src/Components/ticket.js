@@ -32,12 +32,19 @@ class Ticket extends React.Component {
     })
   }
 
+  goBack = () => {
+    this.props.history.push(`/companies/${this.state.ticket.company.id}`)
+  }
+
   render() {
     // console.log("ticket",this.state);
     const tic = this.state.ticket
     return(
       this.state.edit
       ? (<div className="cards">
+        <div className="ui basic grey button" onClick={(e)=>this.goBack()}>
+          <i className="angle double left icon" />Back
+        </div>
         <Card key={`Ticket-${tic.id}`} id={tic.id}>
           <Card.Content>
             <Card.Header>{tic.title}</Card.Header>
