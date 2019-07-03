@@ -41,7 +41,7 @@ class CompaniesList extends React.Component{
             <br />
           </Card.Meta>
           <Card.Meta>
-            Next Payroll: {!!c.payrolls[0] ? c.payrolls[0].end_date : 'None'}
+            Next Payroll: {!!c.payrolls.pop() ? c.payrolls.pop().end_date : 'None'}
             <br />
           </Card.Meta>
         </Card.Content>

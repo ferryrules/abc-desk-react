@@ -40,30 +40,10 @@ class EmployeeForm extends React.Component {
     })
   }
 
-  fetFunc = (url, method, then) => {
-    fetch(url, {
-      method: method,
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        'payroll_status': this.state.payroll_status,
-        'start_date': this.state.start_date,
-        'end_date': this.state.end_date,
-        'check_date': this.state.check_date,
-        'company_id': parseInt(this.state.company_id)
-      })
-    })
-    .then(r=>r.json())
-    .then(then)
-  }
-
   render() {
     // console.log("payrForm state", this.state)
     // console.log("payrForm props", this.props)
-    console.log("payrForm comp", this.props.company)
+    // console.log("payrForm comp", this.props.company)
     const eachEmp = this.props.company.employees.map(e=>{
       return (
         <Table.Row key={`PayrollForm-${e.id}`}>
@@ -112,6 +92,26 @@ class EmployeeForm extends React.Component {
         <button className="ui button" type="submit" onClick={(e)=>this.handleSubmit(e)}>Submit</button>
       </div>
     )
+  }
+
+  fetFunc = (url, method, then) => {
+    fetch(url, {
+      method: method,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        'payroll_status': this.state.payroll_status,
+        'start_date': this.state.start_date,
+        'end_date': this.state.end_date,
+        'check_date': this.state.check_date,
+        'company_id': parseInt(this.state.company_id)
+      })
+    })
+    .then(r=>r.json())
+    .then(then)
   }
 }
 

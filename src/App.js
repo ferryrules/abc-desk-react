@@ -20,37 +20,39 @@ import Payroll from './components/payroll'
 import NotFound from './components/notFound'
 import './App.css'
 
-const App = props => {
+class App extends React.Component {
   // console.log('%c APP Props: ', 'color: firebrick', props)
   // <Route exact path="/companies/:company_id/employees/:employee_id" render={()=><Employee {...props}/>} />
-  return (
-    <Fragment>
-      <Nav />
-      <Switch>
-        <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/login" component={LoginForm} />
-        <Route exact path="/dashboard" component={Dashboard} />
+  render() {
+    return (
+      <Fragment>
+        <Nav />
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/dashboard" component={Dashboard} />
 
-        <Route exact path="/companies" render={()=><CompaniesList {...props}/>} />
-        <Route exact path="/companies/:company_id" render={()=><Company {...props}/>} />
+          <Route exact path="/companies" render={()=><CompaniesList {...this.props}/>} />
+          <Route exact path="/companies/:company_id" render={()=><Company {...this.props}/>} />
 
-        <Route exact path="/tickets" render={()=><TicketForm {...props}/>} />
-        <Route exact path="/tickets/:ticket_id" render={()=><Ticket {...props}/>} />
-        <Route exact path="/tickets/:ticket_id/edit" render={()=><TicketForm {...props}/>} />
+          <Route exact path="/tickets" render={()=><TicketForm {...this.props}/>} />
+          <Route exact path="/tickets/:ticket_id" render={()=><Ticket {...this.props}/>} />
+          <Route exact path="/tickets/:ticket_id/edit" render={()=><TicketForm {...this.props}/>} />
 
-        <Route exact path="/employees" render={()=><EmployeeForm {...props}/>} />
-        <Route exact path="/employees/:employee_id" render={()=><Employee {...props}/>} />
-        <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...props}/>} />
+          <Route exact path="/employees" render={()=><EmployeeForm {...this.props}/>} />
+          <Route exact path="/employees/:employee_id" render={()=><Employee {...this.props}/>} />
+          <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...this.props}/>} />
 
-        <Route exact path="/payrolls" render={()=><PayrollForm {...props}/>} />
-        <Route exact path="/payrolls/:payroll_id" render={()=><Payroll {...props}/>} />
-        <Route exact path="/payrolls/:payroll_id/edit" render={()=><PayrollForm {...props}/>} />
+          <Route exact path="/payrolls" render={()=><PayrollForm {...this.props}/>} />
+          <Route exact path="/payrolls/:payroll_id" render={()=><Payroll {...this.props}/>} />
+          <Route exact path="/payrolls/:payroll_id/edit" render={()=><PayrollForm {...this.props}/>} />
 
-        <Route component={NotFound} />
-      </Switch>
-    </Fragment>
-  )
+          <Route component={NotFound} />
+        </Switch>
+      </Fragment>
+    )
+  }
 }
 
 export default withRouter(App)

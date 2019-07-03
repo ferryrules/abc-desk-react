@@ -34,7 +34,7 @@ class PayrollsList extends React.Component {
           </Card.Content>
         </Card>
       }).sort((a,b)=>{
-        return a.props.children.props.children[0].props.children.localeCompare(b.props.children.props.children[0].props.children)
+        return b.props.children.props.children[0].props.children[1].localeCompare(a.props.children.props.children[0].props.children[1])
       })
     }
   }

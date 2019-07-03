@@ -36,30 +36,17 @@ class EmployeeForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     !!this.props.employee
-    ? (fetch(`http://localhost:3000/employees/${this.props.employee.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        'full_name': this.state.full_name,
-        'pay_type': this.state.pay_type,
-        'pay_rate': this.state.pay_rate,
-        'filing_status': this.state.filing_status,
-        'w4_allowance': this.state.w4_allowance,
-        'active_status': this.state.active_status,
-        'company_id': this.state.company_id
-      })
-    })
-    .then(r=>r.json())
-    .then(employee=>{
-      // debugger
+    ? this.fetFunc(`http://localhost:3000/employees/${this.props.employee.id}`, 'PATCH',employee=>{
       this.props.props.history.push(`/companies/${this.state.company_id}`)
-    }))
-    : (fetch(`http://localhost:3000/employees`, {
-      method: 'POST',
+    })
+    : this.fetFunc(`http://localhost:3000/employees`, 'POST', employee=>{
+      this.props.props.history.push(`/employees/${employee.id}`)
+    })
+  }
+
+  fetFunc = (url, method, then) => {
+    fetch(url, {
+      method: method,
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json',
@@ -76,15 +63,13 @@ class EmployeeForm extends React.Component {
       })
     })
     .then(r=>r.json())
-    .then(employee=>{
-      this.props.props.history.push(`/employees/${employee.id}`)
-    }))
+    .then(then)
   }
 
   render() {
-    console.log("empForm state", this.state)
-    console.log("empForm props", this.props)
-    console.log("empForm comp", this.props.company)
+    // console.log("empForm state", this.state)
+    // console.log("empForm props", this.props)
+    // console.log("empForm comp", this.props.company)
 
     return(
       <div className="ui equal width form">

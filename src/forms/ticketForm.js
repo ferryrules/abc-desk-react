@@ -40,30 +40,10 @@ class TicketForm extends React.Component {
     })
   }
 
-  fetFunc = (url, method, then) => {
-    fetch(url, {
-      method: method,
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        'title': this.state.title,
-        'category': this.state.category,
-        'description': this.state.description,
-        'priority': this.state.priority,
-        'company_id': this.state.company_id
-      })
-    })
-    .then(r=>r.json())
-    .then(then)
-  }
-
   render() {
-    console.log("ticForm state", this.state)
-    console.log("ticForm props", this.props)
-    console.log("ticForm comp", this.props.company)
+    // console.log("ticForm state", this.state)
+    // console.log("ticForm props", this.props)
+    // console.log("ticForm comp", this.props.company)
     return(
       <div className="ui equal width form">
         <div className="fields">
@@ -92,6 +72,26 @@ class TicketForm extends React.Component {
         <button className="ui negative basic button" onClick={(e)=>this.handleSubmit(e)}><i className="undo icon"></i>Cancel</button>
       </div>
     )
+  }
+
+  fetFunc = (url, method, then) => {
+    fetch(url, {
+      method: method,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        'title': this.state.title,
+        'category': this.state.category,
+        'description': this.state.description,
+        'priority': this.state.priority,
+        'company_id': this.state.company_id
+      })
+    })
+    .then(r=>r.json())
+    .then(then)
   }
 }
 
