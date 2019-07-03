@@ -30,6 +30,7 @@ class Company extends React.Component {
         company
       })
     })
+    .catch(error=> console.error('Error', error))
   }
 
   newEmpOrTicketOrPayroll = (emp, ticket, payr) => {

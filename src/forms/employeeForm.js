@@ -33,6 +33,10 @@ class EmployeeForm extends React.Component {
     })
   }
 
+  cancelSubmit = (e) => {
+    this.props.props.history.push(`/companies/${this.state.company_id}`)
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     !!this.props.employee
@@ -80,7 +84,7 @@ class EmployeeForm extends React.Component {
           </div>
         </div>
         <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>
-        <button className="ui negative basic button" onClick={(e)=>this.handleSubmit(e)}><i className="undo icon"></i>Cancel</button>
+        <button className="ui negative basic button" onClick={(e)=>this.cancelSubmit(e)}><i className="undo icon"></i>Cancel</button>
       </div>
     )
   }

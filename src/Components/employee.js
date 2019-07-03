@@ -21,6 +21,7 @@ class Employee extends React.Component {
     .then(r=>r.json())
     .then(employee=>{ this.setState({ employee })
     })
+    .catch(error=> console.error('Error', error))
   }
 
   editEmployee = (emp) => {
@@ -41,12 +42,19 @@ class Employee extends React.Component {
 
   }
 
+  goBack = (emp) => {
+    this.props.history.push(`/companies/${this.state.employee.company.id}`)
+  }
+
   render() {
     console.log("employee",this.props);
     const emp = this.state.employee
     return(
       !this.state.edit
       ? (<div className="cards">
+        <div className="ui basic grey button" onClick={(e)=>this.goBack(emp)}>
+          <i class="angle double left icon" />Back
+        </div>
         <Card key={`Employee-${emp.id}`} id={emp.id}>
           <Card.Content>
             <Card.Header>{emp.full_name}</Card.Header>
@@ -83,6 +91,7 @@ class Employee extends React.Component {
     })
     .then(r=>r.json())
     .then(then)
+    .catch(error=> console.error('Error', error))
   }
 }
 

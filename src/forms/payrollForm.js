@@ -29,6 +29,11 @@ class EmployeeForm extends React.Component {
     })
   }
 
+  cancelSubmit = (e) => {
+    this.props.props.history.push(`/companies`)
+    this.props.props.history.push(`/companies/${this.state.company_id}`)
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     !!this.props.payroll
@@ -48,7 +53,7 @@ class EmployeeForm extends React.Component {
       return (
         <Table.Row key={`PayrollForm-${e.id}`}>
           <Table.Cell>{e.full_name}</Table.Cell>
-          <Table.Cell>40</Table.Cell>
+          <Table.Cell>0</Table.Cell>
           <Table.Cell>{e.pay_rate}</Table.Cell>
         </Table.Row>
       )
@@ -89,7 +94,8 @@ class EmployeeForm extends React.Component {
             {eachEmp}
           </Table.Body>
         </Table>
-        <button className="ui button" type="submit" onClick={(e)=>this.handleSubmit(e)}>Submit</button>
+        <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Start</button>
+        <button className="ui negative basic button" onClick={(e)=>this.cancelSubmit(e)}><i className="undo icon"></i>Cancel</button>
       </div>
     )
   }

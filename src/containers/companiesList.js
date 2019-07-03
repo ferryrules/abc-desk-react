@@ -22,6 +22,7 @@ class CompaniesList extends React.Component{
         companies
       })
     })
+    .catch(error=> console.error('Error', error))
   }
 
   selectCompany = (c) => {
@@ -29,8 +30,8 @@ class CompaniesList extends React.Component{
   }
 
   render() {
-    // console.log(this.props);
-    // console.log(this.state);
+    console.log(this.props);
+    console.log(this.state);
     const eachCompany = this.state.companies.map(c=>{
       return <Card key={c.id} onClick={(e)=>this.selectCompany(c)} id={c.id}>
         <Card.Content>
@@ -41,7 +42,7 @@ class CompaniesList extends React.Component{
             <br />
           </Card.Meta>
           <Card.Meta>
-            Next Payroll: {!!c.payrolls.pop() ? c.payrolls.pop().end_date : 'None'}
+            Next Payroll: {!!c.payrolls.length > 0 ? c.payrolls.pop().end_date : 'None'}
             <br />
           </Card.Meta>
         </Card.Content>

@@ -57,6 +57,7 @@ class PayrollsList extends React.Component {
     return (
       !this.state.newPayr
       ? (<div>
+          <br />
           <div className="ui basic green button" id={this.props.company.id} onClick={this.addPayroll}>
             <i className="icon add circle" />Add Payroll
           </div>
