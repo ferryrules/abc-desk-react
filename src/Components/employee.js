@@ -25,6 +25,7 @@ class Employee extends React.Component {
   }
 
   editEmployee = (emp) => {
+    console.log("edit");
     this.setState({
       edit: !this.state.edit
     })

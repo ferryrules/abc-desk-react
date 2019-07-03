@@ -31,7 +31,6 @@ class EmployeeForm extends React.Component {
 
   cancelSubmit = (e) => {
     this.props.props.history.push(`/companies`)
-    this.props.props.history.push(`/companies/${this.state.company_id}`)
   }
 
   handleSubmit = (e) => {

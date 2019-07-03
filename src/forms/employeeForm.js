@@ -33,8 +33,8 @@ class EmployeeForm extends React.Component {
     })
   }
 
-  cancelSubmit = (e) => {
-    this.props.props.history.push(`/companies/${this.state.company_id}`)
+  cancelSubmit = () => {
+    this.props.props.history.push(`/companies`)
   }
 
   handleSubmit = (e) => {
@@ -50,7 +50,7 @@ class EmployeeForm extends React.Component {
 
   render() {
     // console.log("empForm state", this.state)
-    // console.log("empForm props", this.props)
+    console.log("empForm props", this.props)
     // console.log("empForm comp", this.props.company)
 
     return(
@@ -84,7 +84,7 @@ class EmployeeForm extends React.Component {
           </div>
         </div>
         <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>
-        <button className="ui negative basic button" onClick={(e)=>this.cancelSubmit(e)}><i className="undo icon"></i>Cancel</button>
+        <button className="ui negative basic button" onClick={(e)=>this.cancelSubmit()}><i className="undo icon"></i>Cancel</button>
       </div>
     )
   }

@@ -40,6 +40,10 @@ class TicketForm extends React.Component {
     })
   }
 
+  cancelSubmit = () => {
+    this.props.props.history.push(`/companies`)
+  }
+  
   render() {
     // console.log("ticForm state", this.state)
     // console.log("ticForm props", this.props)
@@ -69,7 +73,7 @@ class TicketForm extends React.Component {
           </div>
         </div>
         <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>
-        <button className="ui negative basic button" onClick={(e)=>this.handleSubmit(e)}><i className="undo icon"></i>Cancel</button>
+        <button className="ui negative basic button" onClick={(e)=>this.cancelSubmit(e)}><i className="undo icon"></i>Cancel</button>
       </div>
     )
   }

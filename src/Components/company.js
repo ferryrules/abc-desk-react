@@ -1,6 +1,7 @@
 import React from 'react'
 import EmployeesList from '../containers/employeesList'
 import EmployeeForm from '../forms/employeeForm'
+import Employee from '../components/employee'
 import TicketForm from '../forms/ticketForm'
 import PayrollForm from '../forms/payrollForm'
 import PayrollsList from '../containers/payrollsList'
@@ -42,7 +43,7 @@ class Company extends React.Component {
   }
 
   render() {
-    // console.log("company",this.props);
+    console.log("company",this.props);
     const { newEmp, newTicket, newPayroll } = this.state
     const c = this.state.company
     // console.log(c);
