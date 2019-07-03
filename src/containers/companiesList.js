@@ -56,4 +56,3 @@ class CompaniesList extends React.Component{
 }
 
 export default withAuth(CompaniesList)
-// <Company key={c.id} company={c} companies={this.state.companies} selectCompany={this.selectCompany} />
