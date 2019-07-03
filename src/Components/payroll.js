@@ -27,19 +27,20 @@ class Payroll extends React.Component {
   }
 
   editPayroll = (payr) => {
+    console.log(payr);
     this.setState({
       edit: !this.state.edit
     })
   }
 
   render() {
-    console.log("payroll",this.props);
-    console.log("payroll state",this.state);
+    // console.log("payroll",this.props);
+    // console.log("payroll state",this.state);
     const payr = this.state.payroll
     return(
       !this.state.edit
       ? (<div className="cards">
-        <Card key={payr.id} id={payr.id}>
+        <Card key={`payroll-${payr.id}`} id={payr.id}>
           <Card.Content>
             <Card.Header>Payroll</Card.Header>
             <Card.Meta>{payr.payroll_status}</Card.Meta>

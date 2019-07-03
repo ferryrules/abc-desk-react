@@ -55,7 +55,7 @@ class Employee extends React.Component {
     return(
       !this.state.edit
       ? (<div className="cards">
-        <Card key={emp.id} id={emp.id}>
+        <Card key={`Employee-${emp.id}`} id={emp.id}>
           <Card.Content>
             <Card.Header>{emp.full_name}</Card.Header>
             <Card.Meta>{emp.active_status ? "Active" : "Terminated"}</Card.Meta>

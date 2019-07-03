@@ -33,12 +33,12 @@ class Ticket extends React.Component {
   }
 
   render() {
-    console.log("ticket",this.state);
+    // console.log("ticket",this.state);
     const tic = this.state.ticket
     return(
       this.state.edit
       ? (<div className="cards">
-        <Card key={tic.id} id={tic.id}>
+        <Card key={`Ticket-${tic.id}`} id={tic.id}>
           <Card.Content>
             <Card.Header>{tic.title}</Card.Header>
             <Card.Meta>{tic.category}</Card.Meta>

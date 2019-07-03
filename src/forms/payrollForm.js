@@ -74,12 +74,12 @@ class EmployeeForm extends React.Component {
   }
 
   render() {
-    console.log("payrForm state", this.state)
-    console.log("payrForm props", this.props)
-    console.log("payrForm comp", this.props.company)
+    // console.log("payrForm state", this.state)
+    // console.log("payrForm props", this.props)
+    // console.log("payrForm comp", this.props.company)
     const eachEmp = this.props.payroll.employees.map(e=>{
       return (
-        <Table.Row>
+        <Table.Row key={`PayrollForm-${e.id}`}>
           <Table.Cell>{e.full_name}</Table.Cell>
           <Table.Cell>40</Table.Cell>
           <Table.Cell>{e.pay_rate}</Table.Cell>
