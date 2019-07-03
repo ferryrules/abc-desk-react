@@ -116,7 +116,8 @@ class EmployeeForm extends React.Component {
             <input onChange={this.handleChange} type="text" placeholder="Active or Inactive" name="active_status" value={this.state.active_status}/>
           </div>
         </div>
-        <button className="ui button" type="submit" onClick={(e)=>this.handleSubmit(e)}>Submit</button>
+        <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>
+        <button className="ui negative basic button" onClick={(e)=>this.handleSubmit(e)}><i className="undo icon"></i>Cancel</button>
       </div>
     )
   }

@@ -29,8 +29,8 @@ class CompaniesList extends React.Component{
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
+    // console.log(this.props);
+    // console.log(this.state);
     const eachCompany = this.state.companies.map(c=>{
       return <Card key={c.id} onClick={(e)=>this.selectCompany(c)} id={c.id}>
         <Card.Content>

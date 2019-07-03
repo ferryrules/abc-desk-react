@@ -102,7 +102,8 @@ class TicketForm extends React.Component {
             <textarea onChange={this.handleChange} type="textarea" placeholder="Description" name="description" value={this.state.description}/>
           </div>
         </div>
-        <button className="ui button" type="submit" onClick={(e)=>this.handleSubmit(e)}>Submit</button>
+        <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>
+        <button className="ui negative basic button" onClick={(e)=>this.handleSubmit(e)}><i className="undo icon"></i>Cancel</button>
       </div>
     )
   }

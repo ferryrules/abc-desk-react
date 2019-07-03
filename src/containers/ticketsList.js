@@ -52,7 +52,7 @@ class TicketsList extends React.Component{
   }
 
   render() {
-    console.log("ticketList", this.props);
+    // console.log("ticketList", this.props);
     return (
       !this.state.newTicket
       ? (<div>
