@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Card } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 class EmployeeForm extends React.Component {
 
@@ -77,6 +77,15 @@ class EmployeeForm extends React.Component {
     console.log("payrForm state", this.state)
     console.log("payrForm props", this.props)
     console.log("payrForm comp", this.props.company)
+    const eachEmp = this.props.payroll.employees.map(e=>{
+      return (
+        <Table.Row>
+          <Table.Cell>{e.full_name}</Table.Cell>
+          <Table.Cell>40</Table.Cell>
+          <Table.Cell>{e.pay_rate}</Table.Cell>
+        </Table.Row>
+      )
+    })
 
     return(
       <div className="ui equal width form">
@@ -100,6 +109,19 @@ class EmployeeForm extends React.Component {
             <input onChange={this.handleChange} type="date" placeholder="Check Date" name="check_date" value={this.state.check_date}/>
           </div>
         </div>
+        <Table celled selectable>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Employee</Table.HeaderCell>
+              <Table.HeaderCell>Hours</Table.HeaderCell>
+              <Table.HeaderCell>Pay</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
+            {eachEmp}
+          </Table.Body>
+        </Table>
         <button className="ui button" type="submit" onClick={(e)=>this.handleSubmit(e)}>Submit</button>
       </div>
     )
