@@ -52,7 +52,7 @@ class EmployeesList extends React.Component {
   }
 
   render() {
-    // console.log("employeeList props", this.props);
+    console.log("employeeList props", this.props);
     return (
       !this.state.newEmp
       ? (<div>

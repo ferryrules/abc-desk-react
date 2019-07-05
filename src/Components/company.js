@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import EmployeesList from '../containers/employeesList'
 import EmployeeForm from '../forms/employeeForm'
 import TicketForm from '../forms/ticketForm'
@@ -15,7 +15,8 @@ class Company extends React.Component {
   state = {
     company: [],
     newEmp: false,
-    newTicket: false
+    newTicket: false,
+    newPayroll: false
   }
 
   componentDidMount() {
@@ -49,9 +50,21 @@ class Company extends React.Component {
     // console.log(c);
     return (
       <div>
-      {newEmp ? <EmployeeForm props={this.props} company={c}/> : <EmployeesList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} employees={c.employees} />}
-      {newTicket ? <TicketForm props={this.props} company={c}/> : <TicketsList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} tickets={c.tickets} />}
-      {newPayroll ? <PayrollForm props={this.props} company={c}/> : <PayrollsList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} payrolls={c.payrolls} />}
+        {!newEmp ?
+          !newTicket ?
+            !newPayroll ? (
+              <Fragment>
+                <EmployeesList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} employees={c.employees} />
+                <TicketsList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} tickets={c.tickets} />
+                <PayrollsList newEmpOrTicketOrPayroll={this.newEmpOrTicketOrPayroll} props={this.props} company={c} payrolls={c.payrolls} />
+              </Fragment>
+            ) : (
+              <PayrollForm props={this.props} company={c}/>
+            ) : (
+            <TicketForm props={this.props} company={c}/>
+          ) : (
+          <EmployeeForm props={this.props} company={c}/>
+        )}
       </div>
     )
   }
