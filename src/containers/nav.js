@@ -11,7 +11,6 @@ class Nav extends React.Component {
   }
 
   render() {
-    // console.log(this.props);
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
       <Menu pointing secondary>
@@ -33,14 +32,7 @@ class Nav extends React.Component {
 }
 
 const mapStateToProps = ({ usersReducer: user }) => {
-  // console.log({user});
   return {user}
 }
 
 export default withRouter(connect(mapStateToProps)(Nav))
-
-
-// <Menu.Item active={pathname === '/dashboard'}><a href="http://localhost:3001/dashboard">Dashboard</a></Menu.Item>
-// import { fetchCurrentUser } from '../actions/user'
-// import LoginForm from './loginForm'
-// as={NavLink} to="/companies" name="Companies" active={pathname === '/companies'} /
