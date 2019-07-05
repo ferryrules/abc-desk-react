@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { Route, Switch, Redirect, withRouter, Life } from 'react-router-dom'
 import Profile from './containers/profile'
 import LoginForm from './components/loginForm'
 import Nav from './containers/nav'
@@ -42,20 +42,26 @@ class App extends React.Component {
     })
   }
 
+  selectCompany = (company) => {
+    this.setState({
+      currentCompany: company
+    })
+  }
+
   // console.log('%c APP Props: ', 'color: firebrick', props)
   // <Route exact path="/companies/:company_id/employees/:employee_id" render={()=><Employee {...props}/>} />
   render() {
-    // console.log(this.state);
+    console.log("App state",this.state);
     return (
       <Fragment>
-        <Nav />
+        <Nav currentCompany={this.state.currentCompany}/>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/dashboard" component={Dashboard} />
 
-          <Route exact path="/companies" render={()=><CompaniesList {...this.props} {...this.state}/>} />
+          <Route exact path="/companies" render={()=><CompaniesList {...this.props} {...this.state} selectCompany={this.selectCompany} />} />
           <Route exact path="/companies/:company_id" render={()=><Company {...this.props} {...this.state}/>} />
 
           <Route exact path="/tickets" render={()=><TicketForm {...this.props} {...this.state}/>} />

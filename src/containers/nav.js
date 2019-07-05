@@ -11,6 +11,7 @@ class Nav extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
       <Menu pointing secondary>
