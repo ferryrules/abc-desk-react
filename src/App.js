@@ -8,13 +8,13 @@ import CompanyDashboard from './containers/companyDashboard';
 import Company from './components/company'
 // import CompaniesList from './containers/companiesList'
 
-import Ticket from './components/ticket'
-import TicketsList from './containers/ticketsList'
-import TicketForm from './forms/ticketForm'
-
 import EmployeesList from './containers/employeesList'
 import Employee from './components/employee'
 import EmployeeForm from './forms/employeeForm'
+
+import Ticket from './components/ticket'
+import TicketsList from './containers/ticketsList'
+import TicketForm from './forms/ticketForm'
 
 import PayrollForm from './forms/payrollForm'
 import Payroll from './components/payroll'
