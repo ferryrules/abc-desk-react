@@ -6,7 +6,7 @@ import Nav from './containers/nav'
 import CompanyDashboard from './containers/companyDashboard';
 
 import Company from './components/company'
-import CompaniesList from './containers/companiesList'
+// import CompaniesList from './containers/companiesList'
 
 import Ticket from './components/ticket'
 import TicketsList from './containers/ticketsList'
@@ -58,17 +58,17 @@ class App extends React.Component {
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/dashboard" component={CompanyDashboard} />
 
+          {/* COMPANY */}
           <Route exact path="/:company_name" render={()=><Company {...this.props} company={this.state.company}/>} />
-
-          <Route exact path="/tickets" render={()=><TicketsList {...this.props} company={this.state.company}/>} />
-          <Route exact path="/tickets/:ticket_id" render={()=><Ticket {...this.props} company={this.state.company}/>} />
-          <Route exact path="/tickets/:ticket_id/edit" render={()=><TicketForm {...this.props} company={this.state.company}/>} />
-
+          {/* EMPLOYEES */}
           <Route exact path="/employees" render={()=><EmployeesList {...this.props} company={this.state.company}/>} />
           <Route exact path="/employees/:employee_id" render={()=><Employee {...this.props} company={this.state.company}/>} />
           <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...this.props} company={this.state.company}/>} />
-          <Route exact path="/employees/new" render={()=><EmployeeForm {...this.props} company={this.state.company}/>} />
-
+          {/* TICKETS */}
+          <Route exact path="/tickets" render={()=><TicketsList {...this.props} company={this.state.company}/>} />
+          <Route exact path="/tickets/:ticket_id" render={()=><Ticket {...this.props} company={this.state.company}/>} />
+          <Route exact path="/tickets/:ticket_id/edit" render={()=><TicketForm {...this.props} company={this.state.company}/>} />
+          {/* PAYROLL */}
           <Route exact path="/payrolls" render={()=><PayrollForm {...this.props} company={this.state.company}/>} />
           <Route exact path="/payrolls/:payroll_id" render={()=><Payroll {...this.props} company={this.state.company}/>} />
           <Route exact path="/payrolls/:payroll_id/edit" render={()=><PayrollForm {...this.props} company={this.state.company}/>} />
