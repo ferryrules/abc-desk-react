@@ -11,24 +11,33 @@ class Nav extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log("nav", this.props)
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
       <Menu pointing secondary>
         {loggedIn ? (
           <Fragment>
-            {/* COMPANY */}
-            <Menu.Item
-              as={NavLink}
-              to={`/${this.props.company.name}`}
-              name={this.props.company.name}
-              active={pathname === '/companies'} />
             {/* DASHBOARD */}
             <Menu.Item
               as={NavLink}
               to="/dashboard"
               name="Dashboard"
               active={pathname === '/dashboard'} />
+            <Menu.Item
+              as={NavLink}
+              to={`/${this.props.company.name}/employees`}
+              name="Employees"
+              active={pathname === `/${this.props.company.name}/employees`} />
+            <Menu.Item
+              as={NavLink}
+              to={`/${this.props.company.name}/tickets`}
+              name="Helpdesk"
+              active={pathname === `/${this.props.company.name}/tickets`} />
+            <Menu.Item
+              as={NavLink}
+              to={`/${this.props.company.name}/payrolls`}
+              name="Payroll"
+              active={pathname === `/${this.props.company.name}/payrolls`} />
 
             {/* RIGHT SIDE MENU */}
             <Menu.Menu position="right">
@@ -36,7 +45,7 @@ class Nav extends React.Component {
               <Menu.Item
                 as={NavLink}
                 to="/profile"
-                name="Profile"
+                name={this.props.user.user.username}
                 active={pathname === '/profile'} />
               {/* LOGOUT */}
               <Menu.Item
@@ -58,3 +67,11 @@ const mapStateToProps = ({ usersReducer: user }) => {
 }
 
 export default withRouter(connect(mapStateToProps)(Nav))
+
+
+// {/* COMPANY */}
+// <Menu.Item
+//   as={NavLink}
+//   to={`/${this.props.company.name}`}
+//   name={this.props.company.name}
+//   active={pathname === '/companies'} />
