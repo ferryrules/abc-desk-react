@@ -33,12 +33,13 @@ class TicketsList extends React.Component{
   render() {
     return (
       <div>
-        <div
-          className="ui basic green button"
-          id={this.props.company.id}
-          onClick={this.addTicket}>
-          <i className="icon add circle" /><Link to={`/${this.props.company.name}/tickets/new`}>Add Ticket</Link>
-        </div>
+        <Link to={`/${this.props.company.name}/tickets/new`}>
+          <div
+            className="ui basic green button"
+            id={this.props.company.id}>
+            <i className="icon add circle" />Add Ticket
+          </div>
+        </Link>
         {this.eachTicket()}
       </div>
     )

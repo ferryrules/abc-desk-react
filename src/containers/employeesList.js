@@ -32,12 +32,13 @@ class EmployeesList extends React.Component {
   render() {
     return (
       <div>
-        <div
-          className="ui basic green button"
-          id={this.props.company.id}
-          onClick={this.addEmployee}>
-          <i className="icon add circle" /><Link to={`/${this.props.company.name}/employees/new`}>Add Employee</Link>
-        </div>
+        <Link to={`/${this.props.company.name}/employees/new`}>
+          <div
+            className="ui basic green button"
+            id={this.props.company.id}>
+            <i className="icon add circle" />Add Employee
+          </div>
+        </Link>
         {this.eachEmployee()}
       </div>
     )
