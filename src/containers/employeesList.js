@@ -2,7 +2,6 @@ import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { Card } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-// import Employee from '../components/employee'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
@@ -31,7 +30,6 @@ class EmployeesList extends React.Component {
   }
 
   render() {
-    // console.log("employeeList props", this.props);
     return (
       <div>
         <div
@@ -48,9 +46,9 @@ class EmployeesList extends React.Component {
 
 export default withAuth(EmployeesList)
 
-
+// extra
+// import Employee from '../components/employee'
 // import EmployeeForm from '../forms/employeeForm'
-
 // state = {
 //   hide: true,
 //   newEmp: false
@@ -72,7 +70,6 @@ export default withAuth(EmployeesList)
 //     newEmp: !this.state.newEmp
 //   })
 // }
-
 // !this.state.newEmp
 // ? (<div>
 //     <div className="ui basic green button" id={this.props.company.id} onClick={this.addEmployee}>
