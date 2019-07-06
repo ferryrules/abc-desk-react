@@ -1,8 +1,8 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-import { Card } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Card } from 'semantic-ui-react'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"

@@ -1,7 +1,8 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-import { Card } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Card } from 'semantic-ui-react'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
@@ -46,7 +47,11 @@ class TicketsList extends React.Component{
   }
 }
 
-export default withAuth(TicketsList)
+const mapStateToProps = ({...props}) => {
+  return {...props}
+}
+
+export default withAuth(connect(mapStateToProps)(TicketsList))
 
 
 // extra
