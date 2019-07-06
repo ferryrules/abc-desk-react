@@ -6,19 +6,18 @@ import Nav from './containers/nav'
 
 import CompanyDashboard from './containers/companyDashboard';
 import Company from './components/company'
-// import CompaniesList from './containers/companiesList'
 
 import EmployeesList from './containers/employeesList'
 import Employee from './components/employee'
 import EmployeeForm from './forms/employeeForm'
 
-import Ticket from './components/ticket'
 import TicketsList from './containers/ticketsList'
+import Ticket from './components/ticket'
 import TicketForm from './forms/ticketForm'
 
-import PayrollForm from './forms/payrollForm'
-import Payroll from './components/payroll'
 import PayrollsList from './containers/payrollsList'
+import Payroll from './components/payroll'
+import PayrollForm from './forms/payrollForm'
 
 import NotFound from './components/notFound'
 import './App.css'
@@ -83,4 +82,5 @@ class App extends React.Component {
 export default withRouter(App)
 
 
+// import CompaniesList from './containers/companiesList'
 // <Route exact path="/companies" render={()=><CompaniesList {...this.props} {...this.state} selectCompany={this.selectCompany} />} />
