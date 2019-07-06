@@ -60,6 +60,7 @@ class App extends React.Component {
           <Route exact path="/:company_name" render={()=><Company {...this.props} company={this.state.company}/>} />
           {/* EMPLOYEES */}
           <Route exact path="/:company_name/employees" render={()=><EmployeesList {...this.props} company={this.state.company}/>} />
+          <Route exact path="/:company_name/employees/new" render={()=><EmployeeForm {...this.props} company={this.state.company}/>} />
           <Route exact path="/employees/:employee_id" render={()=><Employee {...this.props} company={this.state.company}/>} />
           <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...this.props} company={this.state.company}/>} />
           {/* TICKETS */}

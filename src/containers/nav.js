@@ -10,8 +10,18 @@ class Nav extends React.Component {
     this.props.dispatch({ type: 'LOG_OUT' })
   }
 
+  changeName = (e) => {
+    // console.log(e.target);
+    e.target.innerText = this.props.company.name
+  }
+
+  handleChange = (e) => {
+    // console.log(e.target.parentElement.children[0]);
+    e.target.parentElement.children[0].innerText = "Dashboard"
+  }
+
   render() {
-    console.log("nav", this.props)
+    // console.log("nav", this.props)
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
       <Menu pointing secondary>
@@ -22,22 +32,26 @@ class Nav extends React.Component {
               as={NavLink}
               to="/dashboard"
               name="Dashboard"
-              active={pathname === '/dashboard'} />
+              active={pathname === '/dashboard'}
+              onClick={(e)=>this.changeName(e)} />
             <Menu.Item
               as={NavLink}
               to={`/${this.props.company.name}/employees`}
               name="Employees"
-              active={pathname === `/${this.props.company.name}/employees`} />
+              active={pathname === `/${this.props.company.name}/employees`}
+              onClick={(e)=>this.handleChange(e)} />
             <Menu.Item
               as={NavLink}
               to={`/${this.props.company.name}/tickets`}
               name="Helpdesk"
-              active={pathname === `/${this.props.company.name}/tickets`} />
+              active={pathname === `/${this.props.company.name}/tickets`}
+              onClick={(e)=>this.handleChange(e)} />
             <Menu.Item
               as={NavLink}
               to={`/${this.props.company.name}/payrolls`}
               name="Payroll"
-              active={pathname === `/${this.props.company.name}/payrolls`} />
+              active={pathname === `/${this.props.company.name}/payrolls`}
+              onClick={(e)=>this.handleChange(e)} />
 
             {/* RIGHT SIDE MENU */}
             <Menu.Menu position="right">
