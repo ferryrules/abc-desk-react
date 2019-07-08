@@ -1,6 +1,6 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-import { Card, Button, Item, Icon } from 'semantic-ui-react'
+import { Button, Item, Icon } from 'semantic-ui-react'
 
 import TicketForm from '../forms/ticketForm'
 
@@ -44,8 +44,6 @@ class Ticket extends React.Component {
   }
 
   render() {
-    const { ticket } = this.state
-    console.log("ticket",this.state);
     const tic = this.state.ticket
     return(
       this.state.edit
@@ -56,8 +54,8 @@ class Ticket extends React.Component {
         <Item>
           <Icon className={`exclamation triangle ${this.state.ticketColor}`} size="huge" />
           <Item.Content verticalAlign='middle'>
-            <Item.Header>{ticket.title}</Item.Header>
-            <Item.Description>{ticket.description}</Item.Description>
+            <Item.Header>{tic.title}</Item.Header>
+            <Item.Description>{tic.description}</Item.Description>
             <Item.Extra>
               <Button floated='right' onClick={(e)=>this.editTicket()}>Edit</Button>
             </Item.Extra>

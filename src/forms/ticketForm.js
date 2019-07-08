@@ -1,7 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
-// import { Card } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 
 class TicketForm extends React.Component {
 
@@ -33,8 +33,8 @@ class TicketForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    if (!this.state.title) {
-      window.confirm(`Please enter a title`)
+    if (!this.state.title || !this.state.category || !this.state.description || !this.state.priority) {
+      window.confirm(`All Fields Required`)
     } else {
       !!this.props.ticket
       ? this.fetFunc(`http://localhost:3000/tickets/${this.props.ticket.id}`, "PATCH", ticket=>{
@@ -51,9 +51,11 @@ class TicketForm extends React.Component {
   }
 
   render() {
-    // console.log("ticForm state", this.state)
-    console.log("ticForm props", this.props)
-    // console.log("ticForm comp", this.props.company)
+    const options = [
+      { key: 'high', text: 'High', value: '1 - High' },
+      { key: 'medium', text: 'Medium', value: '2 - Medium' },
+      { key: 'low', text: 'Low', value: '3 - Low' }
+    ]
     return(
       <div className="ui equal width form">
         <div className="fields">
@@ -69,7 +71,12 @@ class TicketForm extends React.Component {
           </div>
           <div className="field">
             <label>Priority</label>
-            <input onChange={this.handleChange} type="text" placeholder="Priority" name="priority" value={this.state.priority}/>
+            <Dropdown
+              selection
+              clearable
+              options={options}
+              onChange={(e)=>this.setState({priority:e.target.innerText})}
+              placeholder={this.state.priority} />
           </div>
         </div>
         <div className="fields">
