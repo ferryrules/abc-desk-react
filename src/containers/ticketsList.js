@@ -62,6 +62,7 @@ class TicketsList extends React.Component{
           options={priOptions}
           onChange={(e)=>this.setState({sort:e.target.innerText})}
           placeholder="Filter by Priority" />
+        <span> </span>
         <Dropdown
           selection
           clearable
