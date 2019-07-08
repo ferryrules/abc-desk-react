@@ -1,7 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
-import { Button, Item, Icon, Container, Divider, Grid, Segment, Label } from 'semantic-ui-react'
+import { Button, Icon, Container, Divider, Grid, Segment, Label } from 'semantic-ui-react'
 
 import TicketForm from '../forms/ticketForm'
 
@@ -57,9 +57,7 @@ class Ticket extends React.Component {
     const tic = this.state.ticket
     return(
       this.state.edit
-      ? (<Item.Group relaxed>
-
-        <Grid columns={3}>
+      ? (<Grid columns={3}>
           <Grid.Column>
             <Button className="ui basic grey" onClick={(e)=>this.goBack()}><i className="angle double left icon" />Back</Button>
           </Grid.Column>
@@ -79,8 +77,7 @@ class Ticket extends React.Component {
           <Grid.Column>
             <Button className="ui basic blue" floated='right' onClick={(e)=>this.editTicket()}><i className="edit outline icon" />Edit</Button>
           </Grid.Column>
-        </Grid>
-      </Item.Group>)
+        </Grid>)
       : <TicketForm editTicket={this.editTicket} ticket={tic} props={this.props} company={tic.company} />
     )
   }
