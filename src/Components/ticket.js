@@ -1,6 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-import { Button, Item, Icon } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Button, Item, Icon, Container, Divider } from 'semantic-ui-react'
 
 import TicketForm from '../forms/ticketForm'
 
@@ -44,6 +45,8 @@ class Ticket extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+    console.log(this.state);
     const tic = this.state.ticket
     return(
       this.state.edit
@@ -51,14 +54,17 @@ class Ticket extends React.Component {
         <div className="ui basic grey button" onClick={(e)=>this.goBack()}>
           <i className="angle double left icon" />Back
         </div>
+        <Button className="ui basic blue" floated='right' onClick={(e)=>this.editTicket()}><i className="edit outline icon" />Edit</Button>
         <Item>
-          <Icon className={`exclamation triangle ${this.state.ticketColor}`} size="huge" />
-          <Item.Content verticalAlign='middle'>
-            <Item.Header>{tic.title}</Item.Header>
-            <Item.Description>{tic.description}</Item.Description>
-            <Item.Extra>
-              <Button floated='right' onClick={(e)=>this.editTicket()}>Edit</Button>
-            </Item.Extra>
+
+          <Item.Content>
+            <br />
+            <Container textAlign="center">
+              <h3><Icon className={`exclamation triangle ${this.state.ticketColor}`} />{tic.title}</h3>
+            </Container>
+            <Container textAlign="center"><h5><b>Created By:</b> {this.props.username}</h5></Container>
+            <Divider />
+            <Container textAlign='justified'>{tic.description}</Container>
           </Item.Content>
         </Item>
       </Item.Group>)
@@ -67,7 +73,16 @@ class Ticket extends React.Component {
   }
 }
 
-export default withAuth(Ticket)
+const mapStateToProps = ({ usersReducer: { user: { id, email, username, permission, fname, lname } } }) => ({
+  id,
+  email,
+  username,
+  permission,
+  fname,
+  lname
+})
+
+export default withAuth(connect(mapStateToProps)(Ticket))
 
 // <div className="cards">
 //   <Card key={`Ticket-${tic.id}`} id={tic.id}>

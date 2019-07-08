@@ -47,7 +47,6 @@ class Profile extends React.Component {
   }
 }
 
-
 const mapStateToProps = ({ usersReducer: { user: { id, email, username, permission, fname, lname } } }) => ({
   id,
   email,
