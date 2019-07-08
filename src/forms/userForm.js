@@ -1,26 +1,24 @@
 import React from 'react'
 // import { Card } from 'semantic-ui-react'
-// u1 = User.create(email: 'ferris@ferryrules.com', username: 'ferryrules', password_digest: 'asd', permission: 'Super Admin', fname: 'Ferris', lname: 'Boran')
+// u1 = User.create(email: 'ferris@ferryrules.com', username: 'ferryrules', password: 'asd', permission: 'Super Admin', fname: 'Ferris', lname: 'Boran')
 class UserForm extends React.Component {
 
   state = {
     fname: '',
     lname: '',
     permission: '',
-    password_digest: '',
     username: '',
     email: ''
   }
 
   componentDidMount() {
-    if (this.props.user) {
+    if (this.props) {
       this.setState({
-        fname: this.props.user.fname,
-        lname: this.props.user.lname,
-        permission: this.props.user.permission,
-        password_digest: this.props.user.password_digest,
-        username: this.props.user.username,
-        email: this.props.user.email
+        fname: this.props.fname,
+        lname: this.props.lname,
+        permission: this.props.permission,
+        username: this.props.username,
+        email: this.props.email
       })
     }
   }
@@ -33,7 +31,7 @@ class UserForm extends React.Component {
   }
 
   cancelSubmit = () => {
-    this.props.props.history.push(`/companies`)
+    this.props.history.push(`/companies`)
   }
 
   handleSubmit = (e) => {
@@ -42,11 +40,11 @@ class UserForm extends React.Component {
       window.confirm(`Please enter a name`)
     } else {
       !!this.props.user
-      ? this.fetFunc(`http://localhost:3000/users/${this.props.user.id}`, 'PATCH',user=>{
-        this.props.props.history.push(`/companies/${this.state.company_id}`)
+      ? this.fetFunc(`http://localhost:3000/users/${this.props.id}`, 'PATCH',user=>{
+        this.props.history.push(`/companies/${this.props.company.company_id}`)
       })
       : this.fetFunc(`http://localhost:3000/users`, 'POST', user=>{
-        this.props.props.history.push(`/users/${user.id}`)
+        this.props.history.push(`/users/${user.id}`)
       })
     }
   }
@@ -58,7 +56,7 @@ class UserForm extends React.Component {
 
     return(
       <div className="ui equal width form">
-        <label className="ui h3">{this.props.user.username}</label>
+        <label className="ui h3">{!!this.props.username ? this.props.username : 'New User'}</label>
         <div className="fields">
           <div className="field">
             <label>First Name</label>
@@ -70,17 +68,13 @@ class UserForm extends React.Component {
           </div>
           <div className="field">
             <label>Permission</label>
-            <input onChange={this.handleChange} type="number" placeholder="Pay Rate" name="permission" value={this.state.permission}/>
+            <input onChange={this.handleChange} type="text" placeholder="Permissions" name="permission" value={this.state.permission}/>
           </div>
         </div>
         <div className="fields">
           <div className="field">
             <label>Username</label>
             <input onChange={this.handleChange} type="text" placeholder="Username" name="username" value={this.state.username}/>
-          </div>
-          <div className="field">
-            <label>Password</label>
-            <input onChange={this.handleChange} type="password" placeholder="Password" name="password_digest" value={this.state.password_digest}/>
           </div>
           <div className="field">
             <label>E-mail</label>
@@ -105,7 +99,6 @@ class UserForm extends React.Component {
         'fname': this.state.fname,
         'lname': this.state.lname,
         'permission': this.state.permission,
-        'password_digest': this.state.password_digest,
         'username': this.state.username,
         'email': this.state.email
       })

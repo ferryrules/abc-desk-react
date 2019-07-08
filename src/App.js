@@ -1,8 +1,13 @@
 import React, { Fragment } from 'react'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+// import { connect } from 'react-redux'
+// import withAuth from './hocs/withAuth'
+
 import Profile from './containers/profile'
 import LoginForm from './components/loginForm'
 import Nav from './containers/nav'
+
+import UserForm from './forms/userForm'
 
 import Company from './components/company'
 import CompanyForm from './forms/companyForm'
@@ -56,6 +61,9 @@ class App extends React.Component {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/dashboard" render={()=><Company {...this.props} company={this.state.company}/>} />
+
+          <Route exact path="/new" render={()=><UserForm />} />
+          <Route exact path="/edit" render={()=><UserForm {...this.props} company={this.state.company}/>} />
 
           {/* COMPANY */}
           <Route exact path="/:company_name" render={()=><Company {...this.props} company={this.state.company}/>} />
