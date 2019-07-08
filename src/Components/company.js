@@ -20,19 +20,21 @@ class Company extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000${this.props.location.pathname}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-      }
-    })
-    .then(r=>r.json())
-    .then(company=>{
-      this.setState({
-        company
+    if (this.props.location.pathname !== '/dashboard') {
+      fetch(`http://localhost:3000${this.props.location.pathname}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
       })
-    })
-    .catch(error=> console.error('Error', error))
+      .then(r=>r.json())
+      .then(company=>{
+        this.setState({
+          company
+        })
+      })
+      .catch(error=> console.error('Error', error))
+    }
   }
 
   newEmpOrTicketOrPayroll = (emp, ticket, payr) => {

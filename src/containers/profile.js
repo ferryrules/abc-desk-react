@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
+import { Card } from 'semantic-ui-react'
 
 const Profile = ({ email, username, permission, fname, lname }) => (
   <Card>

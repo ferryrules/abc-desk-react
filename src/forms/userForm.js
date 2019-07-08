@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import withAuth from '../hocs/withAuth'
 // import { Card } from 'semantic-ui-react'
 // u1 = User.create(email: 'ferris@ferryrules.com', username: 'ferryrules', password: 'asd', permission: 'Super Admin', fname: 'Ferris', lname: 'Boran')
 class UserForm extends React.Component {
@@ -12,7 +14,7 @@ class UserForm extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props) {
+    if (this.props.company) {
       this.setState({
         fname: this.props.fname,
         lname: this.props.lname,
@@ -56,7 +58,7 @@ class UserForm extends React.Component {
 
     return(
       <div className="ui equal width form">
-        <label className="ui h3">{!!this.props.username ? this.props.username : 'New User'}</label>
+        <label className="ui h3">{!!this.props.company ? this.props.username : 'New User'}</label>
         <div className="fields">
           <div className="field">
             <label>First Name</label>
@@ -108,4 +110,14 @@ class UserForm extends React.Component {
   }
 }
 
-export default UserForm
+const mapStateToProps = ({ usersReducer: { user: { id, email, username, permission, fname, lname } } }) => ({
+  id,
+  email,
+  username,
+  permission,
+  fname,
+  lname
+})
+
+export default withAuth(connect(mapStateToProps)(UserForm))
+// export default UserForm
