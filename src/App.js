@@ -56,27 +56,30 @@ class App extends React.Component {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/dashboard" render={()=><Company {...this.props} company={this.state.company}/>} />
+          <Route component={NotFound} />
 
           {/* COMPANY */}
           <Route exact path="/:company_name" render={()=><Company {...this.props} company={this.state.company}/>} />
-          <Route exact path="/:user_name/new" render={()=><CompanyForm {...this.props} company={this.state.company}/>} />
+          <Route exact path="/:company_name/edit" render={()=><CompanyForm {...this.props} company={this.state.company}/>} />
+          <Route exact path="/:user_name/new" render={()=><CompanyForm {...this.props} />} />
+
           {/* EMPLOYEES */}
           <Route exact path="/:company_name/employees" render={()=><EmployeesList {...this.props} company={this.state.company}/>} />
           <Route exact path="/:company_name/employees/new" render={()=><EmployeeForm {...this.props} company={this.state.company}/>} />
           <Route exact path="/employees/:employee_id" render={()=><Employee {...this.props} company={this.state.company}/>} />
           <Route exact path="/employees/:employee_id/edit" render={()=><EmployeeForm {...this.props} company={this.state.company}/>} />
+
           {/* TICKETS */}
           <Route exact path="/:company_name/tickets" render={()=><TicketsList {...this.props} company={this.state.company}/>} />
           <Route exact path="/:company_name/tickets/new" render={()=><TicketForm {...this.props} company={this.state.company}/>} />
           <Route exact path="/tickets/:ticket_id" render={()=><Ticket {...this.props} company={this.state.company}/>} />
           <Route exact path="/tickets/:ticket_id/edit" render={()=><TicketForm {...this.props} company={this.state.company}/>} />
+
           {/* PAYROLL */}
           <Route exact path="/:company_name/payrolls" render={()=><PayrollsList {...this.props} company={this.state.company}/>} />
           <Route exact path="/:company_name/payrolls/new" render={()=><PayrollForm {...this.props} company={this.state.company}/>} />
           <Route exact path="/payrolls/:payroll_id" render={()=><Payroll {...this.props} company={this.state.company}/>} />
           <Route exact path="/payrolls/:payroll_id/edit" render={()=><PayrollForm {...this.props} company={this.state.company}/>} />
-
-          <Route component={NotFound} />
         </Switch>
       </Fragment>
     )
