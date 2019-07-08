@@ -9,7 +9,7 @@ import Nav from './containers/nav'
 
 import UserForm from './forms/userForm'
 
-import Company from './components/company'
+import CompanyDashboard from './containers/companyDashboard'
 import CompanyForm from './forms/companyForm'
 
 import EmployeesList from './containers/employeesList'
@@ -60,13 +60,12 @@ class App extends React.Component {
           <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
           <Route exact path="/profile" render={()=><Profile {...this.props} company={this.state.company}/>} />
           <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/dashboard" render={()=><Company {...this.props} company={this.state.company}/>} />
+          <Route exact path="/dashboard" render={()=><CompanyDashboard {...this.props} company={this.state.company}/>} />
 
           <Route exact path="/new" render={()=><UserForm />} />
           <Route exact path="/edit" render={()=><UserForm {...this.props} company={this.state.company}/>} />
 
           {/* COMPANY */}
-          <Route exact path="/:company_name" render={()=><Company {...this.props} company={this.state.company}/>} />
           <Route exact path="/:company_name/edit" render={()=><CompanyForm {...this.props} company={this.state.company}/>} />
           <Route exact path="/:user_name/new" render={()=><CompanyForm {...this.props} />} />
 
@@ -103,3 +102,4 @@ export default withRouter(App)
 // import CompanyDashboard from './containers/companyDashboard';
 // import CompaniesList from './containers/companiesList'
 // <Route exact path="/companies" render={()=><CompaniesList {...this.props} {...this.state} selectCompany={this.selectCompany} />} />
+// <Route exact path="/:company_name" render={()=><Company {...this.props} company={this.state.company}/>} />

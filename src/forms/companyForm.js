@@ -1,10 +1,11 @@
 import React from 'react'
+// import UserForm from './userForm'
 // import { Card } from 'semantic-ui-react'
 
 class CompanyForm extends React.Component {
 
   state = {
-    name: ''
+    name: '',
   }
 
   componentDidMount() {
@@ -44,7 +45,7 @@ class CompanyForm extends React.Component {
   render() {
     return(
       <div className="ui equal width form">
-        <label className="ui h3">New Company</label>
+        <label className="ui h3">Edit Company</label>
         <div className="fields">
           <div className="field">
             <label>Name</label>

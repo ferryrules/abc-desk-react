@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import withAuth from '../hocs/withAuth'
+
 // import { Card } from 'semantic-ui-react'
 // u1 = User.create(email: 'ferris@ferryrules.com', username: 'ferryrules', password: 'asd', permission: 'Super Admin', fname: 'Ferris', lname: 'Boran')
 class UserForm extends React.Component {
@@ -15,7 +16,7 @@ class UserForm extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.company) {
+    if (!this.props.new) {
       this.setState({
         fname: this.props.fname,
         lname: this.props.lname,
@@ -34,7 +35,7 @@ class UserForm extends React.Component {
   }
 
   cancelSubmit = () => {
-    this.props.history.push(`/profile`)
+    window.location.replace(`http://localhost:3001/profile`)
   }
 
   handleSubmit = (e) => {
@@ -42,12 +43,12 @@ class UserForm extends React.Component {
     if (!this.state.fname) {
       window.confirm(`Please enter a name`)
     } else {
-      !!this.props.company
+      !this.props.new
       ? this.fetFunc(`http://localhost:3000/users/${this.props.id}`, 'PATCH',user=>{
         window.location.replace(`http://localhost:3001/profile`)
       })
       : this.fetFunc(`http://localhost:3000/users`, 'POST', user=>{
-        this.props.history.push(`/users/${user.id}`)
+        window.location.replace(`http://localhost:3001/profile`)
       })
     }
   }
@@ -59,7 +60,7 @@ class UserForm extends React.Component {
 
     return(
       <div className="ui equal width form">
-        <label className="ui h3">{!!this.props.company ? this.props.username : 'New User'}</label>
+        <label className="ui h3">{!this.props.new ? this.props.username : 'New User'}</label>
         <div className="fields">
           <div className="field">
             <label>First Name</label>
