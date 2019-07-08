@@ -1,7 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
-import { Button, Item, Icon, Container, Divider } from 'semantic-ui-react'
+import { Button, Item, Icon, Container, Divider, Grid, Segment, Label } from 'semantic-ui-react'
 
 import TicketForm from '../forms/ticketForm'
 
@@ -10,7 +10,8 @@ class Ticket extends React.Component {
   state = {
     ticket: [],
     edit: true,
-    ticketColor: ''
+    ticketColor: '',
+    ticketStatus: ''
   }
 
   componentDidMount() {
@@ -27,9 +28,15 @@ class Ticket extends React.Component {
       : ticket.priority === "Medium"
       ? 'orange'
       : 'green'
+      let ticketStatus = ticket.ticket_status === "Open"
+      ? 'purple'
+      : ticket.ticket_status === "Pending"
+      ? 'blue'
+      : 'grey'
       this.setState({
         ticket,
-        ticketColor
+        ticketColor,
+        ticketStatus
       })
     })
   }
@@ -45,28 +52,34 @@ class Ticket extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
+    console.log("props",this.props);
+    console.log("state",this.state);
     const tic = this.state.ticket
     return(
       this.state.edit
       ? (<Item.Group relaxed>
-        <div className="ui basic grey button" onClick={(e)=>this.goBack()}>
-          <i className="angle double left icon" />Back
-        </div>
-        <Button className="ui basic blue" floated='right' onClick={(e)=>this.editTicket()}><i className="edit outline icon" />Edit</Button>
-        <Item>
 
-          <Item.Content>
-            <br />
+        <Grid columns={3}>
+          <Grid.Column>
+            <Button className="ui basic grey" onClick={(e)=>this.goBack()}><i className="angle double left icon" />Back</Button>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment>
+              <Label as="a" color={this.state.ticketStatus} ribbon>{tic.ticket_status}</Label>
+              <br />
+              <Label as="a" color={this.state.ticketColor} ribbon='right'>{tic.priority}</Label>
             <Container textAlign="center">
               <h3><Icon className={`exclamation triangle ${this.state.ticketColor}`} />{tic.title}</h3>
             </Container>
             <Container textAlign="center"><h5><b>Created By:</b> {this.props.username}</h5></Container>
             <Divider />
             <Container textAlign='justified'>{tic.description}</Container>
-          </Item.Content>
-        </Item>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Button className="ui basic blue" floated='right' onClick={(e)=>this.editTicket()}><i className="edit outline icon" />Edit</Button>
+          </Grid.Column>
+        </Grid>
       </Item.Group>)
       : <TicketForm editTicket={this.editTicket} ticket={tic} props={this.props} company={tic.company} />
     )

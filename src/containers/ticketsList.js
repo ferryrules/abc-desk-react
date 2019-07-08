@@ -2,29 +2,32 @@ import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Card, Dropdown } from 'semantic-ui-react'
+import { Card, Dropdown, Divider, Label } from 'semantic-ui-react'
 
 class TicketsList extends React.Component{
 
   state = {
-    sort: ""
+    sort: "",
+    sortStat: ""
   }
 
   eachTicket = () => {
     const { tickets } = this.props.company
     if (tickets) {
       return tickets.map(tic=>{
-        return this.state.sort === tic.priority || !this.state.sort ?
+        return (this.state.sort === tic.priority || !this.state.sort) && (this.state.sortStat === tic.ticket_status || !this.state.sortStat)?
           (<Card key={tic.id} id={tic.id} onClick={(e)=>window.location.replace(`http://localhost:3001/tickets/${tic.id}`)}>
             <Card.Content>
               <Card.Header>{tic.title}</Card.Header>
               <Card.Meta>{tic.category}</Card.Meta>
+              <Divider />
               <Card.Description>
                 {tic.description.length > 30 ? tic.description.substr(0,30).concat(' ...') : tic.description}
               </Card.Description>
-            </Card.Content>
-            <Card.Content>
-              Priority: {tic.priority}
+            <Divider />
+              <Label color={tic.priority === "High" ? 'red' : tic.priority === "Medium" ? 'orange' : 'green'}>Priority: {tic.priority}</Label>
+              <br />
+              <Label color={tic.ticket_status === "Open" ? 'purple' : tic.ticket_status === "Pending" ? 'blue' : 'grey'}>Status: {tic.ticket_status}</Label>
             </Card.Content>
           </Card>) : null
         }
@@ -33,12 +36,17 @@ class TicketsList extends React.Component{
   }
 
   render() {
-    const options = [
-      { key: 'high', text: 'High', value: '1 - High' },
-      { key: 'medium', text: 'Medium', value: '2 - Medium' },
-      { key: 'low', text: 'Low', value: '3 - Low' }
+    const priOptions = [
+      { key: 'high', text: 'High', value: 'High' },
+      { key: 'medium', text: 'Medium', value: 'Medium' },
+      { key: 'low', text: 'Low', value: 'Low' }
     ]
-    
+    const statOptions = [
+      { key: 'open', text: 'Open', value: 'Open' },
+      { key: 'pending', text: 'Pending', value: 'Pending' },
+      { key: 'closed', text: 'Closed', value: 'Closed' }
+    ]
+
     return (
       <div>
         <Link to={`/${this.props.company.name}/tickets/new`}>
@@ -51,9 +59,15 @@ class TicketsList extends React.Component{
         <Dropdown
           selection
           clearable
-          options={options}
+          options={priOptions}
           onChange={(e)=>this.setState({sort:e.target.innerText})}
-          placeholder="Filter" />
+          placeholder="Filter by Priority" />
+        <Dropdown
+          selection
+          clearable
+          options={statOptions}
+          onChange={(e)=>this.setState({sortStat:e.target.innerText})}
+          placeholder="Filter by Status" />
         <br />
         <br />
         <div className="ui cards">

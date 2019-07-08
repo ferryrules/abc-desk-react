@@ -10,6 +10,7 @@ class TicketForm extends React.Component {
     category: '',
     description: '',
     priority: '',
+    ticket_status: '',
     company_id: this.props.company.id
   }
 
@@ -19,7 +20,8 @@ class TicketForm extends React.Component {
         title: this.props.ticket.title,
         category: this.props.ticket.category,
         description: this.props.ticket.description,
-        priority: this.props.ticket.priority
+        priority: this.props.ticket.priority,
+        ticket_status: this.props.ticket.ticket_status
       })
     }
   }
@@ -51,10 +53,17 @@ class TicketForm extends React.Component {
   }
 
   render() {
-    const options = [
+    console.log("props", this.props);
+    console.log("state", this.state);
+    const priOptions = [
       { key: 'high', text: 'High', value: '1 - High' },
       { key: 'medium', text: 'Medium', value: '2 - Medium' },
       { key: 'low', text: 'Low', value: '3 - Low' }
+    ]
+    const statOptions = [
+      { key: 'open', text: 'Open', value: 'open' },
+      { key: 'pending', text: 'Pending', value: 'pending' },
+      { key: 'closed', text: 'Closed', value: 'closed' }
     ]
     return(
       <div className="ui equal width form">
@@ -74,9 +83,18 @@ class TicketForm extends React.Component {
             <Dropdown
               selection
               clearable
-              options={options}
+              options={priOptions}
               onChange={(e)=>this.setState({priority:e.target.innerText})}
               placeholder={this.state.priority} />
+          </div>
+          <div className="field">
+            <label>Status</label>
+            <Dropdown
+              selection
+              clearable
+              options={statOptions}
+              onChange={(e)=>this.setState({ticket_status:e.target.innerText})}
+              placeholder={this.state.ticket_status} />
           </div>
         </div>
         <div className="fields">
@@ -104,6 +122,7 @@ class TicketForm extends React.Component {
         'category': this.state.category,
         'description': this.state.description,
         'priority': this.state.priority,
+        'ticket_status': this.state.ticket_status,
         'company_id': this.state.company_id,
         'user_id': this.props.id
       })
