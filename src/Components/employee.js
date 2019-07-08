@@ -1,5 +1,6 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
+import { connect } from 'react-redux'
 import { Card } from 'semantic-ui-react'
 
 import EmployeeForm from '../forms/employeeForm'
@@ -25,7 +26,6 @@ class Employee extends React.Component {
   }
 
   editEmployee = (emp) => {
-    console.log("edit");
     this.setState({
       edit: !this.state.edit
     })
@@ -33,18 +33,17 @@ class Employee extends React.Component {
 
   termEmployee = (emp) => {
 
-    let termOrHire = emp.active_status ? { 'active_status': false } : { 'active_status': true }
+    let termOrHire = emp.active_status === 'Active' ? { 'active_status': 'Terminated' } : { 'active_status': 'Active' }
 
-    window.confirm(`Are you sure you want to ${emp.active_status ? 'terminate' : 'rehire'} this employee?`)
+    window.confirm(`Are you sure you want to ${emp.active_status === 'Active' ? 'terminate' : 'rehire'} this employee?`)
 
     this.fetFunc(`http://localhost:3000${this.props.location.pathname}`, 'PATCH', termOrHire, employees=>{
-      this.props.history.push(`/companies/${this.state.employee.company.id}`)
+      window.location.replace(`http://localhost:3001/${this.props.company.name}/employees`)
     })
-
   }
 
   goBack = () => {
-    this.props.history.push(`/companies/${this.state.employee.company.id}`)
+    window.location.replace(`/${this.props.company.name}/employees`)
   }
 
   render() {
@@ -59,7 +58,7 @@ class Employee extends React.Component {
         <Card key={`Employee-${emp.id}`} id={emp.id}>
           <Card.Content>
             <Card.Header>{emp.full_name}</Card.Header>
-            <Card.Meta>{emp.active_status ? "Active" : "Terminated"}</Card.Meta>
+            <Card.Meta>{emp.active_status}</Card.Meta>
             <Card.Description>
               Pay Type: {emp.pay_type}
               <br />
@@ -70,13 +69,13 @@ class Employee extends React.Component {
             <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp)}>
               <i className="edit outline icon" />Edit
             </div>
-            <div className={`delete-button ui basic ${emp.active_status ? 'red' : 'green'} button`} onClick={()=>{this.termEmployee(emp)} }>
-              <i className={`user ${emp.active_status ? 'delete' : 'plus'} icon`} />{emp.active_status ? 'Terminate' : 'Rehire'}
+            <div className={`delete-button ui basic ${emp.active_status === 'Active' ? 'red' : 'green'} button`} onClick={()=>{this.termEmployee(emp)} }>
+              <i className={`user ${emp.active_status === 'Active' ? 'delete' : 'plus'} icon`} />{emp.active_status === 'Active' ? 'Terminate' : 'Rehire'}
             </div>
           </div>
         </Card>
       </div>)
-      : <EmployeeForm edit={this.editEmployee} props={this.props} company={emp.company} employee={emp} />
+      : <EmployeeForm edit={this.editEmployee} props={this.props} employee={emp} company={this.props.company}/>
     )
   }
 
@@ -96,4 +95,13 @@ class Employee extends React.Component {
   }
 }
 
-export default withAuth(Employee)
+const mapStateToProps = ({ usersReducer: { user: { id, email, username, permission, fname, lname } } }) => ({
+  id,
+  email,
+  username,
+  permission,
+  fname,
+  lname
+})
+
+export default withAuth(connect(mapStateToProps)(Employee))

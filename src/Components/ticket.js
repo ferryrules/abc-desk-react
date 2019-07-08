@@ -39,6 +39,7 @@ class Ticket extends React.Component {
         ticketStatus
       })
     })
+    .catch(error=> console.error('Error', error))
   }
 
   editTicket = (ticket) => {

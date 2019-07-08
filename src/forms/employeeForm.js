@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Card } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 
 class EmployeeForm extends React.Component {
 
@@ -34,28 +34,32 @@ class EmployeeForm extends React.Component {
   }
 
   cancelSubmit = () => {
-    this.props.props.history.push(`/companies`)
+    window.location.replace(`http://localhost:3001/${this.props.company.name}/employees`)
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    if (!this.state.full_name) {
-      window.confirm(`Please enter a name`)
+    if (!this.state.full_name || !this.state.pay_type || !this.state.pay_rate || !this.state.filing_status || !this.state.w4_allowance || !this.state.active_status) {
+      window.confirm(`All Fields Required`)
     } else {
       !!this.props.employee
       ? this.fetFunc(`http://localhost:3000/employees/${this.props.employee.id}`, 'PATCH',employee=>{
-        this.props.props.history.push(`/companies/${this.state.company_id}`)
+        window.location.replace(`/employees/${employee.id}`)
       })
       : this.fetFunc(`http://localhost:3000/employees`, 'POST', employee=>{
-        this.props.props.history.push(`/employees/${employee.id}`)
+        window.location.replace(`/employees/${employee.id}`)
       })
     }
   }
 
   render() {
-    // console.log("empForm state", this.state)
-    console.log("empForm props", this.props)
+    console.log("empForm state", this.state)
+    // console.log("empForm props", this.props)
     // console.log("empForm comp", this.props.company)
+    const statOptions = [
+      { key: 'active', text: 'Active', value: 'Active' },
+      { key: 'terminated', text: 'Terminated', value: 'Terminated' }
+    ]
 
     return(
       <div className="ui equal width form">
@@ -85,7 +89,12 @@ class EmployeeForm extends React.Component {
           </div>
           <div className="field">
             <label>Employement Status</label>
-            <input onChange={this.handleChange} type="text" placeholder="Active or Inactive" name="active_status" value={this.state.active_status}/>
+              <Dropdown
+                selection
+                clearable
+                options={statOptions}
+                onChange={(e)=>this.setState({active_status:e.target.innerText})}
+                placeholder={this.state.active_status} />
           </div>
         </div>
         <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>
