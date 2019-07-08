@@ -56,7 +56,6 @@ class App extends React.Component {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/dashboard" render={()=><Company {...this.props} company={this.state.company}/>} />
-          <Route component={NotFound} />
 
           {/* COMPANY */}
           <Route exact path="/:company_name" render={()=><Company {...this.props} company={this.state.company}/>} />
@@ -80,6 +79,10 @@ class App extends React.Component {
           <Route exact path="/:company_name/payrolls/new" render={()=><PayrollForm {...this.props} company={this.state.company}/>} />
           <Route exact path="/payrolls/:payroll_id" render={()=><Payroll {...this.props} company={this.state.company}/>} />
           <Route exact path="/payrolls/:payroll_id/edit" render={()=><PayrollForm {...this.props} company={this.state.company}/>} />
+
+          {/*KEEP AT BOTTOM*/}
+          <Route component={NotFound} />
+
         </Switch>
       </Fragment>
     )
