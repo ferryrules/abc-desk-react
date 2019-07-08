@@ -1,5 +1,6 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
+import Template from '../views/Template';
 // import Chart from 'chart.js';
 // .getContext('2d');
 // import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
@@ -13,7 +14,7 @@ class Dashboard extends React.Component {
     console.log(this.props);
     return (
       <div>
-        <h3>{this.props.company.name} Dashboard</h3>
+        <Template />
       </div>
     )
   }
