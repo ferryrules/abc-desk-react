@@ -14,8 +14,8 @@ class TicketsList extends React.Component{
     const { tickets } = this.props.company
     if (tickets) {
       return tickets.map(tic=>{
-        if (this.state.sort === tic.priority || !this.state.sort) {
-          return <Card key={tic.id} id={tic.id} onClick={(e)=>window.location.replace(`http://localhost:3001/tickets/${tic.id}`)}>
+        return this.state.sort === tic.priority || !this.state.sort ?
+          (<Card key={tic.id} id={tic.id} onClick={(e)=>window.location.replace(`http://localhost:3001/tickets/${tic.id}`)}>
             <Card.Content>
               <Card.Header>{tic.title}</Card.Header>
               <Card.Meta>{tic.category}</Card.Meta>
@@ -26,9 +26,9 @@ class TicketsList extends React.Component{
             <Card.Content>
               Priority: {tic.priority}
             </Card.Content>
-          </Card>
+          </Card>) : null
         }
-      })
+      )
     }
   }
 
@@ -38,6 +38,7 @@ class TicketsList extends React.Component{
       { key: 'medium', text: 'Medium', value: '2 - Medium' },
       { key: 'low', text: 'Low', value: '3 - Low' }
     ]
+    
     return (
       <div>
         <Link to={`/${this.props.company.name}/tickets/new`}>

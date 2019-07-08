@@ -1,7 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-import Template from '../views/Template';
 import PieChart from "../views/pie & funnel charts/Pie Chart";
+// import Template from '../views/Template';
 // import Chart from 'chart.js';
 // .getContext('2d');
 // import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
