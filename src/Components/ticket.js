@@ -50,13 +50,16 @@ class Ticket extends React.Component {
     return(
       this.state.edit
       ? (<Item.Group relaxed>
+        <div className="ui basic grey button" onClick={(e)=>this.goBack()}>
+          <i className="angle double left icon" />Back
+        </div>
         <Item>
           <Icon className={`exclamation triangle ${this.state.ticketColor}`} size="huge" />
           <Item.Content verticalAlign='middle'>
             <Item.Header>{ticket.title}</Item.Header>
             <Item.Description>{ticket.description}</Item.Description>
             <Item.Extra>
-              <Button floated='right'>Edit</Button>
+              <Button floated='right' onClick={(e)=>this.editTicket()}>Edit</Button>
             </Item.Extra>
           </Item.Content>
         </Item>
@@ -69,9 +72,6 @@ class Ticket extends React.Component {
 export default withAuth(Ticket)
 
 // <div className="cards">
-//   <div className="ui basic grey button" onClick={(e)=>this.goBack()}>
-//     <i className="angle double left icon" />Back
-//   </div>
 //   <Card key={`Ticket-${tic.id}`} id={tic.id}>
 //     <Card.Content>
 //       <Card.Header>{tic.title}</Card.Header>
