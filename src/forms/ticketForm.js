@@ -1,4 +1,6 @@
 import React from 'react'
+import withAuth from '../hocs/withAuth'
+import { connect } from 'react-redux'
 // import { Card } from 'semantic-ui-react'
 
 class TicketForm extends React.Component {
@@ -36,16 +38,16 @@ class TicketForm extends React.Component {
     } else {
       !!this.props.ticket
       ? this.fetFunc(`http://localhost:3000/tickets/${this.props.ticket.id}`, "PATCH", ticket=>{
-        this.props.props.history.push(`/companies/${this.state.company_id}`)
+        window.location.replace(`/tickets/${ticket.id}`)
       })
       : this.fetFunc(`http://localhost:3000/tickets`, "POST", ticket=>{
-        this.props.props.history.push(`/tickets/${ticket.id}`)
+        window.location.replace(`/tickets/${ticket.id}`)
       })
     }
   }
 
   cancelSubmit = () => {
-    this.props.props.history.push(`/companies`)
+    window.location.replace(`http://localhost:3001/${this.props.company.name}/tickets`)
   }
 
   render() {
@@ -95,7 +97,8 @@ class TicketForm extends React.Component {
         'category': this.state.category,
         'description': this.state.description,
         'priority': this.state.priority,
-        'company_id': this.state.company_id
+        'company_id': this.state.company_id,
+        'user_id': this.props.id
       })
     })
     .then(r=>r.json())
@@ -103,4 +106,13 @@ class TicketForm extends React.Component {
   }
 }
 
-export default TicketForm
+const mapStateToProps = ({ usersReducer: { user: { id, email, username, permission, fname, lname } } }) => ({
+  id,
+  email,
+  username,
+  permission,
+  fname,
+  lname
+})
+
+export default withAuth(connect(mapStateToProps)(TicketForm))

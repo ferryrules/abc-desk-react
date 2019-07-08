@@ -4,11 +4,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Card, Dropdown } from 'semantic-ui-react'
 
-import TicketForm from '../forms/ticketForm'
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "shards-ui/dist/css/shards.min.css"
-
 class TicketsList extends React.Component{
 
   state = {
@@ -39,9 +34,9 @@ class TicketsList extends React.Component{
 
   render() {
     const options = [
-      { key: 'high', text: '1 - High', value: '1 - High' },
-      { key: 'medium', text: '2 - Medium', value: '2 - Medium' },
-      { key: 'low', text: '3 - Low', value: '3 - Low' }
+      { key: 'high', text: 'High', value: '1 - High' },
+      { key: 'medium', text: 'Medium', value: '2 - Medium' },
+      { key: 'low', text: 'Low', value: '3 - Low' }
     ]
     return (
       <div>
