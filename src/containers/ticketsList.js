@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Card, Dropdown } from 'semantic-ui-react'
 
+import TicketForm from '../forms/ticketForm'
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 
@@ -18,7 +20,7 @@ class TicketsList extends React.Component{
     if (tickets) {
       return tickets.map(tic=>{
         if (this.state.sort === tic.priority || !this.state.sort) {
-          return <Card key={tic.id} id={tic.id}>
+          return <Card key={tic.id} id={tic.id} onClick={(e)=>window.location.replace(`http://localhost:3001/tickets/${tic.id}`)}>
             <Card.Content>
               <Card.Header>{tic.title}</Card.Header>
               <Card.Meta>{tic.category}</Card.Meta>
@@ -50,8 +52,17 @@ class TicketsList extends React.Component{
             <i className="icon add circle" />Add Ticket
           </div>
         </Link>
-        <Dropdown selection clearable options={options} onChange={(e)=>this.setState({sort:e.target.innerText})}/>
-        {this.eachTicket()}
+        <Dropdown
+          selection
+          clearable
+          options={options}
+          onChange={(e)=>this.setState({sort:e.target.innerText})}
+          placeholder="Filter" />
+        <br />
+        <br />
+        <div className="ui cards">
+          {this.eachTicket()}
+        </div>
       </div>
     )
   }

@@ -50,7 +50,7 @@ class TicketForm extends React.Component {
 
   render() {
     // console.log("ticForm state", this.state)
-    // console.log("ticForm props", this.props)
+    console.log("ticForm props", this.props)
     // console.log("ticForm comp", this.props.company)
     return(
       <div className="ui equal width form">

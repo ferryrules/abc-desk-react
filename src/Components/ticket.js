@@ -1,6 +1,6 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-import { Card } from 'semantic-ui-react'
+import { Card, Button, Item } from 'semantic-ui-react'
 
 import TicketForm from '../forms/ticketForm'
 
@@ -33,11 +33,11 @@ class Ticket extends React.Component {
   }
 
   goBack = () => {
-    this.props.history.push(`/companies/${this.state.ticket.company.id}`)
+    window.location.replace(`http://localhost:3001/${this.props.company.name}/tickets`)
   }
 
   render() {
-    // console.log("ticket",this.state);
+    // console.log("ticket",this.props);
     const tic = this.state.ticket
     return(
       this.state.edit
