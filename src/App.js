@@ -58,7 +58,7 @@ class App extends React.Component {
         <Nav company={this.state.company}/>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile" render={()=><Profile {...this.props} company={this.state.company}/>} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/dashboard" render={()=><Company {...this.props} company={this.state.company}/>} />
 
