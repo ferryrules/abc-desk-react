@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import withAuth from '../hocs/withAuth'
 // import { Card } from 'semantic-ui-react'
 // u1 = User.create(email: 'ferris@ferryrules.com', username: 'ferryrules', password: 'asd', permission: 'Super Admin', fname: 'Ferris', lname: 'Boran')
@@ -33,7 +34,7 @@ class UserForm extends React.Component {
   }
 
   cancelSubmit = () => {
-    this.props.history.push(`/companies`)
+    this.props.history.push(`/profile`)
   }
 
   handleSubmit = (e) => {
@@ -41,9 +42,9 @@ class UserForm extends React.Component {
     if (!this.state.fname) {
       window.confirm(`Please enter a name`)
     } else {
-      !!this.props.user
+      !!this.props.company
       ? this.fetFunc(`http://localhost:3000/users/${this.props.id}`, 'PATCH',user=>{
-        this.props.history.push(`/companies/${this.props.company.company_id}`)
+        window.location.replace(`http://localhost:3001/profile`)
       })
       : this.fetFunc(`http://localhost:3000/users`, 'POST', user=>{
         this.props.history.push(`/users/${user.id}`)
@@ -83,7 +84,9 @@ class UserForm extends React.Component {
             <input onChange={this.handleChange} type="text" placeholder="E-mail" name="email" value={this.state.email}/>
           </div>
         </div>
-        <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>
+        <Link to='/profile'>
+          <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>
+        </Link>
         <button className="ui negative basic button" onClick={(e)=>this.cancelSubmit()}><i className="undo icon"></i>Cancel</button>
       </div>
     )

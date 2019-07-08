@@ -45,7 +45,7 @@ class App extends React.Component {
     .then(companies=>{
       // let comp = companies.length > 1 ? 'companies' : 'company'
       this.setState({
-        company: companies[0]
+        company: companies
       })
     })
     .catch(error=> console.error('Error', error))

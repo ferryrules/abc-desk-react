@@ -23,7 +23,7 @@ class CompanyForm extends React.Component {
   }
 
   cancelSubmit = () => {
-    this.props.props.history.push(`/companies`)
+    window.location.replace(`http://localhost:3001/profile`)
   }
 
   handleSubmit = (e) => {
@@ -33,10 +33,10 @@ class CompanyForm extends React.Component {
     } else {
       !!this.props.company
       ? this.fetFunc(`http://localhost:3000/companies/${this.props.company.id}`, 'PATCH',company=>{
-        this.props.props.history.push(`/companies/${this.props.company.id}`)
+        window.location.replace(`http://localhost:3001/profile`)
       })
       : this.fetFunc(`http://localhost:3000/companies`, 'POST', company=>{
-        this.props.props.history.push(`/companies/${company.id}`)
+        window.location.replace(`http://localhost:3001/profile`)
       })
     }
   }
