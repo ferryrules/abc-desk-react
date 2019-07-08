@@ -5,6 +5,7 @@ import LoginForm from './components/loginForm'
 import Nav from './containers/nav'
 
 import Company from './components/company'
+import CompanyForm from './forms/companyForm'
 
 import EmployeesList from './containers/employeesList'
 import Employee from './components/employee'
@@ -58,6 +59,7 @@ class App extends React.Component {
 
           {/* COMPANY */}
           <Route exact path="/:company_name" render={()=><Company {...this.props} company={this.state.company}/>} />
+          <Route exact path="/:user_name/new" render={()=><CompanyForm {...this.props} company={this.state.company}/>} />
           {/* EMPLOYEES */}
           <Route exact path="/:company_name/employees" render={()=><EmployeesList {...this.props} company={this.state.company}/>} />
           <Route exact path="/:company_name/employees/new" render={()=><EmployeeForm {...this.props} company={this.state.company}/>} />
