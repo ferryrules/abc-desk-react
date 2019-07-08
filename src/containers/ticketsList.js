@@ -2,36 +2,45 @@ import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Card } from 'semantic-ui-react'
+import { Card, Dropdown } from 'semantic-ui-react'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 
 class TicketsList extends React.Component{
 
+  state = {
+    sort: ""
+  }
+
   eachTicket = () => {
     const { tickets } = this.props.company
     if (tickets) {
       return tickets.map(tic=>{
-        return <Card key={tic.id} id={tic.id}>
-          <Card.Content>
-            <Card.Header>{tic.title}</Card.Header>
-            <Card.Meta>{tic.category}</Card.Meta>
-            <Card.Description>
-              {tic.description.length > 30 ? tic.description.substr(0,30).concat(' ...') : tic.description}
-            </Card.Description>
-          </Card.Content>
-          <Card.Content>
-            Priority: {tic.priority}
-          </Card.Content>
-        </Card>
-      }).sort((a,b)=>{
-        return a.props.children[0].props.children[0].props.children.localeCompare(b.props.children[0].props.children[0].props.children)
+        if (this.state.sort === tic.priority || !this.state.sort) {
+          return <Card key={tic.id} id={tic.id}>
+            <Card.Content>
+              <Card.Header>{tic.title}</Card.Header>
+              <Card.Meta>{tic.category}</Card.Meta>
+              <Card.Description>
+                {tic.description.length > 30 ? tic.description.substr(0,30).concat(' ...') : tic.description}
+              </Card.Description>
+            </Card.Content>
+            <Card.Content>
+              Priority: {tic.priority}
+            </Card.Content>
+          </Card>
+        }
       })
     }
   }
 
   render() {
+    const options = [
+      { key: 'high', text: '1 - High', value: '1 - High' },
+      { key: 'medium', text: '2 - Medium', value: '2 - Medium' },
+      { key: 'low', text: '3 - Low', value: '3 - Low' }
+    ]
     return (
       <div>
         <Link to={`/${this.props.company.name}/tickets/new`}>
@@ -41,6 +50,7 @@ class TicketsList extends React.Component{
             <i className="icon add circle" />Add Ticket
           </div>
         </Link>
+        <Dropdown selection clearable options={options} onChange={(e)=>this.setState({sort:e.target.innerText})}/>
         {this.eachTicket()}
       </div>
     )
@@ -52,6 +62,7 @@ const mapStateToProps = ({...props}) => {
 }
 
 export default withAuth(connect(mapStateToProps)(TicketsList))
+
 
 
 // extra

@@ -4,11 +4,14 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class PieChart extends Component {
 	render() {
+		console.log(this.props);
+		const employeeCount = !!this.props.company.employees ? this.props.company.employees.length : null
+		const ticketCount = !!this.props.company.tickets ? this.props.company.tickets.length : null
 		const options = {
 			exportEnabled: true,
 			animationEnabled: true,
 			title: {
-				text: "Website Traffic Sources"
+				text: `${this.props.company.name} Tickets`
 			},
 			data: [{
 				type: "pie",
@@ -19,8 +22,8 @@ class PieChart extends Component {
 				indexLabelFontSize: 16,
 				indexLabel: "{label} - {y}%",
 				dataPoints: [
-					{ y: 18, label: "Direct" },
-					{ y: 49, label: "Organic Search" },
+					{ y: employeeCount, label: "Employees" },
+					{ y: ticketCount, label: "Tickets" },
 					{ y: 9, label: "Paid Search" },
 					{ y: 5, label: "Referral" },
 					{ y: 19, label: "Social" }
@@ -30,7 +33,6 @@ class PieChart extends Component {
 
 		return (
 		<div>
-			<h1>React Pie Chart</h1>
 			<CanvasJSChart options = {options}
 				/* onRef={ref => this.chart = ref} */
 			/>

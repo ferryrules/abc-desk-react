@@ -42,10 +42,10 @@ class App extends React.Component {
       }
     })
     .then(r=>r.json())
-    .then(companies=>{
+    .then(company=>{
       // let comp = companies.length > 1 ? 'companies' : 'company'
       this.setState({
-        company: companies
+        company
       })
     })
     .catch(error=> console.error('Error', error))
