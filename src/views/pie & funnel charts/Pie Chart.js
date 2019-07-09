@@ -13,20 +13,20 @@ class PieChart extends Component {
 			title: {
 				text: `${this.props.company.name} Tickets`
 			},
+			backgroundColor: 'transparent',
 			data: [{
 				type: "pie",
+				startAngle: 75,
+				toolTipContent: "<b>{label}</b>: {y}%",
 				showInLegend: false,
-				legendText: "{label}",
-				toolTipContent: "{label}: <strong>{y}%</strong>",
-				indexLabel: "{y} {label}",
-				indexLabelPlacement: "inside",
+				indexLabelFontSize: 16,
+				indexLabel: "{label} - {y}",
 				dataPoints: [
 					{ y: employeeCount, label: "Employees" },
 					{ y: ticketCount, label: "Tickets" },
-					{ y: 15, label: "Education" },
-					{ y: 19, label: "Career" },
-					{ y: 5, label: "Family" },
-					{ y: 7, label: "Real Estate" }
+					{ y: 9, label: "Paid Search" },
+					{ y: 5, label: "Referral" },
+					{ y: 19, label: "Social" }
 				]
 			}]
 		}

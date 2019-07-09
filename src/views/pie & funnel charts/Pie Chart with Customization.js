@@ -8,34 +8,31 @@ class PieChartWithCustomization extends Component {
 		const employeeCount = !!this.props.company.employees ? this.props.company.employees.length : null
 		const ticketCount = !!this.props.company.tickets ? this.props.company.tickets.length : null
 		const options = {
-			theme: "light5",
-			animationEnabled: true,
-			exportFileName: "New Year Resolutions",
 			exportEnabled: true,
-			title:{
-				text: "Top Categories of New Year's Resolution"
+			animationEnabled: true,
+			title: {
+				text: `${this.props.company.name} Payroll`
 			},
+			backgroundColor: 'transparent',
 			data: [{
 				type: "pie",
+				startAngle: 75,
+				toolTipContent: "<b>{label}</b>: {y}%",
 				showInLegend: false,
-				legendText: "{label}",
-				toolTipContent: "{label}: <strong>{y}%</strong>",
-				indexLabel: "{y} {label}",
-				indexLabelPlacement: "inside",
+				indexLabelFontSize: 16,
+				indexLabel: "{label} - {y}",
 				dataPoints: [
 					{ y: employeeCount, label: "Employees" },
 					{ y: ticketCount, label: "Tickets" },
-					{ y: 15, label: "Education" },
-					{ y: 19, label: "Career" },
-					{ y: 5, label: "Family" },
-					{ y: 7, label: "Real Estate" }
+					{ y: 9, label: "Paid Search" },
+					{ y: 5, label: "Referral" },
+					{ y: 19, label: "Social" }
 				]
 			}]
 		}
 
 		return (
 		<div>
-			<h1>React Pie Chart with Index Labels Placed Inside</h1>
 			<CanvasJSChart options = {options}
 				/* onRef={ref => this.chart = ref} */
 			/>

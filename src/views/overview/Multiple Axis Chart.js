@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import CanvasJSReact from '../../assets/canvasjs.react';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
- 
-class MultipleAxisChart extends Component {	
+
+class MultipleAxisChart extends Component {
 		constructor() {
 		super();
 		this.toggleDataSeries = this.toggleDataSeries.bind(this);
 	}
-	
+
 	toggleDataSeries(e){
 		if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
 			e.dataSeries.visible = false;
@@ -17,22 +17,19 @@ class MultipleAxisChart extends Component {
 		}
 		this.chart.render();
 	}
-	
+
 	render() {
 		const options = {
 			theme: "light2",
 			animationEnabled: true,
 			title:{
-				text: "Units Sold VS Profit"
+				text: "Payroll Cost vs. Hours"
 			},
-			subtitles: [{
-				text: "Click Legend to Hide or Unhide Data Series"
-			}],
 			axisX: {
-				title: "States"
+				title: "Month"
 			},
 			axisY: {
-				title: "Units Sold",
+				title: "Hours",
 				titleFontColor: "#6D78AD",
 				lineColor: "#6D78AD",
 				labelFontColor: "#6D78AD",
@@ -40,7 +37,7 @@ class MultipleAxisChart extends Component {
 				includeZero: false
 			},
 			axisY2: {
-				title: "Profit in USD",
+				title: "Payroll Cost",
 				titleFontColor: "#51CDA0",
 				lineColor: "#51CDA0",
 				labelFontColor: "#51CDA0",
@@ -56,7 +53,7 @@ class MultipleAxisChart extends Component {
 			},
 			data: [{
 				type: "spline",
-				name: "Units Sold",
+				name: "Hours",
 				showInLegend: true,
 				xValueFormatString: "MMM YYYY",
 				yValueFormatString: "#,##0 Units",
@@ -77,7 +74,7 @@ class MultipleAxisChart extends Component {
 			},
 			{
 				type: "spline",
-				name: "Profit",
+				name: "Payroll Cost",
 				axisYType: "secondary",
 				showInLegend: true,
 				xValueFormatString: "MMM YYYY",
@@ -98,12 +95,11 @@ class MultipleAxisChart extends Component {
 				]
 			}]
 		}
-		
-		
+
+
 		return (
 		  <div className="MultipleAxisChart">
-			<h1>Reatct Spline Chart with Multiple Axes</h1>
-			<CanvasJSChart options = {options} 
+			<CanvasJSChart options = {options}
 				 onRef={ref => this.chart = ref}
 			/>
 			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
