@@ -61,6 +61,17 @@ class EmployeeForm extends React.Component {
       { key: 'terminated', text: 'Terminated', value: 'Terminated' }
     ]
 
+    const payTypeOptions = [
+      { key: 'hourly', text: 'Hourly', value: 'Hourly'},
+      { key: 'salary', text: 'Salary', value: 'Salary'}
+    ]
+
+    const filingOptions = [
+      { key: 'single', text: 'Single', value: 'Single'},
+      { key: 'married', text: 'Married', value: 'Married'},
+      { key: 'married-single', text: 'Married Filing Single', value: 'Married Filing Single'}
+    ]
+
     return(
       <div className="ui equal width form">
         <label className="ui h3">New Employee</label>
@@ -71,7 +82,12 @@ class EmployeeForm extends React.Component {
           </div>
           <div className="field">
             <label>Pay Type</label>
-            <input onChange={this.handleChange} type="text" name="pay_type" placeholder="Salary or Hourly" value={this.state.pay_type} />
+              <Dropdown
+                selection
+                clearable
+                options={payTypeOptions}
+                onChange={(e)=>this.setState({pay_type:e.target.innerText})}
+                placeholder={this.state.pay_type} />
           </div>
           <div className="field">
             <label>Pay Rate</label>
@@ -81,7 +97,12 @@ class EmployeeForm extends React.Component {
         <div className="fields">
           <div className="field">
             <label>Filing Status</label>
-            <input onChange={this.handleChange} type="text" placeholder="Single, Married, or Married Filing Single" name="filing_status" value={this.state.filing_status}/>
+              <Dropdown
+                selection
+                clearable
+                options={filingOptions}
+                onChange={(e)=>this.setState({filing_status:e.target.innerText})}
+                placeholder={this.state.filing_status} />
           </div>
           <div className="field">
             <label>W4 Allowances</label>

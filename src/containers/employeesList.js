@@ -1,40 +1,49 @@
-import React from 'react'
+import React, { Component } from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Card, Dropdown } from 'semantic-ui-react'
+import { Card, Dropdown, Label, Divider, Button } from 'semantic-ui-react'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 
-class EmployeesList extends React.Component {
+class EmployeesList extends Component {
 
   state = {
-    statSort: ''
+    statSort: '',
+    paySort: '',
+    nameSort: true
   }
 
   eachEmployee = () => {
     const { employees } = this.props.company
     if (employees) {
       return employees.map(emp=>{
-        return (this.state.statSort === emp.active_status || !this.state.statSort) ? (<Card key={emp.id} id={emp.id} onClick={(e)=>window.location.replace(`http://localhost:3001/employees/${emp.id}`)}>
+        return (this.state.statSort === emp.active_status || !this.state.statSort) && (this.state.paySort === emp.pay_type || !this.state.paySort) ? (<Card key={emp.id} id={emp.id} onClick={(e)=>window.location.replace(`http://localhost:3001/employees/${emp.id}`)}>
           <Card.Content>
+            <Label ribbon color={emp.active_status === "Active" ? "green" : "grey"}>{emp.active_status}</Label>
+            <br />
+            <br />
             <Card.Header>{emp.full_name}</Card.Header>
-            <Card.Meta>{emp.active_status}</Card.Meta>
+            <Divider />
             <Card.Description>
-              Pay Type: {emp.pay_type}
+              Pay Type: <Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label>
               <br />
-              Pay Rate: {emp.pay_rate}
+              Pay Rate: ${emp.pay_rate}
             </Card.Description>
           </Card.Content>
         </Card>) : null
       })
-      // .sort((a,b)=>{
-      //   console.log(a.props.children.props.children[0].props.children);
-      //   console.log(b.props.children.props.children[0].props.children);
-      //   debugger
-      //   return a.props.children.props.children[0].props.children.localeCompare(b.props.children.props.children[0].props.children)
-      // })
+    }
+  }
+
+  sortEmps = () => {
+    if (!!this.state.statSort || !!this.state.nameSort) {
+      return this.eachEmployee()
+    } else {
+      return this.eachEmployee().sort((a,b)=>{
+        return a.props.children.props.children[3].props.children.localeCompare(b.props.children.props.children[3].props.children)
+      })
     }
   }
 
@@ -43,6 +52,12 @@ class EmployeesList extends React.Component {
       { key: 'active', text: 'Active', value: 'Active' },
       { key: 'terminated', text: 'Terminated', value: 'Terminated' }
     ]
+
+    const payTypeOptions = [
+      { key: 'hourly', text: 'Hourly', value: 'Hourly'},
+      { key: 'salary', text: 'Salary', value: 'Salary'}
+    ]
+
     return (
       <div>
         <Link to={`/${this.props.company.name}/employees/new`}>
@@ -52,16 +67,24 @@ class EmployeesList extends React.Component {
             <i className="icon add circle" />Add Employee
           </div>
         </Link>
+        <Button basic color="purple" onClick={(e)=>this.setState({nameSort: !this.state.nameSort})}>Sort</Button>
         <Dropdown
           selection
           clearable
           options={statOptions}
           onChange={(e)=>this.setState({statSort:e.target.innerText})}
           placeholder="Filter by Status" />
+        <span> </span>
+        <Dropdown
+          selection
+          clearable
+          options={payTypeOptions}
+          onChange={(e)=>this.setState({paySort:e.target.innerText})}
+          placeholder="Filter by Pay Type" />
         <br />
         <br />
-        <div className="ui cards">
-          {this.eachEmployee()}
+        <div className="ui three cards">
+          {this.state.nameSort ? this.eachEmployee() : this.sortEmps()}
         </div>
       </div>
     )

@@ -1,7 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
-import { Card, Modal, Form, Button } from 'semantic-ui-react'
+import { Card, Modal, Button } from 'semantic-ui-react'
 
 import EmployeeForm from '../forms/employeeForm'
 

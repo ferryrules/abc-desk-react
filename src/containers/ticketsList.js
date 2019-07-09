@@ -71,7 +71,7 @@ class TicketsList extends React.Component{
           placeholder="Filter by Status" />
         <br />
         <br />
-        <div className="ui cards">
+        <div className="ui three cards">
           {this.eachTicket()}
         </div>
       </div>
