@@ -1,7 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
-import { Card, Modal, Button } from 'semantic-ui-react'
+import { Button, Grid, Label, Container, Icon, Divider, List } from 'semantic-ui-react'
 
 import EmployeeForm from '../forms/employeeForm'
 
@@ -46,44 +46,112 @@ class Employee extends React.Component {
     window.location.replace(`/${this.props.company.name}/employees`)
   }
 
+  listPaychecks = () => {
+    const {paychecks, payrolls} = this.state.employee
+    if (paychecks && paychecks.length > 0) {
+      return payrolls.map(pr=>{
+        return paychecks.map(pc=>{
+          if (pc.payroll_id === pr.id) {
+            return (
+              <List.Item key={`pr-${pr.id}`} icon='time' content={`Check Date: ${pr.check_date} - Hours: ${pc.hours}`} />
+            )
+          }
+        })
+      })
+    }
+  }
+
+  listRecurring = () => {
+    const recur = this.state.employee.recurring_adjustments
+    if (recur && recur.length > 0) {
+      return recur.map(ra=>{
+        return (
+          <List.Item key={`ra-${ra.id}`} icon='dollar' content={`Description: ${ra.description}`} />
+        )
+      })
+    }
+  }
+
   render() {
     console.log("employee",this.props);
+    console.log("employee state",this.state);
     const emp = this.state.employee
     return(
       !this.state.edit
-      ? (<div className="cards">
-        <div className="ui basic grey button" onClick={(e)=>this.goBack()}>
-          <i className="angle double left icon" />Back
-        </div>
-        <Modal size="mini" trigger={<Button>Show Modal</Button>}>
-          <Modal.Content>
-            <p>test</p>
-            <Modal.Actions>
-            <Button negative>No</Button>
-            <Button positive icon='checkmark' labelPosition='right' content='Yes' />
-          </Modal.Actions>
-          </Modal.Content>
-        </Modal>
-        <Card key={`Employee-${emp.id}`} id={emp.id}>
-          <Card.Content>
-            <Card.Header>{emp.full_name}</Card.Header>
-            <Card.Meta>{emp.active_status}</Card.Meta>
-            <Card.Description>
-              Pay Type: {emp.pay_type}
-              <br />
-              Pay Rate: {emp.pay_rate}
-            </Card.Description>
-          </Card.Content>
-          <div className="ui extra content" >
-            <div className="ui basic blue button" onClick={(e)=>this.editEmployee(emp)}>
-              <i className="edit outline icon" />Edit
-            </div>
-            <div className={`delete-button ui basic ${emp.active_status === 'Active' ? 'red' : 'green'} button`} onClick={()=>{this.termEmployee(emp)} }>
+      ? (<Grid columns={3}>
+        <Grid.Row>
+          <Grid.Column textAlign="center">
+            <Button basic color='grey' onClick={(e)=>this.goBack()}><i className="angle double left icon" />Back</Button>
+          </Grid.Column>
+          <Grid.Column textAlign="center">
+            <Button basic color='blue' onClick={(e)=>this.editEmployee()}><i className="edit outline icon" />Edit</Button>
+          </Grid.Column>
+          <Grid.Column textAlign="center">
+            <Button delete ui basic  color={emp.active_status === 'Active' ? 'red' : 'green'} onClick={()=>{this.termEmployee(emp)} }>
               <i className={`user ${emp.active_status === 'Active' ? 'delete' : 'plus'} icon`} />{emp.active_status === 'Active' ? 'Terminate' : 'Rehire'}
-            </div>
-          </div>
-        </Card>
-      </div>)
+            </Button>
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column></Grid.Column>
+          <Grid.Column>
+            <Label ribbon color={emp.active_status === 'Active' ? 'green' : 'grey'}>{emp.active_status}</Label>
+            <Container textAlign="center">
+              <h3><Icon className="chess queen" />{emp.full_name}</h3>
+            </Container>
+            <Container textAlign="center"><h5>Title: {emp.departments? emp.departments[0].name:null}</h5></Container>
+          </Grid.Column>
+          <Grid.Column></Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column></Grid.Column>
+          <Grid.Column textAlign="center">
+            <b>Pay Type:</b> <Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label>
+            <br />
+            <br />
+            <b>Pay Rate:</b> ${emp.pay_rate}
+          </Grid.Column>
+          <Grid.Column></Grid.Column>
+        </Grid.Row>
+        <Divider />
+
+        <Grid.Row divided>
+          <Grid.Column textAlign="center">
+            <h4>Tax Information</h4>
+          </Grid.Column>
+          <Grid.Column textAlign="center">
+            <h4>Paychecks</h4>
+          </Grid.Column>
+          <Grid.Column textAlign="center">
+            <h4>Recurring Adjustments</h4>
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column textAlign="center">
+            <b>Filing Status: </b> {emp.filing_status}
+          </Grid.Column>
+          <Grid.Column textAlign="center">
+            <List>
+              {this.listPaychecks()}
+            </List>
+          </Grid.Column>
+          <Grid.Column textAlign="center">
+            <List>
+              {this.listRecurring()}
+            </List>
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column textAlign="center">
+            <b>Allowances: </b> {emp.w4_allowance}
+          </Grid.Column>
+        </Grid.Row>
+
+      </Grid>)
       : <EmployeeForm edit={this.editEmployee} props={this.props} employee={emp} company={this.props.company}/>
     )
   }

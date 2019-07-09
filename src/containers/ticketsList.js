@@ -18,6 +18,9 @@ class TicketsList extends React.Component{
         return (this.state.sort === tic.priority || !this.state.sort) && (this.state.sortStat === tic.ticket_status || !this.state.sortStat)?
           (<Card key={tic.id} id={tic.id} onClick={(e)=>window.location.replace(`http://localhost:3001/tickets/${tic.id}`)}>
             <Card.Content>
+              <Label ribbon color={tic.priority === "High" ? 'red' : tic.priority === "Medium" ? 'orange' : 'green'}>{tic.priority} Priority</Label>
+              <br />
+              <br />
               <Card.Header>{tic.title}</Card.Header>
               <Card.Meta>{tic.category}</Card.Meta>
               <Divider />
@@ -25,8 +28,6 @@ class TicketsList extends React.Component{
                 {tic.description.length > 30 ? tic.description.substr(0,30).concat(' ...') : tic.description}
               </Card.Description>
             <Divider />
-              <Label color={tic.priority === "High" ? 'red' : tic.priority === "Medium" ? 'orange' : 'green'}>Priority: {tic.priority}</Label>
-              <br />
               <Label color={tic.ticket_status === "Open" ? 'purple' : tic.ticket_status === "Pending" ? 'blue' : 'grey'}>Status: {tic.ticket_status}</Label>
             </Card.Content>
           </Card>) : null
