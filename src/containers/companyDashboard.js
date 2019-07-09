@@ -1,6 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
 import PieChart from "../views/pie & funnel charts/Pie Chart";
+import PieChartWithCustomization from "../views/pie & funnel charts/Pie Chart with Customization";
 // import Template from '../views/Template';
 // import Chart from 'chart.js';
 // .getContext('2d');
@@ -16,6 +17,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <PieChart company={this.props.company} />
+        <PieChartWithCustomization company={this.props.company} />
       </div>
     )
   }

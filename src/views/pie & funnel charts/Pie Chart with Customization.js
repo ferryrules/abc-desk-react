@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import CanvasJSReact from '../../assets/canvasjs.react';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
- 
+
 class PieChartWithCustomization extends Component {
 	render() {
+    console.log(this.props);
+		const employeeCount = !!this.props.company.employees ? this.props.company.employees.length : null
+		const ticketCount = !!this.props.company.tickets ? this.props.company.tickets.length : null
 		const options = {
-			theme: "dark2",
+			theme: "light5",
 			animationEnabled: true,
 			exportFileName: "New Year Resolutions",
 			exportEnabled: true,
@@ -14,14 +17,14 @@ class PieChartWithCustomization extends Component {
 			},
 			data: [{
 				type: "pie",
-				showInLegend: true,
+				showInLegend: false,
 				legendText: "{label}",
 				toolTipContent: "{label}: <strong>{y}%</strong>",
-				indexLabel: "{y}%",
+				indexLabel: "{y} {label}",
 				indexLabelPlacement: "inside",
 				dataPoints: [
-					{ y: 32, label: "Health" },
-					{ y: 22, label: "Finance" },
+					{ y: employeeCount, label: "Employees" },
+					{ y: ticketCount, label: "Tickets" },
 					{ y: 15, label: "Education" },
 					{ y: 19, label: "Career" },
 					{ y: 5, label: "Family" },
@@ -29,11 +32,11 @@ class PieChartWithCustomization extends Component {
 				]
 			}]
 		}
-		
+
 		return (
 		<div>
 			<h1>React Pie Chart with Index Labels Placed Inside</h1>
-			<CanvasJSChart options = {options} 
+			<CanvasJSChart options = {options}
 				/* onRef={ref => this.chart = ref} */
 			/>
 			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}

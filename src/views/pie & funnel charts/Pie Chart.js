@@ -15,18 +15,18 @@ class PieChart extends Component {
 			},
 			data: [{
 				type: "pie",
-				startAngle: 75,
-				toolTipContent: "<b>{label}</b>: {y}%",
-				showInLegend: "true",
+				showInLegend: false,
 				legendText: "{label}",
-				indexLabelFontSize: 16,
-				indexLabel: "{label} - {y}%",
+				toolTipContent: "{label}: <strong>{y}%</strong>",
+				indexLabel: "{y} {label}",
+				indexLabelPlacement: "inside",
 				dataPoints: [
 					{ y: employeeCount, label: "Employees" },
 					{ y: ticketCount, label: "Tickets" },
-					{ y: 9, label: "Paid Search" },
-					{ y: 5, label: "Referral" },
-					{ y: 19, label: "Social" }
+					{ y: 15, label: "Education" },
+					{ y: 19, label: "Career" },
+					{ y: 5, label: "Family" },
+					{ y: 7, label: "Real Estate" }
 				]
 			}]
 		}
