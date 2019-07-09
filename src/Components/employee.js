@@ -1,7 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
-import { Card } from 'semantic-ui-react'
+import { Card, Modal, Form, Button } from 'semantic-ui-react'
 
 import EmployeeForm from '../forms/employeeForm'
 
@@ -55,6 +55,15 @@ class Employee extends React.Component {
         <div className="ui basic grey button" onClick={(e)=>this.goBack()}>
           <i className="angle double left icon" />Back
         </div>
+        <Modal size="mini" trigger={<Button>Show Modal</Button>}>
+          <Modal.Content>
+            <p>test</p>
+            <Modal.Actions>
+            <Button negative>No</Button>
+            <Button positive icon='checkmark' labelPosition='right' content='Yes' />
+          </Modal.Actions>
+          </Modal.Content>
+        </Modal>
         <Card key={`Employee-${emp.id}`} id={emp.id}>
           <Card.Content>
             <Card.Header>{emp.full_name}</Card.Header>
