@@ -25,9 +25,11 @@ class EmployeesList extends Component {
             <br />
             <br />
             <Card.Header>{emp.full_name}</Card.Header>
+            <Card.Meta>{emp.title}</Card.Meta>
             <Divider />
             <Card.Description>
               Pay Type: <Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label>
+              <br />
               <br />
               Pay Rate: ${emp.pay_rate}
             </Card.Description>

@@ -76,7 +76,7 @@ class EmployeeForm extends React.Component {
 
     return(
       <div className="ui equal width form">
-        <label className="ui h3">{this.props.new ? 'New Employee' : `Edit ${this.state.full_name}`}</label>
+        <label className="ui h3">{!this.props.full_name ? 'New Employee' : `Edit ${this.state.full_name}`}</label>
         <div className="fields">
           <div className="field">
             <label>Full Name</label>
