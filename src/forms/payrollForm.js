@@ -54,10 +54,10 @@ class EmployeeForm extends React.Component {
     } else {
       !!this.props.payroll
       ? this.fetFunc(`http://localhost:3000/payrolls/${this.props.payroll.id}`, 'PATCH',payroll=>{
-        this.props.props.history.push(`/companies/${this.state.company_id}`)
+        window.location.replace(`/payrolls/${payroll.id}`)
       })
       : this.fetFunc(`http://localhost:3000/payrolls`, 'POST', payroll=>{
-        this.props.props.history.push(`/payrolls/${payroll.id}`)
+        window.location.replace(`/payrolls/${payroll.id}`)
       })
     }
   }
