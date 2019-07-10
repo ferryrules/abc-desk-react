@@ -10,6 +10,7 @@ class EmployeeForm extends React.Component {
     filing_status: '',
     w4_allowance: '',
     active_status: '',
+    title: '',
     company_id: this.props.company.id
   }
 
@@ -21,7 +22,8 @@ class EmployeeForm extends React.Component {
         pay_rate: this.props.employee.pay_rate,
         filing_status: this.props.employee.filing_status,
         w4_allowance: this.props.employee.w4_allowance,
-        active_status: this.props.employee.active_status
+        active_status: this.props.employee.active_status,
+        title: this.props.employee.title
       })
     }
   }
@@ -39,7 +41,7 @@ class EmployeeForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    if (!this.state.full_name || !this.state.pay_type || !this.state.pay_rate || !this.state.filing_status || !this.state.w4_allowance || !this.state.active_status) {
+    if (!this.state.full_name || !this.state.pay_type || !this.state.pay_rate || !this.state.filing_status || !this.state.w4_allowance || !this.state.active_status || !this.state.title) {
       window.confirm(`All Fields Required`)
     } else {
       !!this.props.employee
@@ -74,12 +76,18 @@ class EmployeeForm extends React.Component {
 
     return(
       <div className="ui equal width form">
-        <label className="ui h3">New Employee</label>
+        <label className="ui h3">{this.props.new ? 'New Employee' : `Edit ${this.state.full_name}`}</label>
         <div className="fields">
           <div className="field">
             <label>Full Name</label>
             <input onChange={this.handleChange} type="text" name="full_name" placeholder="Full Name" value={this.state.full_name} />
           </div>
+          <div className="field">
+            <label>Title</label>
+            <input onChange={this.handleChange} type="text" name="title" placeholder="Title" value={this.state.title} />
+          </div>
+        </div>
+        <div className="fields">
           <div className="field">
             <label>Pay Type</label>
               <Dropdown
