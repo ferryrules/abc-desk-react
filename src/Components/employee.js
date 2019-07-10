@@ -37,8 +37,8 @@ class Employee extends React.Component {
 
     window.confirm(`Are you sure you want to ${emp.active_status === 'Active' ? 'terminate' : 'rehire'} this employee?`)
 
-    this.fetFunc(`http://localhost:3000${this.props.location.pathname}`, 'PATCH', termOrHire, employees=>{
-      window.location.replace(`http://localhost:3001/${this.props.company.name}/employees`)
+    this.fetFunc(`http://localhost:3000${this.props.location.pathname}`, 'PATCH', termOrHire, employee=>{
+      window.location.replace(`http://localhost:3001/employees/${employee.id}`)
     })
   }
 
@@ -116,7 +116,7 @@ class Employee extends React.Component {
             <b>Pay Type:</b> <Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label>
             <br />
             <br />
-            <b>Pay Rate:</b> ${emp.pay_rate}
+            <b>Pay Rate:</b> ${emp.to_currency}
           </Grid.Column>
           <Grid.Column></Grid.Column>
         </Grid.Row>

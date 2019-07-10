@@ -41,7 +41,7 @@ class EmployeeForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    if (!this.state.full_name || !this.state.pay_type || !this.state.pay_rate || !this.state.filing_status || !this.state.w4_allowance || !this.state.active_status || !this.state.title) {
+    if (!this.state.full_name || !this.state.pay_type || !this.state.pay_rate || !this.state.filing_status || !this.state.active_status || !this.state.title) {
       window.confirm(`All Fields Required`)
     } else {
       !!this.props.employee
@@ -147,6 +147,7 @@ class EmployeeForm extends React.Component {
         'filing_status': this.state.filing_status,
         'w4_allowance': this.state.w4_allowance,
         'active_status': this.state.active_status,
+        'title': this.state.title,
         'company_id': parseInt(this.state.company_id)
       })
     })

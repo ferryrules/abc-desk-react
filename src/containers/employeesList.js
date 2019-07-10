@@ -10,16 +10,19 @@ import "shards-ui/dist/css/shards.min.css"
 class EmployeesList extends Component {
 
   state = {
-    statSort: '',
-    paySort: '',
+    filterEmps: 'employees',
     nameSort: true
   }
 
   eachEmployee = () => {
     const { employees } = this.props.company
     if (employees) {
-      return employees.map(emp=>{
-        return (this.state.statSort === emp.active_status || !this.state.statSort) && (this.state.paySort === emp.pay_type || !this.state.paySort) ? (<Card key={emp.id} id={emp.id} onClick={(e)=>window.location.replace(`http://localhost:3001/employees/${emp.id}`)}>
+      return this.props.company[this.state.filterEmps]
+      .sort((a,b)=>{
+        return this.state.nameSort ? a.full_name.localeCompare(b.full_name) : b.full_name.localeCompare(a.full_name)
+      })
+      .map(emp=>{
+        return (<Card key={emp.id} id={emp.id} onClick={(e)=>window.location.replace(`http://localhost:3001/employees/${emp.id}`)}>
           <Card.Content>
             <Label ribbon color={emp.active_status === "Active" ? "green" : "grey"}>{emp.active_status}</Label>
             <br />
@@ -31,33 +34,22 @@ class EmployeesList extends Component {
               Pay Type: <Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label>
               <br />
               <br />
-              Pay Rate: ${emp.pay_rate}
+              Pay Rate: ${emp.to_currency}
             </Card.Description>
           </Card.Content>
-        </Card>) : null
-      })
-    }
-  }
-
-  sortEmps = () => {
-    if (!!this.state.statSort || !!this.state.nameSort) {
-      return this.eachEmployee()
-    } else {
-      return this.eachEmployee().sort((a,b)=>{
-        return a.props.children.props.children[3].props.children.localeCompare(b.props.children.props.children[3].props.children)
+        </Card>)
       })
     }
   }
 
   render() {
+    console.log(this.props);
+    console.log(this.state);
     const statOptions = [
-      { key: 'active', text: 'Active', value: 'Active' },
-      { key: 'terminated', text: 'Terminated', value: 'Terminated' }
-    ]
-
-    const payTypeOptions = [
+      { key: 'active', text: 'Active', value: 'active' },
+      { key: 'terminated', text: 'Terminated', value: 'terminated' },
       { key: 'hourly', text: 'Hourly', value: 'Hourly'},
-      { key: 'salary', text: 'Salary', value: 'Salary'}
+      { key: 'salary', text: 'Salary', value: 'salary'}
     ]
 
     return (
@@ -74,19 +66,13 @@ class EmployeesList extends Component {
           selection
           clearable
           options={statOptions}
-          onChange={(e)=>this.setState({statSort:e.target.innerText})}
+          onChange={(e)=>this.setState({filterEmps: e.target.innerText.toLowerCase()})}
           placeholder="Filter by Status" />
         <span> </span>
-        <Dropdown
-          selection
-          clearable
-          options={payTypeOptions}
-          onChange={(e)=>this.setState({paySort:e.target.innerText})}
-          placeholder="Filter by Pay Type" />
         <br />
         <br />
         <div className="ui three cards">
-          {this.state.nameSort ? this.eachEmployee() : this.sortEmps()}
+          {this.eachEmployee()}
         </div>
       </div>
     )
@@ -128,6 +114,12 @@ export default withAuth(connect(mapStateToProps)(EmployeesList))
 //     <div className="ui basic green button" id={this.props.company.id} onClick={this.addEmployee}>
 //       <i className="icon add circle" />Add Employee
 //     </div>
+        // <Dropdown
+        //   selection
+        //   clearable
+        //   options={payTypeOptions}
+        //   onChange={(e)=>this.setState({paySort:e.target.innerText})}
+        //   placeholder="Filter by Pay Type" />
 //     <h3 className="ui fluid button top attached blue header" onClick={(e)=>this.collapse(e)} >
 //       <i className={`dropdown icon ${this.state.hide ? null : 'counterclockwise rotated'}`} />
 //         Employees
