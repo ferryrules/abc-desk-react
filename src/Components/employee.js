@@ -79,7 +79,9 @@ class Employee extends React.Component {
     const emp = this.state.employee
     return(
       !this.state.edit
-      ? (<Grid columns={3}>
+      ? (
+      <Grid columns={3}>
+        {/* buttons */}
         <Grid.Row>
           <Grid.Column textAlign="center">
             <Button basic color='grey' onClick={(e)=>this.goBack()}><i className="angle double left icon" />Back</Button>
@@ -93,11 +95,13 @@ class Employee extends React.Component {
             </Button>
           </Grid.Column>
         </Grid.Row>
-
+        {/* employee name and status */}
         <Grid.Row>
           <Grid.Column></Grid.Column>
           <Grid.Column>
             <Label ribbon color={emp.active_status === 'Active' ? 'green' : 'grey'}>{emp.active_status}</Label>
+            <br />
+            <br />
             <Container textAlign="center">
               <h3><Icon className="chess queen" />{emp.full_name}</h3>
             </Container>
@@ -105,7 +109,7 @@ class Employee extends React.Component {
           </Grid.Column>
           <Grid.Column></Grid.Column>
         </Grid.Row>
-
+        {/* employee pay */}
         <Grid.Row>
           <Grid.Column></Grid.Column>
           <Grid.Column textAlign="center">
@@ -117,7 +121,7 @@ class Employee extends React.Component {
           <Grid.Column></Grid.Column>
         </Grid.Row>
         <Divider />
-
+        {/* headers */}
         <Grid.Row divided>
           <Grid.Column textAlign="center">
             <h4>Tax Information</h4>
@@ -129,10 +133,13 @@ class Employee extends React.Component {
             <h4>Recurring Adjustments</h4>
           </Grid.Column>
         </Grid.Row>
-
+        {/* info */}
         <Grid.Row>
           <Grid.Column textAlign="center">
             <b>Filing Status: </b> {emp.filing_status}
+            <br />
+            <br />
+            <b>Allowances: </b> {emp.w4_allowance}
           </Grid.Column>
           <Grid.Column textAlign="center">
             <List>
@@ -145,13 +152,6 @@ class Employee extends React.Component {
             </List>
           </Grid.Column>
         </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column textAlign="center">
-            <b>Allowances: </b> {emp.w4_allowance}
-          </Grid.Column>
-        </Grid.Row>
-
       </Grid>)
       : <EmployeeForm edit={this.editEmployee} props={this.props} employee={emp} company={this.props.company}/>
     )
