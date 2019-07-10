@@ -104,8 +104,8 @@ class Employee extends React.Component {
             <br />
             <Container textAlign="center">
               <h3><Icon className="chess queen" />{emp.full_name}</h3>
+              <h5>Title: {emp.title? emp.title:null}</h5>
             </Container>
-            <Container textAlign="center"><h5>Title: {emp.title? emp.title:null}</h5></Container>
           </Grid.Column>
           <Grid.Column></Grid.Column>
         </Grid.Row>
