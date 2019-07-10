@@ -22,18 +22,17 @@ class PieChart extends Component {
 			backgroundColor: 'transparent',
 			data: [{
 				type: "pie",
-				startAngle: 75,
-				toolTipContent: "<b>{label}</b>: {y}%",
+				startAngle: 125,
 				showInLegend: false,
 				indexLabelFontSize: 16,
-				indexLabel: "{label} - {y}",
+				indexLabel: "{label}: {y}",
 				dataPoints: [
-					{ y: highCount, label: "High Pri" },
-					{ y: mediumCount, label: "Medium Pri" },
-					{ y: lowCount, label: "Low Pri" },
-					{ y: openCount, label: "Open" },
-					{ y: pendingCount, label: "Pending" },
-					{ y: closedCount, label: "Closed" }
+					{ y: highCount, label: "High Pri", color: 'red' },
+					{ y: mediumCount, label: "Medium Pri", color: 'orange' },
+					{ y: lowCount, label: "Low Pri", color: 'green' },
+					{ y: pendingCount, label: "Pending", color: 'blue' },
+					{ y: openCount, label: "Open", color: 'purple' },
+					{ y: closedCount, label: "Closed", color: 'grey' }
 				]
 			}]
 		}
@@ -41,7 +40,7 @@ class PieChart extends Component {
 		return (
 		<div>
 			<CanvasJSChart options = {options}
-				/* onRef={ref => this.chart = ref} */
+				onRef={ref => this.chart = ref}
 			/>
 			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
 		</div>
