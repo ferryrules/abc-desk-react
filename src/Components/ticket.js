@@ -88,7 +88,7 @@ class Ticket extends React.Component {
               <Button basic color='grey' onClick={(e)=>this.goBack()}><i className="angle double left icon" />Back</Button>
             </Grid.Column>
             <Grid.Column textAlign="center">
-              <Button basic color='blue' onClick={(e)=>this.editEmployee()}><i className="edit outline icon" />Edit</Button>
+              <Button basic color='blue' onClick={(e)=>this.editTicket()}><i className="edit outline icon" />Edit</Button>
             </Grid.Column>
           </Grid.Row>
           {/* label */}
