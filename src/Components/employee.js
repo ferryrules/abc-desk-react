@@ -50,6 +50,7 @@ class Employee extends React.Component {
     const {paychecks, payrolls} = this.state.employee
     if (paychecks && paychecks.length > 0) {
       return payrolls.map(pr=>{
+        // eslint-disable-next-line
         return paychecks.map(pc=>{
           if (pc.payroll_id === pr.id) {
             return (

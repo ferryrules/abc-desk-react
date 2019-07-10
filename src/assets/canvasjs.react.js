@@ -12,7 +12,7 @@ class CanvasJSChart extends React.Component {
 		this.chartContainerId = "canvasjs-react-chart-container-" + CanvasJSChart._cjsContainerId++;
 	}
 	componentDidMount() {
-		console.log(this.props);
+		// console.log(this.props);
 		//Create Chart and Render
 		this.chart = new CanvasJS.Chart(this.chartContainerId, this.options);
 		this.chart.render();

@@ -4,7 +4,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class PieChart extends Component {
 	render() {
-		console.log(this.props);
+		// console.log(this.props);
 		const ticketCount = !!this.props.company.tickets ? this.props.company.tickets.length : null
 		const highCount = !!this.props.company.high ? this.props.company.high.length : null
 		const mediumCount = !!this.props.company.medium ? this.props.company.medium.length : null

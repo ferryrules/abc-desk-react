@@ -54,6 +54,7 @@ class Ticket extends React.Component {
   }
 
   createNewDescription = () => {
+    // eslint-disable-next-line
     return this.state.ticket.description + ` ____________________________________________` + ` ${this.props.username}: ${this.state.update}`
   }
 
