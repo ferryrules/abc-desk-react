@@ -145,23 +145,3 @@ const mapStateToProps = ({ usersReducer: { user: { id, email, username, permissi
 })
 
 export default withAuth(connect(mapStateToProps)(Ticket))
-
-// <div className="cards">
-//   <Card key={`Ticket-${tic.id}`} id={tic.id}>
-//     <Card.Content>
-//       <Card.Header>{tic.title}</Card.Header>
-//       <Card.Meta>{tic.category}</Card.Meta>
-//       <Card.Description>
-//         {tic.description}
-//       </Card.Description>
-//     </Card.Content>
-//     <Card.Content>
-//       Priority: {tic.priority}
-//     </Card.Content>
-//     <div className="ui extra content" >
-//       <div className="ui basic blue button" onClick={(e)=>this.editTicket(tic)}>
-//         <i className="edit outline icon" />Edit
-//       </div>
-//     </div>
-//   </Card>
-//   </div>
