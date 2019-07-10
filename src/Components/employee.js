@@ -53,7 +53,8 @@ class Employee extends React.Component {
         return paychecks.map(pc=>{
           if (pc.payroll_id === pr.id) {
             return (
-              <List.Item key={`pr-${pr.id}`} icon='time' content={`Check Date: ${pr.check_date} - Hours: ${pc.hours}`} />
+              <List.Item key={`pr-${pr.id}`} icon='time'>
+                <b>Check Date: </b> {pr.check_date} <b>- Hours:</b> {pc.hours}</List.Item>
             )
           }
         })
@@ -66,7 +67,7 @@ class Employee extends React.Component {
     if (recur && recur.length > 0) {
       return recur.map(ra=>{
         return (
-          <List.Item key={`ra-${ra.id}`} icon='dollar' content={`Description: ${ra.description}`} />
+          <List.Item key={`ra-${ra.id}`} icon='dollar'><b>Description: </b> {ra.description}</List.Item>
         )
       })
     }
@@ -100,7 +101,7 @@ class Employee extends React.Component {
             <Container textAlign="center">
               <h3><Icon className="chess queen" />{emp.full_name}</h3>
             </Container>
-            <Container textAlign="center"><h5>Title: {emp.departments? emp.departments[0].name:null}</h5></Container>
+            <Container textAlign="center"><h5>Title: {emp.title? emp.title:null}</h5></Container>
           </Grid.Column>
           <Grid.Column></Grid.Column>
         </Grid.Row>
