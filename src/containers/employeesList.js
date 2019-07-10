@@ -67,7 +67,7 @@ class EmployeesList extends Component {
           clearable
           options={statOptions}
           onChange={(e)=>this.setState({filterEmps: e.target.innerText.toLowerCase()})}
-          placeholder="Filter by Status" />
+          placeholder="Filter" />
         <span> </span>
         <br />
         <br />
