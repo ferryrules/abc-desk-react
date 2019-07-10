@@ -116,7 +116,7 @@ class Employee extends React.Component {
             <b>Pay Type:</b> <Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label>
             <br />
             <br />
-            <b>Pay Rate:</b> ${emp.to_currency}
+            <b>Pay Rate:</b> {emp.to_currency}
           </Grid.Column>
           <Grid.Column></Grid.Column>
         </Grid.Row>

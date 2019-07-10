@@ -34,7 +34,7 @@ class EmployeesList extends Component {
               Pay Type: <Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label>
               <br />
               <br />
-              Pay Rate: ${emp.to_currency}
+              Pay Rate: {emp.to_currency}
             </Card.Description>
           </Card.Content>
         </Card>)
