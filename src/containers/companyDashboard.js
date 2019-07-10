@@ -1,9 +1,9 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
 import PieChart from "../views/pie & funnel charts/Pie Chart";
-import PieChartWithCustomization from "../views/pie & funnel charts/Pie Chart with Customization";
+// import PieChartWithCustomization from "../views/pie & funnel charts/Pie Chart with Customization";
 import MultipleAxisChart from "../views/overview/Multiple Axis Chart";
-import { Button, Grid, Label, Container, Icon, Divider, List } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 // import Template from '../views/Template';
 // import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 // import { connect } from 'react-redux'
