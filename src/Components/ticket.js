@@ -107,11 +107,10 @@ class Ticket extends React.Component {
             <Grid.Column></Grid.Column>
             <Grid.Column textAlign="center">
               <h3>
-                <Icon
-                  className={`exclamation triangle ${this.state.ticketColor}`}/>
-                {tic.title}
+                <Icon className={tic.priority === "High" ? 'bomb' : tic.priority === "Medium" ? 'fire extinguisher' : 'bed'} color={`${this.state.ticketColor}`}/>
+                 {tic.title}
               </h3>
-              <h5>Priority: {tic.priority}</h5>
+              <h5> Priority: {tic.priority}</h5>
             </Grid.Column>
           </Grid.Row>
           <Divider />

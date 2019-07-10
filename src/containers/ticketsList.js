@@ -2,7 +2,7 @@ import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Card, Dropdown, Divider, Label } from 'semantic-ui-react'
+import { Card, Dropdown, Divider, Label, Icon } from 'semantic-ui-react'
 
 class TicketsList extends React.Component{
 
@@ -18,7 +18,12 @@ class TicketsList extends React.Component{
         return (this.state.sort === tic.priority || !this.state.sort) && (this.state.sortStat === tic.ticket_status || !this.state.sortStat)
         ? (<Card key={tic.id} id={tic.id} onClick={(e)=>window.location.replace(`http://localhost:3001/tickets/${tic.id}`)}>
             <Card.Content>
-              <Label ribbon color={tic.priority === "High" ? 'red' : tic.priority === "Medium" ? 'yellow' : 'green'}>{tic.priority} Priority</Label>
+              <Label
+                ribbon
+                color={tic.priority === "High" ? 'red' : tic.priority === "Medium" ? 'yellow' : 'green'}>
+                <Icon className={tic.priority === "High" ? 'bomb' : tic.priority === "Medium" ? 'fire extinguisher' : 'bed'} />
+                {tic.priority} Priority
+              </Label>
               <br />
               <br />
               <Card.Header>{tic.title}</Card.Header>
@@ -28,7 +33,7 @@ class TicketsList extends React.Component{
                 {tic.description.length > 30 ? tic.description.substr(0,30).concat(' ...') : tic.description}
               </Card.Description>
             <Divider />
-              <Label color={tic.ticket_status === "Open" ? 'purple' : tic.ticket_status === "Pending" ? 'blue' : 'grey'}>Status: {tic.ticket_status}</Label>
+              <b>Status: </b><Label color={tic.ticket_status === "Open" ? 'purple' : tic.ticket_status === "Pending" ? 'blue' : 'grey'}>{tic.ticket_status}</Label>
             </Card.Content>
           </Card>) : null
         }
