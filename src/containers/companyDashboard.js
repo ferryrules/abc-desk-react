@@ -19,9 +19,6 @@ class Dashboard extends React.Component {
           <Grid.Column>
             <PieChart company={this.props.company} />
           </Grid.Column>
-          <Grid.Column>
-            <MultipleAxisChart company={this.props.company} />
-          </Grid.Column>
         </Grid>
       </div>
     )
@@ -29,3 +26,7 @@ class Dashboard extends React.Component {
 }
 
 export default withAuth(Dashboard)
+
+// <Grid.Column>
+//   <MultipleAxisChart company={this.props.company} />
+// </Grid.Column>
