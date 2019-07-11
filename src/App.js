@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
-// import { connect } from 'react-redux'
-// import withAuth from './hocs/withAuth'
 
 import Profile from './containers/profile'
 import LoginForm from './components/loginForm'
@@ -99,6 +97,8 @@ class App extends React.Component {
 export default withRouter(App)
 
 
+// import { connect } from 'react-redux'
+// import withAuth from './hocs/withAuth'
 // import CompanyDashboard from './containers/companyDashboard';
 // import CompaniesList from './containers/companiesList'
 // <Route exact path="/companies" render={()=><CompaniesList {...this.props} {...this.state} selectCompany={this.selectCompany} />} />

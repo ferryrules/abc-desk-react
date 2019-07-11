@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Modal, Header, Input } from 'semantic-ui-react'
+// import { Table, Modal, Header, Input } from 'semantic-ui-react'
 
 class EmployeeForm extends React.Component {
 

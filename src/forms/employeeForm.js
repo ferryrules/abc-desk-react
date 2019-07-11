@@ -11,6 +11,7 @@ class EmployeeForm extends React.Component {
     w4_allowance: '',
     active_status: '',
     title: '',
+    department_id: '',
     company_id: this.props.company.id
   }
 
@@ -23,7 +24,8 @@ class EmployeeForm extends React.Component {
         filing_status: this.props.employee.filing_status,
         w4_allowance: this.props.employee.w4_allowance,
         active_status: this.props.employee.active_status,
-        title: this.props.employee.title
+        title: this.props.employee.title,
+        department_id: this.props.employee.department_id
       })
     }
   }

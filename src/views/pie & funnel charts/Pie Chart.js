@@ -4,14 +4,15 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class PieChart extends Component {
 	render() {
-		// console.log(this.props);
+		console.log(this.props.company)
+
 		const ticketCount = !!this.props.company.tickets ? this.props.company.tickets.length : null
-		const highCount = !!this.props.company.high ? this.props.company.high.length : null
-		const mediumCount = !!this.props.company.medium ? this.props.company.medium.length : null
-		const lowCount = !!this.props.company.low ? this.props.company.low.length : null
-		const openCount = !!this.props.company.open ? this.props.company.open.length : null
-		const pendingCount = !!this.props.company.pending ? this.props.company.pending.length : null
-		const closedCount = !!this.props.company.closed ? this.props.company.closed.length : null
+		const highCount = !!this.props.company.all_tickets.high ? this.props.company.all_tickets.high.length : null
+		const mediumCount = !!this.props.company.all_tickets.medium ? this.props.company.all_tickets.medium.length : null
+		const lowCount = !!this.props.company.all_tickets.low ? this.props.company.all_tickets.low.length : null
+		const openCount = !!this.props.company.all_tickets.open ? this.props.company.all_tickets.open.length : null
+		const pendingCount = !!this.props.company.all_tickets.pending ? this.props.company.all_tickets.pending.length : null
+		const closedCount = !!this.props.company.all_tickets.closed ? this.props.company.all_tickets.closed.length : null
 
 		const options = {
 			exportEnabled: true,

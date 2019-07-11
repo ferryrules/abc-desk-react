@@ -1,6 +1,6 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-import { Card, Modal, Table, Header, Button } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 
 import PayrollForm from '../forms/payrollForm'
 
