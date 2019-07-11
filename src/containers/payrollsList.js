@@ -2,30 +2,37 @@ import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Card } from 'semantic-ui-react'
+import { Card, Label } from 'semantic-ui-react'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 
 class PayrollsList extends React.Component {
 
+  state = {
+    filter: ''
+  }
+
   eachPayroll = () => {
     const { payrolls } = this.props.company
     if (payrolls) {
       return payrolls.map(payr=>{
-        return <Card key={payr.id} id={payr.id}>
+        return (this.state.filter === payr.payroll_status || !this.state.filter) ? (<Card key={payr.id} id={payr.id} onClick={(e)=>window.location.replace(`/payrolls/${payr.id}`)}>
           <Card.Content>
-            <Card.Header>Payroll - {payr.end_date}</Card.Header>
+            <Label ribbon color={payr.payroll_status === "Not Started" ? "red" : payr.payroll_status === "Started" ? "green" : "grey"}>{payr.payroll_status}</Label>
+            <br />
+            <br />
+            <Card.Header>Payroll Ending {payr.end_date}</Card.Header>
             <Card.Meta>{payr.payroll_status}</Card.Meta>
             <Card.Description>
-              From {payr.start_date} To {payr.end_date}
+              <b>From</b> {payr.start_date} <b>To</b> {payr.end_date}
               <br />
-              Check Date: {payr.check_date}
+              <b>Check Date:</b> {payr.check_date}
             </Card.Description>
           </Card.Content>
-        </Card>
+        </Card>) : null
       }).sort((a,b)=>{
-        return b.props.children.props.children[0].props.children[1].localeCompare(a.props.children.props.children[0].props.children[1])
+        return b.props.children.props.children[3].props.children[1].localeCompare(a.props.children.props.children[3].props.children[1])
       })
     }
   }
@@ -41,7 +48,11 @@ class PayrollsList extends React.Component {
             <i className="icon add circle" />Add Payroll
           </div>
         </Link>
-        {this.eachPayroll()}
+        <br />
+        <br />
+        <div className="ui three cards">
+          {this.eachPayroll()}
+        </div>
       </div>
     )
   }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import withAuth from '../hocs/withAuth'
 import { Table, Button } from 'semantic-ui-react'
 
@@ -44,6 +44,27 @@ class Payroll extends React.Component {
     window.location.replace(`/${this.props.company.name}/payrolls`)
   }
 
+  eachPaycheck = () => {
+    const { paychecks, employees } = this.state.payroll
+    if (paychecks && paychecks.length > 0) {
+      return paychecks.map(pc=>{
+        return (
+          <Table.Row>
+            <Table.Cell>{pc.emp_name}</Table.Cell>
+            <Table.Cell textAlign="center">{pc.emp_pay_type}</Table.Cell>
+            <Table.Cell textAlign="center">{pc.emp_pay_rate}</Table.Cell>
+            <Table.Cell textAlign="center">{pc.hours}</Table.Cell>
+            <Table.Cell textAlign="center">{pc.ot_hours}</Table.Cell>
+            <Table.Cell textAlign="center">{pc.pto_hours}</Table.Cell>
+            <Table.Cell textAlign="center">{pc.vacation_hours}</Table.Cell>
+            <Table.Cell textAlign="center">{pc.holiday_hours}</Table.Cell>
+            <Table.Cell textAlign="center">{pc.sick_hours}</Table.Cell>
+          </Table.Row>
+        )
+      })
+    }
+  }
+
   render() {
     console.log("payroll",this.props);
     console.log("payroll state",this.state);
@@ -57,24 +78,29 @@ class Payroll extends React.Component {
             Back
           </Button>
           <Table celled structured>
-            <Table.Row textAlign="center">
-              <Table.HeaderCell verticalAlign='middle' rowSpan='2'>Name</Table.HeaderCell>
-              <Table.HeaderCell verticalAlign='middle' rowSpan='2'>Pay Type</Table.HeaderCell>
-              <Table.HeaderCell verticalAlign='middle' rowSpan='2'>Pay Rate</Table.HeaderCell>
-              <Table.HeaderCell colSpan='6'>Hours Breakdown</Table.HeaderCell>
-              <Table.HeaderCell colSpan='3'>Hours Breakdown</Table.HeaderCell>
-            </Table.Row>
-            <Table.Row  textAlign="center">
-              <Table.HeaderCell>Hours</Table.HeaderCell>
-              <Table.HeaderCell>OT Hours</Table.HeaderCell>
-              <Table.HeaderCell>PTO Hours</Table.HeaderCell>
-              <Table.HeaderCell>Vacation Hours</Table.HeaderCell>
-              <Table.HeaderCell>Holiday Hours</Table.HeaderCell>
-              <Table.HeaderCell>Sick Hours</Table.HeaderCell>
-              <Table.HeaderCell>Type</Table.HeaderCell>
-              <Table.HeaderCell>Description</Table.HeaderCell>
-              <Table.HeaderCell>Amount</Table.HeaderCell>
-            </Table.Row>
+            <Table.Header>
+              <Table.Row textAlign="center">
+                <Table.HeaderCell verticalAlign='middle' rowSpan='2'>Name</Table.HeaderCell>
+                <Table.HeaderCell verticalAlign='middle' rowSpan='2'>Pay Type</Table.HeaderCell>
+                <Table.HeaderCell verticalAlign='middle' rowSpan='2'>Pay Rate</Table.HeaderCell>
+                <Table.HeaderCell colSpan='6'>Hours Breakdown</Table.HeaderCell>
+                <Table.HeaderCell colSpan='3'>Adjustments</Table.HeaderCell>
+              </Table.Row>
+              <Table.Row  textAlign="center">
+                <Table.HeaderCell>Hours</Table.HeaderCell>
+                <Table.HeaderCell>OT Hours</Table.HeaderCell>
+                <Table.HeaderCell>PTO Hours</Table.HeaderCell>
+                <Table.HeaderCell>Vacation Hours</Table.HeaderCell>
+                <Table.HeaderCell>Holiday Hours</Table.HeaderCell>
+                <Table.HeaderCell>Sick Hours</Table.HeaderCell>
+                <Table.HeaderCell>Type</Table.HeaderCell>
+                <Table.HeaderCell>Description</Table.HeaderCell>
+                <Table.HeaderCell>Amount</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {this.eachPaycheck()}
+            </Table.Body>
           </Table>
         </div>)
       : <PayrollForm  edit={this.editPayroll} props={this.props} company={payr.company} payroll={payr} />
