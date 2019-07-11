@@ -21,10 +21,15 @@ class MultipleAxisChart extends Component {
 	render() {
 		console.log(this.props);
 
-		const hoursData = this.props.company.check_dates_with_total_hours.map(ch=>{
-			return { x: new Date(ch[0]), y: ch[1]}
+		const hoursData = this.props.company.payrolls.map(pr=>{
+			return { x: new Date(pr.check_date), y: pr.total_hours}
+		})
+
+		const costData = this.props.company.payrolls.map(pr=>{
+			return { x: new Date(pr.check_date), y: pr.cash_req}
 		})
 		console.log(hoursData);
+		console.log(costData);
 		const options = {
 			theme: "light2",
 			animationEnabled: true,
@@ -72,7 +77,7 @@ class MultipleAxisChart extends Component {
 				showInLegend: true,
 				xValueFormatString: "MMM YYYY",
 				yValueFormatString: "$#,##0.#",
-				dataPoints: hoursData
+				dataPoints: costData
 			}]
 		}
 
