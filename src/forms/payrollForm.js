@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Modal, Header, Input } from 'semantic-ui-react'
 
 class EmployeeForm extends React.Component {
 
@@ -18,21 +18,10 @@ class EmployeeForm extends React.Component {
         payroll_status: this.props.payroll.payroll_status,
         start_date: this.props.payroll.start_date,
         end_date: this.props.payroll.end_date,
-        check_date: this.props.payroll.check_date
+        check_date: this.props.payroll.check_date,
+        employees: this.props.company.employees
       })
     }
-    fetch(`http://localhost:3000/companies/${this.state.company_id}`, {
-      method: "GET",
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-      }
-    })
-    .then(r=>r.json())
-    .then(company=>{
-      this.setState({
-        employees: company.employees
-      })
-    })
   }
 
   handleChange = (e) => {
@@ -43,7 +32,7 @@ class EmployeeForm extends React.Component {
   }
 
   cancelSubmit = (e) => {
-    this.props.props.history.push(`/companies`)
+    window.location.replace(`/${this.props.company.name}/payrolls`)
   }
 
   handleSubmit = (e) => {
@@ -66,22 +55,14 @@ class EmployeeForm extends React.Component {
     console.log("payrForm state", this.state)
     console.log("payrForm props", this.props)
     console.log("payrForm comp", this.props.company)
-    const eachEmp = this.state.employees.map(e=>{
-      return (
-        <Table.Row key={`PayrollForm-${e.id}`}>
-          <Table.Cell>{e.full_name}</Table.Cell>
-          <Table.Cell>0</Table.Cell>
-          <Table.Cell>{e.pay_rate}</Table.Cell>
-        </Table.Row>
-      )
-    })
+    // eslint-disable-next-line
 
     return(
       <div className="ui equal width form">
         <div className="fields">
           <div className="field">
             <label>Payroll Status</label>
-            <input onChange={this.handleChange} type="text" name="payroll_status" placeholder="Not Started" value={this.state.payroll_status} />
+            <input disabled='true' onChange={this.handleChange} type="text" name="payroll_status" placeholder="Not Started" value={this.state.payroll_status} />
           </div>
         </div>
         <div className="fields">
@@ -98,19 +79,6 @@ class EmployeeForm extends React.Component {
             <input onChange={this.handleChange} type="date" placeholder="Check Date" name="check_date" value={this.state.check_date}/>
           </div>
         </div>
-        <Table celled selectable>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Employee</Table.HeaderCell>
-              <Table.HeaderCell>Hours</Table.HeaderCell>
-              <Table.HeaderCell>Pay</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-
-          <Table.Body>
-            {eachEmp}
-          </Table.Body>
-        </Table>
         <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Start</button>
         <button className="ui negative basic button" onClick={(e)=>this.cancelSubmit(e)}><i className="undo icon"></i>Cancel</button>
       </div>

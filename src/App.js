@@ -57,15 +57,15 @@ class App extends React.Component {
       <Fragment>
         <Nav company={this.state.company}/>
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
+          <Route exact path="/" render={() => <Redirect to="/login" />} />
           <Route exact path="/profile" render={()=><Profile {...this.props} company={this.state.company}/>} />
           <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/dashboard" render={()=><CompanyDashboard {...this.props} company={this.state.company}/>} />
 
           <Route exact path="/new" render={()=><UserForm />} />
           <Route exact path="/edit" render={()=><UserForm {...this.props} company={this.state.company}/>} />
 
           {/* COMPANY */}
+          <Route exact path="/:company_name" render={()=><CompanyDashboard {...this.props} company={this.state.company}/>} />
           <Route exact path="/:company_name/edit" render={()=><CompanyForm {...this.props} company={this.state.company}/>} />
           <Route exact path="/:user_name/new" render={()=><CompanyForm {...this.props} />} />
 

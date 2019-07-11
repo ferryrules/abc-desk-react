@@ -31,6 +31,7 @@ class PayrollsList extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <Link to={`/${this.props.company.name}/payrolls/new`}>
