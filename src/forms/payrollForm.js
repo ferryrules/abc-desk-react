@@ -1,7 +1,8 @@
 import React from 'react'
+import withAuth from '../hocs/withAuth'
 // import { Table, Modal, Header, Input } from 'semantic-ui-react'
 
-class EmployeeForm extends React.Component {
+class PayrollForm extends React.Component {
 
   state = {
     payroll_status: '',
@@ -106,4 +107,4 @@ class EmployeeForm extends React.Component {
   }
 }
 
-export default EmployeeForm
+export default withAuth(PayrollForm)

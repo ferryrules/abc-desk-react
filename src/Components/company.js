@@ -5,6 +5,7 @@ import TicketForm from '../forms/ticketForm'
 import PayrollForm from '../forms/payrollForm'
 import PayrollsList from '../containers/payrollsList'
 import TicketsList from '../containers/ticketsList'
+import withAuth from '../hocs/withAuth'
 // import Employee from '../components/employee'
 // import { Card } from 'semantic-ui-react'
 // import { withRouter } from 'react-router-dom'
@@ -72,4 +73,4 @@ class Company extends React.Component {
   }
 };
 
-export default Company
+export default withAuth(Company)

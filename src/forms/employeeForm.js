@@ -1,4 +1,5 @@
 import React from 'react'
+import withAuth from '../hocs/withAuth'
 import { Dropdown } from 'semantic-ui-react'
 
 class EmployeeForm extends React.Component {
@@ -11,7 +12,6 @@ class EmployeeForm extends React.Component {
     w4_allowance: '',
     active_status: '',
     title: '',
-    department_id: '',
     company_id: this.props.company.id
   }
 
@@ -24,8 +24,7 @@ class EmployeeForm extends React.Component {
         filing_status: this.props.employee.filing_status,
         w4_allowance: this.props.employee.w4_allowance,
         active_status: this.props.employee.active_status,
-        title: this.props.employee.title,
-        department_id: this.props.employee.department_id
+        title: this.props.employee.title
       })
     }
   }
@@ -51,7 +50,7 @@ class EmployeeForm extends React.Component {
         window.location.replace(`/employees/${employee.id}`)
       })
       : this.fetFunc(`http://localhost:3000/employees`, 'POST', employee=>{
-        window.location.replace(`/employees/${employee.id}`)
+        window.location.replace(`/${this.props.company.name}/employees`)
       })
     }
   }
@@ -158,4 +157,4 @@ class EmployeeForm extends React.Component {
   }
 }
 
-export default EmployeeForm
+export default withAuth(EmployeeForm)

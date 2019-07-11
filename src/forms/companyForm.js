@@ -1,4 +1,5 @@
 import React from 'react'
+import withAuth from '../hocs/withAuth'
 // import UserForm from './userForm'
 // import { Card } from 'semantic-ui-react'
 
@@ -75,7 +76,7 @@ class CompanyForm extends React.Component {
   }
 }
 
-export default CompanyForm
+export default withAuth(CompanyForm)
 
 
 //extras
