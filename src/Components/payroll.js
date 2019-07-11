@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import withAuth from '../hocs/withAuth'
-import { Table, Button } from 'semantic-ui-react'
+import { Table, Button, Input, Icon } from 'semantic-ui-react'
 
 import PayrollForm from '../forms/payrollForm'
 
@@ -8,12 +8,6 @@ class Payroll extends React.Component {
 
   state = {
     payroll: [],
-    hours: 0,
-    ot_hours: 0,
-    vacation_hours: 0,
-    holiday_hours: 0,
-    sick_hours: 0,
-    employee_id: '',
     payroll_id: ''
   }
 
@@ -41,32 +35,103 @@ class Payroll extends React.Component {
   }
 
   goBack = () => {
-    window.location.replace(`/${this.props.company.name}/payrolls`)
+    if (window.confirm('Leave this page without saving?')) {
+      this.fetFunc('PATCH', 'Started')
+    }
   }
 
   eachPaycheck = () => {
-    const { paychecks, employees } = this.state.payroll
+    const { paychecks } = this.state.payroll
+    const { employees } = this.props.company
     if (paychecks && paychecks.length > 0) {
       return paychecks.map(pc=>{
         return (
           <Table.Row>
-            <Table.Cell>{pc.emp_name}</Table.Cell>
+            <Table.Cell>
+              <Icon className="save outline icon" color='green' onClick={(e)=>this.savePaycheck()}/> {pc.emp_name}
+            </Table.Cell>
             <Table.Cell textAlign="center">{pc.emp_pay_type}</Table.Cell>
             <Table.Cell textAlign="center">{pc.emp_pay_rate}</Table.Cell>
-            <Table.Cell textAlign="center">{pc.hours}</Table.Cell>
-            <Table.Cell textAlign="center">{pc.ot_hours}</Table.Cell>
-            <Table.Cell textAlign="center">{pc.pto_hours}</Table.Cell>
-            <Table.Cell textAlign="center">{pc.vacation_hours}</Table.Cell>
-            <Table.Cell textAlign="center">{pc.holiday_hours}</Table.Cell>
-            <Table.Cell textAlign="center">{pc.sick_hours}</Table.Cell>
+            <Table.Cell textAlign="center">
+              <Input size="mini" name={`hours_${pc.emp_id}`} onChange={(e)=>this.handleChange(e)} placeholder={pc.hours}>
+              </Input>
+            </Table.Cell>
+            <Table.Cell textAlign="center">
+              <Input size="mini" name={`hours_${pc.emp_id}`} onChange={(e)=>this.handleChange(e)} placeholder={pc.ot_hours}>
+              </Input>
+            </Table.Cell>
+            <Table.Cell textAlign="center">
+              <Input size="mini" name={`hours_${pc.emp_id}`} onChange={(e)=>this.handleChange(e)} placeholder={pc.pto_hours}>
+              </Input>
+            </Table.Cell>
+            <Table.Cell textAlign="center">
+              <Input size="mini" name={`hours_${pc.emp_id}`} onChange={(e)=>this.handleChange(e)} placeholder={pc.vacation_hours}>
+              </Input>
+            </Table.Cell>
+            <Table.Cell textAlign="center">
+              <Input size="mini" name={`hours_${pc.emp_id}`} onChange={(e)=>this.handleChange(e)} placeholder={pc.holiday_hours}>
+              </Input>
+            </Table.Cell>
+            <Table.Cell textAlign="center">
+              <Input size="mini" name={`hours_${pc.emp_id}`} onChange={(e)=>this.handleChange(e)} placeholder={pc.sick_hours}>
+              </Input>
+            </Table.Cell>
           </Table.Row>
         )
+      })
+    } else if (employees) {
+      return this.props.company.employees.map(emp=>{
+        if (emp.active_status === 'Active') {
+          return (
+            <Table.Row>
+              <Table.Cell>
+                <Icon className="save outline icon" color='green' onClick={(e)=>this.savePaycheck()}/> {emp.full_name}</Table.Cell>
+              <Table.Cell textAlign="center">{emp.pay_type}</Table.Cell>
+              <Table.Cell textAlign="center">{emp.weekly_to_currency}</Table.Cell>
+              <Table.Cell>
+                <Input size="mini" name={`hours_${emp.id}`} onChange={(e)=>this.handleChange(e)}>
+                </Input>
+              </Table.Cell>
+              <Table.Cell>
+                <Input size="mini" name={`ot_hours_${emp.id}`} onChange={(e)=>this.handleChange(e)}>
+                </Input>
+              </Table.Cell>
+              <Table.Cell>
+                <Input size="mini" name={`pto_hours_${emp.id}`} onChange={(e)=>this.handleChange(e)}>
+                </Input>
+              </Table.Cell>
+              <Table.Cell>
+                <Input size="mini" name={`vacation_hours_${emp.id}`} onChange={(e)=>this.handleChange(e)}>
+                </Input>
+              </Table.Cell>
+              <Table.Cell>
+                <Input size="mini" name={`holiday_hours_${emp.id}`} onChange={(e)=>this.handleChange(e)}>
+                </Input>
+              </Table.Cell>
+              <Table.Cell>
+                <Input size="mini" name={`sick_hours_${emp.id}`} onChange={(e)=>this.handleChange(e)}>
+                </Input>
+              </Table.Cell>
+            </Table.Row>
+          )
+        }
       })
     }
   }
 
+  handleChange = (e) => {
+    const { name, value } = e.target
+    this.setState({
+      [name]: value
+    })
+  }
+
+  submitPayroll = () => {
+    this.fetFunc('PATCH', 'Submitted')
+  }
+
   render() {
-    console.log("payroll",this.props);
+    console.log("payroll",this.props.company.employees);
     console.log("payroll state",this.state);
     const payr = this.state.payroll
 
@@ -77,14 +142,17 @@ class Payroll extends React.Component {
             <i className="angle double left icon" />
             Back
           </Button>
-          <Table celled structured>
+          <Button basic color='green' onClick={(e)=>this.submitPayroll()}>
+            <i className="check circle outline icon" />
+            Submit
+          </Button>
+          <Table celled structured striped>
             <Table.Header>
               <Table.Row textAlign="center">
                 <Table.HeaderCell verticalAlign='middle' rowSpan='2'>Name</Table.HeaderCell>
                 <Table.HeaderCell verticalAlign='middle' rowSpan='2'>Pay Type</Table.HeaderCell>
                 <Table.HeaderCell verticalAlign='middle' rowSpan='2'>Pay Rate</Table.HeaderCell>
                 <Table.HeaderCell colSpan='6'>Hours Breakdown</Table.HeaderCell>
-                <Table.HeaderCell colSpan='3'>Adjustments</Table.HeaderCell>
               </Table.Row>
               <Table.Row  textAlign="center">
                 <Table.HeaderCell>Hours</Table.HeaderCell>
@@ -93,9 +161,6 @@ class Payroll extends React.Component {
                 <Table.HeaderCell>Vacation Hours</Table.HeaderCell>
                 <Table.HeaderCell>Holiday Hours</Table.HeaderCell>
                 <Table.HeaderCell>Sick Hours</Table.HeaderCell>
-                <Table.HeaderCell>Type</Table.HeaderCell>
-                <Table.HeaderCell>Description</Table.HeaderCell>
-                <Table.HeaderCell>Amount</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -103,8 +168,24 @@ class Payroll extends React.Component {
             </Table.Body>
           </Table>
         </div>)
-      : <PayrollForm  edit={this.editPayroll} props={this.props} company={payr.company} payroll={payr} />
+      : null
     )
+  }
+
+  fetFunc = (method, status) => {
+    fetch(`http://localhost:3000${this.props.location.pathname}`, {
+      method: method,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
+      body: JSON.stringify({
+        payroll_status: status
+      })
+    })
+    .then(r=>r.json())
+    .then(window.location.replace(`/${this.props.company.name}/payrolls`))
   }
 }
 

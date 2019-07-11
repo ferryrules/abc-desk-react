@@ -35,11 +35,11 @@ class Employee extends React.Component {
 
     let termOrHire = emp.active_status === 'Active' ? { 'active_status': 'Terminated' } : { 'active_status': 'Active' }
 
-    window.confirm(`Are you sure you want to ${emp.active_status === 'Active' ? 'terminate' : 'rehire'} this employee?`)
-
-    this.fetFunc(`http://localhost:3000${this.props.location.pathname}`, 'PATCH', termOrHire, employee=>{
-      window.location.replace(`http://localhost:3001/employees/${employee.id}`)
-    })
+    if (window.confirm(`Are you sure you want to ${emp.active_status === 'Active' ? 'terminate' : 'rehire'} this employee?`)) {
+      this.fetFunc(`http://localhost:3000${this.props.location.pathname}`, 'PATCH', termOrHire, employee=>{
+        window.location.replace(`http://localhost:3001/employees/${employee.id}`)
+      })
+    }
   }
 
   goBack = () => {
