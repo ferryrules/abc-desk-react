@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import withAuth from '../hocs/withAuth'
 import { Table, Button, Input, Icon } from 'semantic-ui-react'
 
-import PayrollForm from '../forms/payrollForm'
+// import PayrollForm from '../forms/payrollForm'
 
 class Payroll extends React.Component {
 
@@ -80,6 +80,7 @@ class Payroll extends React.Component {
         )
       })
     } else if (employees) {
+      // eslint-disable-next-line
       return this.props.company.employees.map(emp=>{
         if (emp.active_status === 'Active') {
           return (
@@ -133,7 +134,6 @@ class Payroll extends React.Component {
   render() {
     console.log("payroll",this.props.company.employees);
     console.log("payroll state",this.state);
-    const payr = this.state.payroll
 
     return(
       !this.state.edit
