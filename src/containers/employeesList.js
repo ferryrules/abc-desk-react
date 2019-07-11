@@ -17,7 +17,8 @@ class EmployeesList extends Component {
   eachEmployee = () => {
     const { employees } = this.props.company
     if (employees) {
-      return this.props.company[this.state.filterEmps]
+      // debugger
+      return this.props.company[!!this.state.filterEmps ? this.state.filterEmps: 'employees']
       .sort((a,b)=>{
         return this.state.nameSort ? a.full_name.localeCompare(b.full_name) : b.full_name.localeCompare(a.full_name)
       })
