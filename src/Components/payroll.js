@@ -132,7 +132,7 @@ class Payroll extends React.Component {
   }
 
   render() {
-    console.log("payroll",this.props.company.employees);
+    console.log("payroll props",this.props);
     console.log("payroll state",this.state);
 
     return(

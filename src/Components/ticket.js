@@ -76,8 +76,8 @@ class Ticket extends React.Component {
   }
 
   render() {
-    // console.log("props",this.props);
-    // console.log("state",this.state);
+    console.log("ticket props",this.props);
+    console.log("ticket state",this.state);
     const tic = this.state.ticket
     return(
       this.state.edit
