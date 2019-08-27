@@ -21,13 +21,14 @@ class MultipleAxisChart extends Component {
 	render() {
 		console.log(this.props);
 
-		const hoursData = this.props.company.payrolls.map(pr=>{
+		const hoursData = this.props.company.payrolls ? this.props.company.payrolls.map(pr=>{
 			return { x: new Date(pr.check_date), y: pr.total_hours}
-		})
+		}) : null
 
-		const costData = this.props.company.payrolls.map(pr=>{
+		const costData = this.props.company.payrolls ? this.props.company.payrolls.map(pr=>{
 			return { x: new Date(pr.check_date), y: pr.cash_req}
-		})
+		}) : null
+
 		console.log(hoursData);
 		console.log(costData);
 		const options = {
