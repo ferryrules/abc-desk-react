@@ -56,7 +56,7 @@ class EmployeeForm extends React.Component {
   }
 
   render() {
-    console.log("empForm state", this.state)
+    // console.log("empForm state", this.state)
     // console.log("empForm props", this.props)
     // console.log("empForm comp", this.props.company)
     const statOptions = [

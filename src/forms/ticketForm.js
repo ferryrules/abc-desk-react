@@ -53,8 +53,8 @@ class TicketForm extends React.Component {
   }
 
   render() {
-    console.log("props", this.props);
-    console.log("state", this.state);
+    // console.log("props", this.props);
+    // console.log("state", this.state);
     const priOptions = [
       { key: 'high', text: 'High', value: '1 - High' },
       { key: 'medium', text: 'Medium', value: '2 - Medium' },

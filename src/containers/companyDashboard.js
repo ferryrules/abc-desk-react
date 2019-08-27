@@ -12,7 +12,7 @@ import { Grid } from 'semantic-ui-react'
 class Dashboard extends React.Component {
 
   render() {
-    console.log("dashboard props", this.props);
+    // console.log("dashboard props", this.props);
     return (
       <div>
         {!!this.props.company.message ? window.location.reload() : null}

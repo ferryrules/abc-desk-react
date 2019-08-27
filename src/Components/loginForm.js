@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router'
 import { loginUser } from '../actions/user'
-import { Button, Message, Card, Input } from 'semantic-ui-react'
+import { Message } from 'semantic-ui-react'
 // import { bindActionCreators } from 'redux'
 
 class LoginForm extends React.Component {

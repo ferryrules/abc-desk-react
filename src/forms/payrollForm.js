@@ -53,9 +53,9 @@ class PayrollForm extends React.Component {
   }
 
   render() {
-    console.log("payrForm state", this.state)
-    console.log("payrForm props", this.props)
-    console.log("payrForm comp", this.props.company)
+    // console.log("payrForm state", this.state)
+    // console.log("payrForm props", this.props)
+    // console.log("payrForm comp", this.props.company)
     // eslint-disable-next-line
 
     return(

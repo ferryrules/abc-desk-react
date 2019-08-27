@@ -8,7 +8,7 @@ import { Loader } from 'semantic-ui-react'
 const withAuth = (WrappedComponent) => {
   class AuthorizedComponent extends React.Component {
     componentDidMount() {
-      console.log('%c INSIDE COMPONENT DID MOUNT FOR AUTH HOC', 'color: purple', this.props)
+      // console.log('%c INSIDE COMPONENT DID MOUNT FOR AUTH HOC', 'color: purple', this.props)
       // TODO: add token expiration
       if (localStorage.getItem('jwt') && !this.props.loggedIn) this.props.fetchCurrentUser()
     }

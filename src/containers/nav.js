@@ -11,7 +11,7 @@ class Nav extends React.Component {
   }
 
   render() {
-    console.log("nav", this.props)
+    // console.log("nav", this.props)
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
       <Fragment>

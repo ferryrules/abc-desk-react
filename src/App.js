@@ -50,8 +50,8 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("App state",this.state);
-    console.log("App props",this.props);
+    // console.log("App state",this.state);
+    // console.log("App props",this.props);
     return (
       <Fragment>
         <Nav company={this.state.company}/>

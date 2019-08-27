@@ -75,8 +75,8 @@ class Employee extends React.Component {
   }
 
   render() {
-    console.log("employee props",this.props);
-    console.log("employee state",this.state);
+    // console.log("employee props",this.props);
+    // console.log("employee state",this.state);
     const emp = this.state.employee
     return(
       !this.state.edit
