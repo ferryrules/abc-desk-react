@@ -15,6 +15,7 @@ class Dashboard extends React.Component {
     console.log("dashboard props", this.props);
     return (
       <div>
+        {!!this.props.company.message ? window.location.reload() : null}
         <Grid columns={2}>
           <Grid.Column>
             <PieChart company={this.props.company} />

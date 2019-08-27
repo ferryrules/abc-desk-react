@@ -65,6 +65,7 @@ class App extends React.Component {
 
           {/* COMPANY */}
           <Route exact path="/:company_name" render={()=><CompanyDashboard {...this.props} company={this.state.company}/>} />
+          <Route exact path="/dashboard" render={()=><CompanyDashboard {...this.props} company={this.state.company}/>} />
           <Route exact path="/:company_name/edit" render={()=><CompanyForm {...this.props} company={this.state.company}/>} />
           <Route exact path="/:user_name/new" render={()=><CompanyForm {...this.props} />} />
 

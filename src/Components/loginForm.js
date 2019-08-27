@@ -14,6 +14,7 @@ class LoginForm extends React.Component {
   }
 
   handleLoginSubmit = (e) => {
+    e.preventDefault()
     this.props.loginUser(this.state.username, this.state.password)
     this.setState({ username: '', password: '' })
   }
@@ -28,7 +29,7 @@ class LoginForm extends React.Component {
     		<div className="container-login100">
     			<div className="wrap-login100">
           <Message className={!!this.props.failedLogin ? ".alert-validate" : "hidden"} header={!!this.props.failedLogin ? this.props.error : null} />
-    				<div className="login100-form">
+    				<form className="login100-form">
     					<span className="login100-form-title p-b-26">
     						Welcome
     					</span>
@@ -70,7 +71,7 @@ class LoginForm extends React.Component {
     							</button>
     						</div>
     					</div>
-    				</div>
+    				</form>
     			</div>
     		</div>
     	</div>
