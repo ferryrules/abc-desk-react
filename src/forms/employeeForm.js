@@ -37,7 +37,7 @@ class EmployeeForm extends React.Component {
   }
 
   cancelSubmit = () => {
-    window.location.replace(`http://localhost:3001/${this.props.company.name}/employees`)
+    window.location.replace(`${window.location.origin}/${this.props.company.name}/employees`)
   }
 
   handleSubmit = (e) => {

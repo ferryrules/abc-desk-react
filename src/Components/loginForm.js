@@ -19,11 +19,11 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    // console.log('%c LOGIN FORM PROPS: ', 'color: red', this.props)
+    console.log('%c LOGIN FORM PROPS: ', 'color: red', this.props)
     // user outline icon
     // <i class="lock icon"></i>
     return this.props.loggedIn ? (
-      <Redirect to="/dashboard" />
+      <Redirect to={`/dashboard`} />
     ) : (
       <Segment>
         <Form

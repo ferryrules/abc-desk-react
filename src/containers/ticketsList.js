@@ -16,7 +16,7 @@ class TicketsList extends React.Component{
     if (tickets) {
       return tickets.map(tic=>{
         return (this.state.sort === tic.priority || !this.state.sort) && (this.state.sortStat === tic.ticket_status || !this.state.sortStat)
-        ? (<Card key={tic.id} id={tic.id} onClick={(e)=>window.location.replace(`http://localhost:3001/tickets/${tic.id}`)}>
+        ? (<Card key={tic.id} id={tic.id} onClick={(e)=>window.location.replace(`${window.location.origin}/tickets/${tic.id}`)}>
             <Card.Content>
               <Label
                 ribbon

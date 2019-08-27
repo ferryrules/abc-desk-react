@@ -30,9 +30,9 @@ class Nav extends React.Component {
             {/* DASHBOARD */}
             <Menu.Item
               as={NavLink}
-              to="/dashboard"
+              to={`/${this.props.company.name}`}
               name="Dashboard"
-              active={pathname === '/dashboard'}
+              active={pathname === `/${this.props.company.name}`}
               onClick={(e)=>this.changeName(e)} />
             <Menu.Item
               as={NavLink}

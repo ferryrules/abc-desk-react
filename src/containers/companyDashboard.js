@@ -12,7 +12,7 @@ import { Grid } from 'semantic-ui-react'
 class Dashboard extends React.Component {
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <div>
         <Grid columns={2}>

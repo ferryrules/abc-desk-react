@@ -23,7 +23,7 @@ class EmployeesList extends Component {
         return this.state.nameSort ? a.full_name.localeCompare(b.full_name) : b.full_name.localeCompare(a.full_name)
       })
       .map(emp=>{
-        return (<Card key={emp.id} id={emp.id} onClick={(e)=>window.location.replace(`http://localhost:3001/employees/${emp.id}`)}>
+        return (<Card key={emp.id} id={emp.id} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)}>
           <Card.Content>
             <Label ribbon color={emp.active_status === "Active" ? "green" : "grey"}>{emp.active_status}</Label>
             <br />
@@ -49,7 +49,7 @@ class EmployeesList extends Component {
     const statOptions = [
       { key: 'active', text: 'Active', value: 'active' },
       { key: 'terminated', text: 'Terminated', value: 'terminated' },
-      { key: 'hourly', text: 'Hourly', value: 'Hourly'},
+      { key: 'hourly', text: 'Hourly', value: 'hourly'},
       { key: 'salary', text: 'Salary', value: 'salary'}
     ]
 
@@ -67,6 +67,7 @@ class EmployeesList extends Component {
           selection
           clearable
           options={statOptions}
+          defaultValue="active"
           onChange={(e)=>this.setState({filterEmps: e.target.innerText.toLowerCase()})}
           placeholder="Filter" />
         <span> </span>

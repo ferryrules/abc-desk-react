@@ -49,7 +49,7 @@ class TicketForm extends React.Component {
   }
 
   cancelSubmit = () => {
-    window.location.replace(`http://localhost:3001/${this.props.company.name}/tickets`)
+    window.location.replace(`${window.location.origin}/${this.props.company.name}/tickets`)
   }
 
   render() {

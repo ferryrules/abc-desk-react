@@ -35,7 +35,7 @@ class UserForm extends React.Component {
   }
 
   cancelSubmit = () => {
-    window.location.replace(`http://localhost:3001/profile`)
+    window.location.replace(`${window.location.origin}/profile`)
   }
 
   handleSubmit = (e) => {
@@ -45,10 +45,10 @@ class UserForm extends React.Component {
     } else {
       !this.props.new
       ? this.fetFunc(`http://localhost:3000/users/${this.props.id}`, 'PATCH',user=>{
-        window.location.replace(`http://localhost:3001/profile`)
+        window.location.replace(`${window.location.origin}/profile`)
       })
       : this.fetFunc(`http://localhost:3000/users`, 'POST', user=>{
-        window.location.replace(`http://localhost:3001/profile`)
+        window.location.replace(`${window.location.origin}/profile`)
       })
     }
   }

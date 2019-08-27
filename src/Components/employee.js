@@ -37,7 +37,7 @@ class Employee extends React.Component {
 
     if (window.confirm(`Are you sure you want to ${emp.active_status === 'Active' ? 'terminate' : 'rehire'} this employee?`)) {
       this.fetFunc(`http://localhost:3000${this.props.location.pathname}`, 'PATCH', termOrHire, employee=>{
-        window.location.replace(`http://localhost:3001/employees/${employee.id}`)
+        window.location.replace(`${window.location.origin}/employees/${employee.id}`)
       })
     }
   }
