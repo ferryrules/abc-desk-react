@@ -14,7 +14,7 @@ const withAuth = (WrappedComponent) => {
     }
 
     render() {
-      console.log('%c INSIDE RENDER FOR HOC', 'color: green', this.props)
+      // console.log('%c INSIDE RENDER FOR HOC', 'color: green', this.props)
       if (localStorage.getItem('jwt') && this.props.loggedIn) {
         return <WrappedComponent {...this.props}/>
       } else if (localStorage.getItem('jwt') && (this.props.authenticatingUser || !this.props.loggedIn)) {
