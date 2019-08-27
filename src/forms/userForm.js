@@ -54,9 +54,8 @@ class UserForm extends React.Component {
   }
 
   render() {
-    // console.log("empForm state", this.state)
+    console.log("userForm state", this.state)
     console.log("userForm props", this.props)
-    // console.log("empForm comp", this.props.company)
 
     return(
       <div className="ui equal width form">

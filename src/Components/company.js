@@ -21,7 +21,7 @@ class Company extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.location.pathname !== '/dashboard') {
+    if (this.props.location.pathname !== `/dashboard`) {
       fetch(`http://localhost:3000${this.props.location.pathname}`, {
         method: 'GET',
         headers: {

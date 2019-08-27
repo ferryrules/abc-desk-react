@@ -10,48 +10,40 @@ class Nav extends React.Component {
     this.props.dispatch({ type: 'LOG_OUT' })
   }
 
-  changeName = (e) => {
-    // console.log(e.target);
-    e.target.innerText = this.props.company.name
-  }
-
-  handleChange = (e) => {
-    // console.log(e.target.parentElement.children[0]);
-    e.target.parentElement.children[0].innerText = "Dashboard"
-  }
-
   render() {
-    // console.log("nav", this.props)
+    console.log("nav", this.props)
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
-      <Menu pointing secondary>
-        {loggedIn ? (
+      <Fragment>
+      {loggedIn ? (
+        <Menu pointing secondary>
           <Fragment>
             {/* DASHBOARD */}
             <Menu.Item
               as={NavLink}
               to={`/${this.props.company.name}`}
-              name="Dashboard"
-              active={pathname === `/${this.props.company.name}`}
-              onClick={(e)=>this.changeName(e)} />
+              name={`${this.props.company.name}`}
+              exact
+              active={pathname === `${this.props.company.name}` || pathname === '/dashboard'}
+              />
             <Menu.Item
               as={NavLink}
               to={`/${this.props.company.name}/employees`}
               name="Employees"
-              active={pathname === `/${this.props.company.name}/employees`}
-              onClick={(e)=>this.handleChange(e)} />
+              active={pathname === `/employees`}
+              />
             <Menu.Item
               as={NavLink}
               to={`/${this.props.company.name}/tickets`}
               name="Helpdesk"
-              active={pathname === `/${this.props.company.name}/tickets`}
-              onClick={(e)=>this.handleChange(e)} />
+              active={pathname === `/tickets`}
+              />
             <Menu.Item
               as={NavLink}
               to={`/${this.props.company.name}/payrolls`}
               name="Payroll"
-              active={pathname === `/${this.props.company.name}/payrolls`}
-              onClick={(e)=>this.handleChange(e)} />
+              active={pathname === `/payrolls`}
+              />
 
             {/* RIGHT SIDE MENU */}
             <Menu.Menu position="right">
@@ -68,10 +60,11 @@ class Nav extends React.Component {
                 onClick={this.logout} />
             </Menu.Menu>
           </Fragment>
+        </Menu>
         ) : (
-          <Menu.Item as={NavLink} to="/login" name="Login" active={pathname === '/login'} />
+          null
         )}
-      </Menu>
+      </Fragment>
     )
   }
 }
@@ -83,6 +76,12 @@ const mapStateToProps = ({ usersReducer: user }) => {
 export default withRouter(connect(mapStateToProps)(Nav))
 
 
+
+// <Menu.Item as={NavLink} to="/login" name="Login" active={pathname === '/login'} />
+// active={pathname === `/${this.props.company.name}`}
+// onClick={(e)=>this.changeName(e)}
+// onClick={(e)=>this.handleChange(e)}
+// onClick={(e)=>this.handleChange(e)}
 // {/* COMPANY */}
 // <Menu.Item
 //   as={NavLink}

@@ -63,21 +63,21 @@ class PayrollForm extends React.Component {
         <div className="fields">
           <div className="field">
             <label>Payroll Status</label>
-            <input disabled='true' onChange={this.handleChange} type="text" name="payroll_status" placeholder="Not Started" value={this.state.payroll_status} />
+            <input autoComplete="false" disabled='true' onChange={this.handleChange} type="text" name="payroll_status" placeholder="Not Started" value={this.state.payroll_status} />
           </div>
         </div>
         <div className="fields">
           <div className="field">
             <label>Start Date</label>
-            <input onChange={this.handleChange} type="date" name="start_date" placeholder="Start Date" value={this.state.start_date} />
+            <input autoComplete="false" onChange={this.handleChange} type="date" name="start_date" placeholder="Start Date" value={this.state.start_date} />
           </div>
           <div className="field">
             <label>End Date</label>
-            <input onChange={this.handleChange} type="date" placeholder="End Date" name="end_date" value={this.state.end_date}/>
+            <input autoComplete="false" onChange={this.handleChange} type="date" placeholder="End Date" name="end_date" value={this.state.end_date}/>
           </div>
           <div className="field">
             <label>Check Date</label>
-            <input onChange={this.handleChange} type="date" placeholder="Check Date" name="check_date" value={this.state.check_date}/>
+            <input autoComplete="false" onChange={this.handleChange} type="date" placeholder="Check Date" name="check_date" value={this.state.check_date}/>
           </div>
         </div>
         <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Start</button>

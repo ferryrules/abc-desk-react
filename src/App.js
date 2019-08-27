@@ -50,14 +50,15 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log("App state",this.state);
+    console.log("App state",this.state);
+    console.log("App props",this.props);
     return (
       <Fragment>
         <Nav company={this.state.company}/>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/login" />} />
           <Route exact path="/profile" render={()=><Profile {...this.props} company={this.state.company}/>} />
-          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/login" component={LoginForm} company={this.state.company}/>
 
           <Route exact path="/new" render={()=><UserForm />} />
           <Route exact path="/edit" render={()=><UserForm {...this.props} company={this.state.company}/>} />

@@ -70,13 +70,13 @@ class TicketForm extends React.Component {
         <div className="fields">
           <div className="field">
             <label>Title</label>
-            <input onChange={this.handleChange} type="text" name="title" placeholder="Title" value={this.state.title} />
+            <input autoComplete="false" onChange={this.handleChange} type="text" name="title" placeholder="Title" value={this.state.title} />
           </div>
         </div>
         <div className="fields">
           <div className="field">
             <label>Category</label>
-            <input onChange={this.handleChange} type="text" name="category" placeholder="Category" value={this.state.category} />
+            <input autoComplete="false" onChange={this.handleChange} type="text" name="category" placeholder="Category" value={this.state.category} />
           </div>
           <div className="field">
             <label>Priority</label>
@@ -100,7 +100,7 @@ class TicketForm extends React.Component {
         <div className="fields">
           <div className="field">
             <label>Description</label>
-            <textarea onChange={this.handleChange} type="textarea" placeholder="Description" name="description" value={this.state.description}/>
+            <textarea autoComplete="false" onChange={this.handleChange} type="textarea" placeholder="Description" name="description" value={this.state.description}/>
           </div>
         </div>
         <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>

@@ -42,6 +42,9 @@ class TicketsList extends React.Component{
   }
 
   render() {
+    console.log("ticketsList State", this.state);
+    console.log("ticketsList props", this.props);
+    
     const priOptions = [
       { key: 'high', text: 'High', value: 'High' },
       { key: 'medium', text: 'Medium', value: 'Medium' },

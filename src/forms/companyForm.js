@@ -50,7 +50,7 @@ class CompanyForm extends React.Component {
         <div className="fields">
           <div className="field">
             <label>Name</label>
-            <input onChange={this.handleChange} type="text" name="name" placeholder="Name" value={this.state.name} />
+            <input autoComplete="false" onChange={this.handleChange} type="text" name="name" placeholder="Name" value={this.state.name} />
           </div>
         </div>
         <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>

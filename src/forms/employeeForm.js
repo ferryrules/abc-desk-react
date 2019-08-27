@@ -81,11 +81,11 @@ class EmployeeForm extends React.Component {
         <div className="fields">
           <div className="field">
             <label>Full Name</label>
-            <input onChange={this.handleChange} type="text" name="full_name" placeholder="Full Name" value={this.state.full_name} />
+            <input autoComplete="false" onChange={this.handleChange} type="text" name="full_name" placeholder="Full Name" value={this.state.full_name} />
           </div>
           <div className="field">
             <label>Title</label>
-            <input onChange={this.handleChange} type="text" name="title" placeholder="Title" value={this.state.title} />
+            <input autoComplete="false" onChange={this.handleChange} type="text" name="title" placeholder="Title" value={this.state.title} />
           </div>
         </div>
         <div className="fields">
@@ -100,7 +100,7 @@ class EmployeeForm extends React.Component {
           </div>
           <div className="field">
             <label>Pay Rate</label>
-            <input onChange={this.handleChange} type="number" placeholder="Pay Rate" name="pay_rate" value={this.state.pay_rate}/>
+            <input autoComplete="false" onChange={this.handleChange} type="number" placeholder="Pay Rate" name="pay_rate" value={this.state.pay_rate}/>
           </div>
         </div>
         <div className="fields">
@@ -115,7 +115,7 @@ class EmployeeForm extends React.Component {
           </div>
           <div className="field">
             <label>W4 Allowances</label>
-            <input onChange={this.handleChange} type="number" placeholder="W4 Allowances" name="w4_allowance" value={this.state.w4_allowance}/>
+            <input autoComplete="false" onChange={this.handleChange} type="number" placeholder="W4 Allowances" name="w4_allowance" value={this.state.w4_allowance}/>
           </div>
           <div className="field">
             <label>Employement Status</label>

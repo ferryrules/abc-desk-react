@@ -10,7 +10,7 @@ import "shards-ui/dist/css/shards.min.css"
 class EmployeesList extends Component {
 
   state = {
-    filterEmps: 'employees',
+    filterEmps: 'active',
     nameSort: true
   }
 
@@ -44,8 +44,8 @@ class EmployeesList extends Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
+    console.log("emplist props", this.props);
+    console.log("emplist state", this.state);
     const statOptions = [
       { key: 'active', text: 'Active', value: 'active' },
       { key: 'terminated', text: 'Terminated', value: 'terminated' },
@@ -67,7 +67,6 @@ class EmployeesList extends Component {
           selection
           clearable
           options={statOptions}
-          defaultValue="active"
           onChange={(e)=>this.setState({filterEmps: e.target.innerText.toLowerCase()})}
           placeholder="Filter" />
         <span> </span>
