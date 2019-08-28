@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Card, Dropdown, Label, Divider, Button } from 'semantic-ui-react'
+import { Icon, Table, Dropdown, Button } from 'semantic-ui-react'
+// import _ from 'lodash'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
@@ -16,75 +17,184 @@ class EmployeesList extends Component {
 
   eachEmployee = () => {
     const { employees } = this.props.company
+
     if (employees) {
       // debugger
-      return this.props.company[!!this.state.filterEmps ? this.state.filterEmps: 'employees']
+      return this.props.company[!!this.state.filterEmps ? this.state.filterEmps : 'employees']
       .sort((a,b)=>{
         return this.state.nameSort ? a.full_name.localeCompare(b.full_name) : b.full_name.localeCompare(a.full_name)
       })
       .map(emp=>{
-        return (<Card key={emp.id} id={emp.id} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)}>
-          <Card.Content>
-            <Label ribbon color={emp.active_status === "Active" ? "green" : "grey"}>{emp.active_status}</Label>
-            <br />
-            <br />
-            <Card.Header>{emp.full_name}</Card.Header>
-            <Card.Meta>{emp.title}</Card.Meta>
-            <Divider />
-            <Card.Description>
-              Pay Type: <Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label>
-              <br />
-              <br />
-              Pay Rate: {emp.to_currency}
-            </Card.Description>
-          </Card.Content>
-        </Card>)
+        return (<Table.Row verticalAlign='middle' key={emp.id} id={emp.id}>
+        <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} colSpan='2'>
+          <h5>{emp.full_name}</h5>
+          {emp.title}
+        </Table.Cell>
+        <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.pay_type}</Table.Cell>
+        <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.pay_rate}</Table.Cell>
+        <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.active_status}</Table.Cell>
+        <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center"><Icon link name="edit outline"/></Table.Cell>
+        <Table.Cell verticalAlign='middle' textAlign="center"><Button delete ui basic color={emp.active_status === 'Active' ? 'red' : 'green'} onClick={()=>{this.termEmployee(emp)} }>
+          <i className={`user ${emp.active_status === 'Active' ? 'delete' : 'plus'} icon`} />{emp.active_status === 'Active' ? 'Terminate' : 'Rehire'}
+        </Button></Table.Cell>
+      </Table.Row>)
       })
     }
   }
 
+  termEmployee = (emp) => {
+
+    let termOrHire = emp.active_status === 'Active' ? { 'active_status': 'Terminated' } : { 'active_status': 'Active' }
+
+    if (window.confirm(`Are you sure you want to ${emp.active_status === 'Active' ? 'terminate' : 'rehire'} ${emp.full_name}?`)) {
+      this.fetFunc(`http://localhost:3000/employees/${emp.id}`, 'PATCH', termOrHire)
+    }
+    window.location.reload()
+  }
+
   render() {
-    // console.log("emplist props", this.props);
-    // console.log("emplist state", this.state);
+    console.log("emplist props", this.props);
+    console.log("emplist state", this.state);
+
     const statOptions = [
-      { key: 'active', text: 'Active', value: 'active' },
-      { key: 'terminated', text: 'Terminated', value: 'terminated' },
-      { key: 'hourly', text: 'Hourly', value: 'hourly'},
-      { key: 'salary', text: 'Salary', value: 'salary'}
+      { key: 'Active', text: 'Active', value: 'Active' },
+      { key: 'Terminated', text: 'Terminated', value: 'Terminated' },
+      { key: 'Hourly', text: 'Hourly', value: 'Hourly' },
+      { key: 'Salary', text: 'Salary', value: 'Salary' }
     ]
 
+    // const { column, data, direction, filterEmps } = this.state
+    // debugger
     return (
-      <div>
-        <Link to={`/${this.props.company.name}/employees/new`}>
-          <div
-            className="ui basic green button"
-            id={this.props.company.id}>
-            <i className="icon add circle" />Add Employee
-          </div>
-        </Link>
-        <Button basic color="purple" onClick={(e)=>this.setState({nameSort: !this.state.nameSort})}>Sort</Button>
-        <Dropdown
-          selection
-          clearable
-          options={statOptions}
-          onChange={(e)=>this.setState({filterEmps: e.target.innerText.toLowerCase()})}
-          placeholder="Filter" />
-        <span> </span>
-        <br />
-        <br />
-        <div className="ui three cards">
-          {this.eachEmployee()}
+      <Fragment>
+      <Link to={`/${this.props.company.name}/employees/new`}>
+        <div
+          className="ui basic green button"
+          id={this.props.company.id}>
+          <i className="icon add circle" />Add Employee
         </div>
-      </div>
+      </Link>
+      <Dropdown
+        selection
+        clearable
+        options={statOptions}
+        onChange={(e)=>this.setState({filterEmps: e.target.innerText.toLowerCase()})}
+        placeholder="Filter" />
+      <br />
+      <br />
+      <Table celled fixed selectable>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell
+              colSpan='2'
+              onClick={(e)=>this.setState({nameSort: !this.state.nameSort})}>
+              <Icon link><h4>Name</h4></Icon>
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              textAlign="center">
+              Pay Type
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              textAlign="center">
+              Pay Rate
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              textAlign="center">
+              Employment Status
+            </Table.HeaderCell>
+            <Table.HeaderCell textAlign="center">
+              Edit
+            </Table.HeaderCell>
+            <Table.HeaderCell textAlign="center">
+              Quick Fire
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {this.eachEmployee()}
+        </Table.Body>
+      </Table>
+      </Fragment>
     )
   }
+  fetFunc = (url, method, body, then) => {
+    fetch(url, {
+      method: method,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
+      body: JSON.stringify(body)
+    })
+    .then(r=>r.json())
+    .then(then)
+    .catch(error=> console.error('Error', error))
+  }
 }
+
 
 const mapStateToProps = ({...props}) => {
   return {...props}
 }
 
 export default withAuth(connect(mapStateToProps)(EmployeesList))
+
+
+
+// handleSort = (clickedColumn) => () => {
+//   const { column, data, direction } = this.state
+//
+//   if (column !== clickedColumn) {
+//     this.setState({
+//       column: clickedColumn,
+//       data: _.sortBy(data, [clickedColumn]),
+//       direction: 'ascending',
+//     })
+//
+//     return
+//   }
+//
+//   this.setState({
+//     data: this.eachEmployee.reverse(),
+//     direction: direction === 'ascending' ? 'descending' : 'ascending',
+//   })
+// }
+
+// {_.map(this.eachEmployee(), ({ id, full_name, title, pay_type, pay_rate, active_status }) => (
+//   <Table.Row verticalAlign='middle' key={id} id={id} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${id}`)}>
+//     <Table.Cell colSpan='2'>
+//       <h3 >{full_name}</h3>
+//       <br/>
+//       {title}
+//     </Table.Cell>
+//     <Table.Cell textAlign="center">{pay_type}</Table.Cell>
+//     <Table.Cell textAlign="center">{pay_rate}</Table.Cell>
+//     <Table.Cell textAlign="center">{active_status}</Table.Cell>
+//     <Table.Cell textAlign="center"><Icon link name="edit outline"/></Table.Cell>
+//   </Table.Row>
+// ))}
+
+// <Link to={`/${this.props.company.name}/employees/new`}>
+//   <div
+//     className="ui basic green button"
+//     id={this.props.company.id}>
+//     <i className="icon add circle" />Add Employee
+//   </div>
+// </Link>
+// <Button basic color="purple" >Sort</Button>
+// <Dropdown
+//   selection
+//   clearable
+//   options={statOptions}
+//   onChange={(e)=>this.setState({filterEmps: e.target.innerText.toLowerCase()})}
+//   placeholder="Filter" />
+// <span> </span>
+// <br />
+// <br />
+// <div className="ui three cards">
+//   {this.eachEmployee()}
+// </div>
 
 // extra
 // import Employee from '../components/employee'
