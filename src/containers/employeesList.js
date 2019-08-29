@@ -27,6 +27,7 @@ class EmployeesView extends Component {
           options={viewOptions}
           placeholder="Table"
         />
+        <span> </span>
         {this.state.view === "Table"
         ? <EmployeeTable company={this.props.company} />
         : <EmployeeCardList company={this.props.company} />}

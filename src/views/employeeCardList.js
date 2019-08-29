@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -54,7 +54,7 @@ class EmployeeCardList extends Component {
     ]
 
     return (
-      <div>
+      <Fragment>
         <Link to={`/${this.props.company.name}/employees/new`}>
           <div
             className="ui basic green button"
@@ -75,7 +75,7 @@ class EmployeeCardList extends Component {
         <div className="ui three cards">
           {this.eachEmployee()}
         </div>
-      </div>
+      </Fragment>
     )
   }
 }
