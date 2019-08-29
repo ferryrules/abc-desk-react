@@ -31,21 +31,21 @@ class EmployeesList extends Component {
       .map(emp=>{
         return (<Table.Row verticalAlign='middle' key={emp.id} id={emp.id}>
 
-        <Table.Cell collapsing onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} colSpan='2'>
+        <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} colSpan='2'>
           {emp.full_name}
           <br/>
           {emp.title}
         </Table.Cell>
 
-        <Table.Cell collapsing className={emp.pay_type === "Hourly" ? `${this.state.lightHour}` : null} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.pay_type}</Table.Cell>
+        <Table.Cell className={emp.pay_type === "Hourly" ? `${this.state.lightHour}` : null} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.pay_type}</Table.Cell>
 
-        <Table.Cell collapsing onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.to_currency}</Table.Cell>
+        <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.to_currency}</Table.Cell>
 
-        <Table.Cell collapsing className={emp.active_status === "Terminated" ? this.state.lightTerm : null} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.active_status}</Table.Cell>
+        <Table.Cell className={emp.active_status === "Terminated" ? this.state.lightTerm : null} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.active_status}</Table.Cell>
 
-        <Table.Cell collapsing onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center"><Icon link name="edit outline"/></Table.Cell>
+        <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center"><Icon link name="binoculars"/></Table.Cell>
 
-        <Table.Cell collapsing verticalAlign='middle' textAlign="center"><Button delete ui basic color={emp.active_status === 'Active' ? 'red' : 'green'} onClick={()=>{this.termEmployee(emp)} }>
+        <Table.Cell verticalAlign='middle' textAlign="center"><Button delete ui basic color={emp.active_status === 'Active' ? 'red' : 'green'} onClick={()=>{this.termEmployee(emp)} }>
           <i className={`user ${emp.active_status === 'Active' ? 'delete' : 'plus'} icon`} />{emp.active_status === 'Active' ? 'Terminate' : 'Rehire'}
         </Button></Table.Cell>
       </Table.Row>)
@@ -153,7 +153,7 @@ class EmployeesList extends Component {
                 placeholder="Active" />
             </Table.HeaderCell>
             <Table.HeaderCell textAlign="center">
-              Edit
+              View
             </Table.HeaderCell>
             <Table.HeaderCell textAlign="center">
 
