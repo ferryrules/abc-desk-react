@@ -91,7 +91,7 @@ class Employee extends React.Component {
             <Button basic color='blue' onClick={(e)=>this.editEmployee()}><i className="edit outline icon" />Edit</Button>
           </Grid.Column>
           <Grid.Column textAlign="center">
-            <Button delete ui basic  color={emp.active_status === 'Active' ? 'red' : 'green'} onClick={()=>{this.termEmployee(emp)} }>
+            <Button delete ui basic color={emp.active_status === 'Active' ? 'red' : 'green'} onClick={()=>{this.termEmployee(emp)} }>
               <i className={`user ${emp.active_status === 'Active' ? 'delete' : 'plus'} icon`} />{emp.active_status === 'Active' ? 'Terminate' : 'Rehire'}
             </Button>
           </Grid.Column>

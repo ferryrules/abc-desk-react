@@ -1,7 +1,7 @@
 import React from 'react'
 import withAuth from '../hocs/withAuth'
-import PieChart from "../views/pie & funnel charts/Pie Chart";
-import MultipleAxisChart from "../views/overview/Multiple Axis Chart";
+import PieChart from "../charts/Pie Chart";
+import MultipleAxisChart from "../charts/Multiple Axis Chart";
 import { Grid } from 'semantic-ui-react'
 // import PieChartWithCustomization from "../views/pie & funnel charts/Pie Chart with Customization";
 // import Template from '../views/Template';

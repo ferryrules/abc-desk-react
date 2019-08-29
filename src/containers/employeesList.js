@@ -1,80 +1,35 @@
 import React, { Component } from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Card, Dropdown, Label, Divider, Button } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "shards-ui/dist/css/shards.min.css"
+import EmployeeTable from '../views/employeeTable.js'
+import EmployeeCardList from '../views/employeeCardList.js'
 
-class EmployeesList extends Component {
+class EmployeesView extends Component {
 
   state = {
-    filterEmps: 'active',
-    nameSort: true
-  }
-
-  eachEmployee = () => {
-    const { employees } = this.props.company
-    if (employees) {
-      // debugger
-      return this.props.company[!!this.state.filterEmps ? this.state.filterEmps: 'employees']
-      .sort((a,b)=>{
-        return this.state.nameSort ? a.full_name.localeCompare(b.full_name) : b.full_name.localeCompare(a.full_name)
-      })
-      .map(emp=>{
-        return (<Card key={emp.id} id={emp.id} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)}>
-          <Card.Content>
-            <Label ribbon color={emp.active_status === "Active" ? "green" : "grey"}>{emp.active_status}</Label>
-            <br />
-            <br />
-            <Card.Header>{emp.full_name}</Card.Header>
-            <Card.Meta>{emp.title}</Card.Meta>
-            <Divider />
-            <Card.Description>
-              Pay Type: <Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label>
-              <br />
-              <br />
-              Pay Rate: {emp.to_currency}
-            </Card.Description>
-          </Card.Content>
-        </Card>)
-      })
-    }
+    view: 'Table'
   }
 
   render() {
-    // console.log("emplist props", this.props);
-    // console.log("emplist state", this.state);
-    const statOptions = [
-      { key: 'active', text: 'Active', value: 'active' },
-      { key: 'terminated', text: 'Terminated', value: 'terminated' },
-      { key: 'hourly', text: 'Hourly', value: 'hourly'},
-      { key: 'salary', text: 'Salary', value: 'salary'}
+
+    const viewOptions = [
+      { key: "table", text: "Table", value: "table"},
+      { key: "cards", text: "Cards", value: "cards"}
     ]
 
-    return (
+    return(
       <div>
-        <Link to={`/${this.props.company.name}/employees/new`}>
-          <div
-            className="ui basic green button"
-            id={this.props.company.id}>
-            <i className="icon add circle" />Add Employee
-          </div>
-        </Link>
-        <Button basic color="purple" onClick={(e)=>this.setState({nameSort: !this.state.nameSort})}>Sort</Button>
         <Dropdown
           selection
-          clearable
-          options={statOptions}
-          onChange={(e)=>this.setState({filterEmps: e.target.innerText.toLowerCase()})}
-          placeholder="Filter" />
-        <span> </span>
-        <br />
-        <br />
-        <div className="ui three cards">
-          {this.eachEmployee()}
-        </div>
+          onChange={(e)=>{this.setState({view: e.target.innerText})}}
+          options={viewOptions}
+          placeholder="Table"
+        />
+        {this.state.view === "Table"
+        ? <EmployeeTable company={this.props.company} />
+        : <EmployeeCardList company={this.props.company} />}
       </div>
     )
   }
@@ -84,49 +39,4 @@ const mapStateToProps = ({...props}) => {
   return {...props}
 }
 
-export default withAuth(connect(mapStateToProps)(EmployeesList))
-
-// extra
-// import Employee from '../components/employee'
-// import EmployeeForm from '../forms/employeeForm'
-// state = {
-//   hide: true,
-//   newEmp: false
-// }
-//
-// selectEmployee = (emp) => {
-//   this.props.props.history.push(`/employees/${emp.id}`)
-// }
-//
-// collapse = (e) => {
-//   this.setState({
-//     hide: !this.state.hide
-//   })
-// }
-//
-// addEmployee = (e) => {
-//   this.props.newEmpOrTicketOrPayroll(true, false, false)
-//   this.setState({
-//     newEmp: !this.state.newEmp
-//   })
-// }
-// !this.state.newEmp
-// ? (<div>
-//     <div className="ui basic green button" id={this.props.company.id} onClick={this.addEmployee}>
-//       <i className="icon add circle" />Add Employee
-//     </div>
-        // <Dropdown
-        //   selection
-        //   clearable
-        //   options={payTypeOptions}
-        //   onChange={(e)=>this.setState({paySort:e.target.innerText})}
-        //   placeholder="Filter by Pay Type" />
-//     <h3 className="ui fluid button top attached blue header" onClick={(e)=>this.collapse(e)} >
-//       <i className={`dropdown icon ${this.state.hide ? null : 'counterclockwise rotated'}`} />
-//         Employees
-//     </h3>
-//     <div className={`ui cards content transition ${this.state.hide ? 'active' : 'hidden'} attached segment`}>
-//       {this.eachEmployee()}
-//     </div>
-//   </div>)
-// : <EmployeeForm company={this.props.company} />
+export default withAuth(connect(mapStateToProps)(EmployeesView))
