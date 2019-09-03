@@ -23,7 +23,6 @@ class EmployeeCardList extends Component {
         return this.state.nameSort ? a.full_name.localeCompare(b.full_name) : b.full_name.localeCompare(a.full_name)
       })
       .map(emp=>{
-        debugger
         return (this.state.filterEmps === emp.active_status || !this.state.filterEmps) && (this.state.payFilter === emp.pay_type || !this.state.payFilter)
         ? (<Card key={emp.id} id={emp.id} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)}>
           <Card.Content>

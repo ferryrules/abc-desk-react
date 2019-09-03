@@ -5,7 +5,8 @@ import { Dropdown } from 'semantic-ui-react'
 class EmployeeForm extends React.Component {
 
   state = {
-    full_name: '',
+    fname: '',
+    lname: '',
     pay_type: '',
     pay_rate: '',
     filing_status: '',
@@ -18,7 +19,8 @@ class EmployeeForm extends React.Component {
   componentDidMount() {
     if (this.props.employee) {
       this.setState({
-        full_name: this.props.employee.full_name,
+        fname: this.props.employee.fname,
+        lname: this.props.employee.lname,
         pay_type: this.props.employee.pay_type,
         pay_rate: this.props.employee.pay_rate,
         filing_status: this.props.employee.filing_status,
@@ -42,7 +44,7 @@ class EmployeeForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    if (!this.state.full_name || !this.state.pay_type || !this.state.pay_rate || !this.state.filing_status || !this.state.active_status || !this.state.title) {
+    if (!this.state.fname || !this.state.lname || !this.state.pay_type || !this.state.pay_rate || !this.state.filing_status || !this.state.active_status || !this.state.title) {
       window.confirm(`All Fields Required`)
     } else {
       !!this.props.employee
@@ -80,8 +82,12 @@ class EmployeeForm extends React.Component {
         <label className="ui h3">{!this.props.full_name ? 'New Employee' : `Edit ${this.state.full_name}`}</label>
         <div className="fields">
           <div className="field">
-            <label>Full Name</label>
-            <input autoComplete="false" onChange={this.handleChange} type="text" name="full_name" placeholder="Full Name" value={this.state.full_name} />
+            <label>First Name</label>
+            <input autoComplete="false" onChange={this.handleChange} type="text" name="fname" placeholder="First Name" value={this.state.fname} />
+          </div>
+          <div className="field">
+            <label>Last Name</label>
+            <input autoComplete="false" onChange={this.handleChange} type="text" name="lname" placeholder="Last Name" value={this.state.lname} />
           </div>
           <div className="field">
             <label>Title</label>
@@ -142,7 +148,8 @@ class EmployeeForm extends React.Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        'full_name': this.state.full_name,
+        'fname': this.state.fname,
+        'lname': this.state.lname,
         'pay_type': this.state.pay_type,
         'pay_rate': this.state.pay_rate,
         'filing_status': this.state.filing_status,
