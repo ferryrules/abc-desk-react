@@ -44,7 +44,7 @@ class TicketsList extends React.Component{
   render() {
     console.log("ticketsList State", this.state);
     console.log("ticketsList props", this.props);
-    
+
     const priOptions = [
       { key: 'high', text: 'High', value: 'High' },
       { key: 'medium', text: 'Medium', value: 'Medium' },
@@ -67,14 +67,12 @@ class TicketsList extends React.Component{
         </Link>
         <Dropdown
           selection
-          clearable
           options={priOptions}
           onChange={(e)=>this.setState({sort:e.target.innerText})}
           placeholder="Filter by Priority" />
         <span> </span>
         <Dropdown
           selection
-          clearable
           options={statOptions}
           onChange={(e)=>this.setState({sortStat:e.target.innerText})}
           placeholder="Filter by Status" />

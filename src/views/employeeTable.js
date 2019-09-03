@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Icon, Table, Dropdown, Button } from 'semantic-ui-react'
+import { Icon, Table, Dropdown, Button, Label } from 'semantic-ui-react'
 // import _ from 'lodash'
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -37,7 +37,7 @@ class EmployeesList extends Component {
           {emp.title}
         </Table.Cell>
 
-        <Table.Cell className={emp.pay_type === "Hourly" ? `${this.state.lightHour}` : null} onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.pay_type}</Table.Cell>
+        <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center"><Label color={emp.pay_type === "Salary" ? 'blue' : 'orange'}>{emp.pay_type}</Label></Table.Cell>
 
         <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} verticalAlign='middle' textAlign="center">{emp.to_currency}</Table.Cell>
 
