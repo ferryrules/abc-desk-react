@@ -23,7 +23,7 @@ class EmployeesList extends Component {
     if (employees) {
       return this.props.company[this.state.statFilter === "all" ? 'employees' : this.state.statFilter]
       .sort((a,b)=>{
-        return this.state.nameSort ? a.full_name.localeCompare(b.full_name) : b.full_name.localeCompare(a.full_name)
+        return this.state.nameSort ? a.lname.localeCompare(b.lname) : b.lname.localeCompare(a.lname)
       })
       .filter(emp=>{
         return this.state.payFilter === "All" ? emp : this.state.payFilter === emp.pay_type
@@ -32,7 +32,7 @@ class EmployeesList extends Component {
         return (<Table.Row verticalAlign='middle' key={emp.id} id={emp.id}>
 
         <Table.Cell onClick={(e)=>window.location.replace(`${window.location.origin}/employees/${emp.id}`)} colSpan='2'>
-          {emp.full_name}
+          {emp.lname}, {emp.fname}
           <br/>
           {emp.title}
         </Table.Cell>
