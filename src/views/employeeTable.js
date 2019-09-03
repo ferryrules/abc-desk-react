@@ -114,13 +114,14 @@ class EmployeesList extends Component {
           <i className="icon add circle" />Add Employee
         </div>
       </Link>
-      <span></span>
+      <span> </span>
+      <br />
+      <br />
       <Dropdown
       selection
       options={colorOptions}
       onChange={(e)=>this.chooseColor(e.target.textContent.toLowerCase())}
       placeholder="Table Color"/>
-      <br />
       <br />
       <Table celled selectable color={this.state.tableColor} className={(this.state.tableColor && this.state.tableColor !== 'clear') ? "inverted" : ""} >
         <Table.Header>
