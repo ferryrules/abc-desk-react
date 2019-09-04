@@ -79,8 +79,8 @@ class EmployeesList extends Component {
   }
 
   render() {
-    console.log("emplist props", this.props);
-    console.log("emplist state", this.state);
+    // console.log("emplist props", this.props);
+    // console.log("emplist state", this.state);
 
     const statOptions = [
       { key: 'Terminated', text: 'Terminated', value: 'Terminated' },
