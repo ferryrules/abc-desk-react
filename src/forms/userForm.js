@@ -44,10 +44,10 @@ class UserForm extends React.Component {
       window.confirm(`Please enter a name`)
     } else {
       !this.props.new
-      ? this.fetFunc(`http://localhost:3000/users/${this.props.id}`, 'PATCH',user=>{
+      ? this.fetFunc(`https://abc-desk.herokuapp.com/users/${this.props.id}`, 'PATCH',user=>{
         window.location.replace(`${window.location.origin}/profile`)
       })
-      : this.fetFunc(`http://localhost:3000/users`, 'POST', user=>{
+      : this.fetFunc(`https://abc-desk.herokuapp.com/users`, 'POST', user=>{
         window.location.replace(`${window.location.origin}/profile`)
       })
     }

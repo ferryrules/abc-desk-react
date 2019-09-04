@@ -39,10 +39,10 @@ class TicketForm extends React.Component {
       window.confirm(`All Fields Required`)
     } else {
       !!this.props.ticket
-      ? this.fetFunc(`http://localhost:3000/tickets/${this.props.ticket.id}`, "PATCH", ticket=>{
+      ? this.fetFunc(`https://abc-desk.herokuapp.com/tickets/${this.props.ticket.id}`, "PATCH", ticket=>{
         window.location.replace(`/tickets/${ticket.id}`)
       })
-      : this.fetFunc(`http://localhost:3000/tickets`, "POST", ticket=>{
+      : this.fetFunc(`https://abc-desk.herokuapp.com/tickets`, "POST", ticket=>{
         window.location.replace(`/tickets/${ticket.id}`)
       })
     }

@@ -34,10 +34,10 @@ class CompanyForm extends React.Component {
       window.confirm(`Please enter a name`)
     } else {
       !!this.props.company
-      ? this.fetFunc(`http://localhost:3000/companies/${this.props.company.id}`, 'PATCH',company=>{
+      ? this.fetFunc(`https://abc-desk.herokuapp.com/companies/${this.props.company.id}`, 'PATCH',company=>{
         window.location.replace(`${window.location.origin}/profile`)
       })
-      : this.fetFunc(`http://localhost:3000/companies`, 'POST', company=>{
+      : this.fetFunc(`https://abc-desk.herokuapp.com/companies`, 'POST', company=>{
         window.location.replace(`${window.location.origin}/profile`)
       })
     }

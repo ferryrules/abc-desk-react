@@ -16,7 +16,7 @@ class Ticket extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000${this.props.location.pathname}`, {
+    fetch(`https://abc-desk.herokuapp.com${this.props.location.pathname}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -59,7 +59,7 @@ class Ticket extends React.Component {
   }
 
   updateTicket = (newDescrip) => {
-    fetch(`http://localhost:3000/tickets/${this.state.ticket.id}`,{
+    fetch(`https://abc-desk.herokuapp.com/tickets/${this.state.ticket.id}`,{
       method: 'PATCH',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,

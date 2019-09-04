@@ -2,7 +2,7 @@ export const loginUser = (username, password) => {
   return (dispatch) => {
     dispatch({ type: 'AUTHENTICATING_USER' })
 
-    fetch(`http://localhost:3000/login`,
+    fetch(`https://abc-desk.herokuapp.com/login`,
       { //TODO: move this to an adapter
       method: 'POST',
       headers: {
@@ -35,7 +35,7 @@ export const loginUser = (username, password) => {
 export const fetchCurrentUser = () => {
   return (dispatch) => {
     dispatch(authenticatingUser())
-    fetch(`http://localhost:3000/profile`, {
+    fetch(`https://abc-desk.herokuapp.com/profile`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`

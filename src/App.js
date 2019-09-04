@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/companies", {
+    fetch("https://abc-desk.herokuapp.com/companies", {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
