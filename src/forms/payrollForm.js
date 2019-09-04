@@ -43,10 +43,10 @@ class PayrollForm extends React.Component {
       window.confirm(`Please enter all dates`)
     } else {
       !!this.props.payroll
-      ? this.fetFunc(`http://localhost:3000/payrolls/${this.props.payroll.id}`, 'PATCH',payroll=>{
+      ? this.fetFunc(`https://abc-desk.herokuapp.com/payrolls/${this.props.payroll.id}`, 'PATCH',payroll=>{
         window.location.replace(`/payrolls/${payroll.id}`)
       })
-      : this.fetFunc(`http://localhost:3000/payrolls`, 'POST', payroll=>{
+      : this.fetFunc(`https://abc-desk.herokuapp.com/payrolls`, 'POST', payroll=>{
         window.location.replace(`/payrolls/${payroll.id}`)
       })
     }

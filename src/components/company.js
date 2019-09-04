@@ -22,7 +22,7 @@ class Company extends React.Component {
 
   componentDidMount() {
     if (this.props.location.pathname !== `/dashboard`) {
-      fetch(`http://localhost:3000${this.props.location.pathname}`, {
+      fetch(`https://abc-desk.herokuapp.com${this.props.location.pathname}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`

@@ -48,10 +48,10 @@ class EmployeeForm extends React.Component {
       window.confirm(`All Fields Required`)
     } else {
       !!this.props.employee
-      ? this.fetFunc(`http://localhost:3000/employees/${this.props.employee.id}`, 'PATCH',employee=>{
+      ? this.fetFunc(`https://abc-desk.herokuapp.com/employees/${this.props.employee.id}`, 'PATCH',employee=>{
         window.location.replace(`/employees/${employee.id}`)
       })
-      : this.fetFunc(`http://localhost:3000/employees`, 'POST', employee=>{
+      : this.fetFunc(`https://abc-desk.herokuapp.com/employees`, 'POST', employee=>{
         window.location.replace(`/${this.props.company.name}/employees`)
       })
     }

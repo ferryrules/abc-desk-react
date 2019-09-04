@@ -13,7 +13,7 @@ class Employee extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000${this.props.location.pathname}`, {
+    fetch(`https://abc-desk.herokuapp.com${this.props.location.pathname}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -36,7 +36,7 @@ class Employee extends React.Component {
     let termOrHire = emp.active_status === 'Active' ? { 'active_status': 'Terminated' } : { 'active_status': 'Active' }
 
     if (window.confirm(`Are you sure you want to ${emp.active_status === 'Active' ? 'terminate' : 'rehire'} this ${emp.full_name}?`)) {
-      this.fetFunc(`http://localhost:3000${this.props.location.pathname}`, 'PATCH', termOrHire, employee=>{
+      this.fetFunc(`https://abc-desk.herokuapp.com${this.props.location.pathname}`, 'PATCH', termOrHire, employee=>{
         window.location.replace(`${window.location.origin}/employees/${employee.id}`)
       })
     }

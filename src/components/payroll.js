@@ -12,7 +12,7 @@ class Payroll extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000${this.props.location.pathname}`, {
+    fetch(`https://abc-desk.herokuapp.com${this.props.location.pathname}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -173,7 +173,7 @@ class Payroll extends React.Component {
   }
 
   fetFunc = (method, status) => {
-    fetch(`http://localhost:3000${this.props.location.pathname}`, {
+    fetch(`https://abc-desk.herokuapp.com${this.props.location.pathname}`, {
       method: method,
       headers: {
         'Content-Type': 'application/json',
