@@ -65,9 +65,9 @@ class EmployeesList extends Component {
     let termOrHire = emp.active_status === 'Active' ? { 'active_status': 'Terminated' } : { 'active_status': 'Active' }
 
     if (window.confirm(`Are you sure you want to ${emp.active_status === 'Active' ? 'terminate' : 'rehire'} this ${emp.full_name}?`)) {
-      debugger
+      
       this.fetFunc(`https://abc-desk.herokuapp.com/employees/${emp.id}`, 'PATCH', termOrHire, employee=>{
-        window.location.replace(`${window.location.origin}/employees`)
+        window.location.replace(`${window.location.origin}/${this.props.company.name}/employees`)
       })
     }
   }
