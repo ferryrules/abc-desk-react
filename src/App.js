@@ -52,6 +52,7 @@ class App extends React.Component {
   render() {
     // console.log("App state",this.state);
     // console.log("App props",this.props);
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log("You know you want to hire me :)");
     console.log("Ferris Boran");
     console.log("email: ferris.boran@gmail.com");
