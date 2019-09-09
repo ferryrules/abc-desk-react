@@ -18,7 +18,6 @@ class EmployeeCardList extends Component {
   eachEmployee = () => {
     const { employees } = this.props.company
     if (employees) {
-      // debugger
       return employees.sort((a,b)=>{
         return this.state.nameSort ? a.full_name.localeCompare(b.full_name) : b.full_name.localeCompare(a.full_name)
       })
@@ -46,7 +45,8 @@ class EmployeeCardList extends Component {
 
   render() {
     // console.log("emplist props", this.props);
-    console.log("emplist state", this.state);
+    // console.log("emplist state", this.state);
+
     const statOptions = [
       { key: 'active', text: 'Active', value: 'active' },
       { key: 'terminated', text: 'Terminated', value: 'terminated' }
