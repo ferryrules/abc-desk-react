@@ -12,7 +12,7 @@ class Ticket extends React.Component {
     edit: true,
     ticketColor: '',
     ticketStatus: '',
-    update: ''
+    updates: []
   }
 
   componentDidMount() {
@@ -53,9 +53,12 @@ class Ticket extends React.Component {
     window.location.replace(`${window.location.origin}/${this.props.company.name}/tickets`)
   }
 
-  createNewDescription = () => {
+  createNewDescription = (ticket, update, user) => {
     // eslint-disable-next-line
-    return this.state.ticket.description + ` ____________________________________________` + ` ${this.props.username}: ${this.state.update}`
+    console.log(this.state.updates);
+    return `${user}: ${update}`
+    // ticket.updates ? ticket.updates.push(`${user}: ${update}`) : `${user}: ${update}`
+    // debugger
   }
 
   updateTicket = (newDescrip) => {
@@ -67,7 +70,7 @@ class Ticket extends React.Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        description: newDescrip
+        updates: newDescrip
       })
     }).then(r=>r.json())
     .then(ticket=>{
@@ -78,7 +81,9 @@ class Ticket extends React.Component {
   render() {
     console.log("ticket props",this.props);
     console.log("ticket state",this.state);
+    console.log(this.state.ticket.updates);
     const tic = this.state.ticket
+
     return(
       this.state.edit
       ? (
@@ -122,11 +127,13 @@ class Ticket extends React.Component {
             </Grid.Column>
             <Grid.Column>
               {tic.description}
+              <br/>
+              {tic.updates}
             </Grid.Column>
             <Grid.Column>
-              <TextArea placeholder='Update ticket' onChange={(e)=>this.setState({update: e.target.value})}/>
+              <TextArea placeholder='Update ticket' onChange={(e)=>this.setState({updates: e.target.value})}/>
               <br />
-              <Button compact basic color='grey' onClick={(e)=>this.updateTicket(this.createNewDescription())}><i className="save outline" />Update</Button>
+              <Button compact basic color='grey' onClick={(e)=>this.updateTicket(this.createNewDescription(this.state.ticket, this.state.updates, this.props.username))}><i className="save outline" />Update</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>)

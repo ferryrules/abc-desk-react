@@ -11,6 +11,7 @@ class TicketForm extends React.Component {
     description: '',
     priority: '',
     ticket_status: '',
+    updates: '',
     company_id: this.props.company.id
   }
 
@@ -21,7 +22,8 @@ class TicketForm extends React.Component {
         category: this.props.ticket.category,
         description: this.props.ticket.description,
         priority: this.props.ticket.priority,
-        ticket_status: this.props.ticket.ticket_status
+        ticket_status: this.props.ticket.ticket_status,
+        updates: this.props.ticket.updates
       })
     }
   }
@@ -103,6 +105,12 @@ class TicketForm extends React.Component {
             <textarea autoComplete="false" onChange={this.handleChange} type="textarea" placeholder="Description" name="description" value={this.state.description}/>
           </div>
         </div>
+        <div className="fields">
+          <div className="field">
+            <label>Update</label>
+            <textarea autoComplete="false" onChange={this.handleChange} type="textarea" placeholder="Update" name="updates" value={this.state.updates}/>
+          </div>
+        </div>
         <button className="ui positive basic button" type="submit" onClick={(e)=>this.handleSubmit(e)}><i className="save icon"></i>Save</button>
         <button className="ui negative basic button" onClick={(e)=>this.cancelSubmit(e)}><i className="undo icon"></i>Cancel</button>
       </div>
@@ -123,6 +131,7 @@ class TicketForm extends React.Component {
         'description': this.state.description,
         'priority': this.state.priority,
         'ticket_status': this.state.ticket_status,
+        'updates': this.state.updates,
         'company_id': this.state.company_id,
         'user_id': this.props.id
       })
