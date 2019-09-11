@@ -6,6 +6,66 @@ import { Dropdown, Divider, Label, Icon, Table } from 'semantic-ui-react'
 
 class TicketsList extends React.Component{
 
+  state = {
+    tableColor: 'clear',
+    statFilter: 'all',
+    priFilter: 'all'
+  }
+
+  eachTicket = () => {
+    const { all_tickets } = this.props.company
+
+    if (all_tickets) {
+      return all_tickets[this.state.statFilter.toLowerCase()]
+      .filter(tic=>{
+        return this.state.priFilter === 'all' ? tic : this.state.priFilter === 'All' ? tic : this.state.priFilter === tic.priority
+      })
+      .map(tic=>{
+        return (
+          <Table.Row verticalAlign='middle' key={tic.id} id={tic.id}>
+            <Table.Cell
+              onClick={(e)=>window.location.replace(`${window.location.origin}/tickets/${tic.id}`)}
+              colSpan='2'>
+              {tic.title}
+            </Table.Cell>
+
+            <Table.Cell
+              onClick={(e)=>window.location.replace(`${window.location.origin}/tickets/${tic.id}`)} verticalAlign='middle' textAlign="center">
+              <Label color={tic.priority === "High" ? 'red' : tic.priority === "Medium" ? 'yellow' : 'green'}>
+                <Icon className={tic.priority === "High" ? 'bomb' : tic.priority === "Medium" ? 'fire extinguisher' : 'bed'} />
+                {tic.priority}
+              </Label>
+            </Table.Cell>
+
+            <Table.Cell
+              onClick={(e)=>window.location.replace(`${window.location.origin}/tickets/${tic.id}`)} verticalAlign='middle' textAlign="center">
+              <Label color={tic.ticket_status === "Open" ? 'purple' : tic.ticket_status === "Pending" ? 'blue' : 'grey'}>{tic.ticket_status}</Label>
+            </Table.Cell>
+
+            <Table.Cell
+              onClick={(e)=>window.location.replace(`${window.location.origin}/tickets/${tic.id}`)} verticalAlign='middle'>
+              {tic.description.length > 60 ? tic.description.substr(0,60).concat(' ...') : tic.description}
+            </Table.Cell>
+
+          </Table.Row>
+        )
+      })
+    }
+  }
+
+  chooseColor = (color) => {
+    if (color === "clearclearorangeyellowolivetealbluevioletpurplepinkbrowngreyblack") {
+      return
+    }
+    this.setState({tableColor: color})
+  }
+
+  debug = (e) => {
+    console.log(e.target);
+
+    debugger
+  }
+
   render() {
     console.log("ticketsList State", this.state);
     console.log("ticketsList props", this.props);
@@ -13,13 +73,15 @@ class TicketsList extends React.Component{
     const statOptions = [
       { key: 'Open', text: 'Open', value: 'Open' },
       { key: 'Closed', text: 'Closed', value: 'Closed' },
-      { key: 'Pending', text: 'Pending', value: 'Pending' }
+      { key: 'Pending', text: 'Pending', value: 'Pending' },
+      { key: 'All', text: 'All', value: 'All' }
     ]
 
     const priOptions = [
       { key: 'High', text: 'High', value: 'High' },
       { key: 'Medium', text: 'Medium', value: 'Medium' },
-      { key: 'Low', text: 'Low', value: 'Low' }
+      { key: 'Low', text: 'Low', value: 'Low' },
+      { key: 'All', text: 'All', value: 'All' }
     ]
 
     const colorOptions = [
@@ -46,6 +108,50 @@ class TicketsList extends React.Component{
             <i className="icon add circle" />Add Ticket
           </div>
         </Link>
+        <span> </span>
+        <br />
+        <br />
+        <Dropdown
+        selection
+        options={colorOptions}
+        onChange={(e)=>this.chooseColor(e.target.textContent.toLowerCase())}
+        placeholder="Table Color"/>
+        <br />
+        <Table celled selectable color={this.state.tableColor} className={(this.state.tableColor && this.state.tableColor !== 'clear') ? "inverted" : ""} >
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell
+                colSpan='2'
+                onClick={(e)=>this.setState({nameSort: !this.state.nameSort})}>
+                Title
+              </Table.HeaderCell>
+              <Table.HeaderCell
+                textAlign="center">
+                <Dropdown
+                  simple
+                  compact
+                  options={priOptions}
+                  onChange={(e)=>this.setState({priFilter: e.target.innerText})}
+                  placeholder="All" />
+              </Table.HeaderCell>
+              <Table.HeaderCell
+                textAlign="center">
+                <Dropdown
+                  simple
+                  compact
+                  options={statOptions}
+                  onChange={(e)=>this.setState({statFilter: e.target.innerText.toLowerCase()})}
+                  placeholder="Active" />
+              </Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">
+                Description
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {this.eachTicket()}
+          </Table.Body>
+        </Table>
       </Fragment>
     )
   }
