@@ -141,7 +141,7 @@ class TicketsList extends React.Component{
                   compact
                   options={statOptions}
                   onChange={(e)=>this.setState({statFilter: e.target.innerText.toLowerCase()})}
-                  placeholder="Active" />
+                  placeholder="All" />
               </Table.HeaderCell>
               <Table.HeaderCell textAlign="center">
                 Description
