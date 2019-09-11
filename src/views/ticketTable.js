@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Dropdown, Divider, Label, Icon, Table } from 'semantic-ui-react'
+import { Dropdown, Label, Icon, Table } from 'semantic-ui-react'
 
 class TicketsList extends React.Component{
 
