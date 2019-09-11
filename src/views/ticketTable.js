@@ -2,58 +2,39 @@ import React, { Fragment } from 'react'
 import withAuth from '../hocs/withAuth'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Card, Dropdown, Divider, Label, Icon } from 'semantic-ui-react'
+import { Dropdown, Divider, Label, Icon, Table } from 'semantic-ui-react'
 
-class TicketCardList extends React.Component{
-
-  state = {
-    sort: "",
-    sortStat: ""
-  }
-
-  eachTicket = () => {
-    const { tickets } = this.props.company
-    if (tickets) {
-      return tickets.map(tic=>{
-        return (this.state.sort === tic.priority || !this.state.sort) && (this.state.sortStat === tic.ticket_status || !this.state.sortStat)
-        ? (<Card key={tic.id} id={tic.id} onClick={(e)=>window.location.replace(`${window.location.origin}/tickets/${tic.id}`)}>
-            <Card.Content>
-              <Label
-                ribbon
-                color={tic.priority === "High" ? 'red' : tic.priority === "Medium" ? 'yellow' : 'green'}>
-                <Icon className={tic.priority === "High" ? 'bomb' : tic.priority === "Medium" ? 'fire extinguisher' : 'bed'} />
-                {tic.priority} Priority
-              </Label>
-              <br />
-              <br />
-              <Card.Header>{tic.title}</Card.Header>
-              <Card.Meta>{tic.category}</Card.Meta>
-              <Divider />
-              <Card.Description>
-                {tic.description.length > 30 ? tic.description.substr(0,30).concat(' ...') : tic.description}
-              </Card.Description>
-            <Divider />
-              <b>Status: </b><Label color={tic.ticket_status === "Open" ? 'purple' : tic.ticket_status === "Pending" ? 'blue' : 'grey'}>{tic.ticket_status}</Label>
-            </Card.Content>
-          </Card>) : null
-        }
-      )
-    }
-  }
+class TicketsList extends React.Component{
 
   render() {
     console.log("ticketsList State", this.state);
     console.log("ticketsList props", this.props);
 
-    const priOptions = [
-      { key: 'high', text: 'High', value: 'High' },
-      { key: 'medium', text: 'Medium', value: 'Medium' },
-      { key: 'low', text: 'Low', value: 'Low' }
-    ]
     const statOptions = [
-      { key: 'open', text: 'Open', value: 'Open' },
-      { key: 'pending', text: 'Pending', value: 'Pending' },
-      { key: 'closed', text: 'Closed', value: 'Closed' }
+      { key: 'Open', text: 'Open', value: 'Open' },
+      { key: 'Closed', text: 'Closed', value: 'Closed' },
+      { key: 'Pending', text: 'Pending', value: 'Pending' }
+    ]
+
+    const priOptions = [
+      { key: 'High', text: 'High', value: 'High' },
+      { key: 'Medium', text: 'Medium', value: 'Medium' },
+      { key: 'Low', text: 'Low', value: 'Low' }
+    ]
+
+    const colorOptions = [
+      { key: 'Clear', text: 'Clear', value: 'Clear' },
+      { key: 'Orange', text: 'Orange', value: 'Orange', label: { color: 'orange', empty: true, circular: true } },
+      { key: 'Yellow', text: 'Yellow', value: 'Yellow', label: { color: 'yellow', empty: true, circular: true } },
+      { key: 'Olive', text: 'Olive', value: 'Olive', label: { color: 'olive', empty: true, circular: true } },
+      { key: 'Teal', text: 'Teal', value: 'Teal', label: { color: 'teal', empty: true, circular: true } },
+      { key: 'Blue', text: 'Blue', value: 'Blue', label: { color: 'blue', empty: true, circular: true } },
+      { key: 'Violet', text: 'Violet', value: 'Violet', label: { color: 'violet', empty: true, circular: true } },
+      { key: 'Purple', text: 'Purple', value: 'Purple', label: { color: 'purple', empty: true, circular: true } },
+      { key: 'Pink', text: 'Pink', value: 'Pink', label: { color: 'pink', empty: true, circular: true } },
+      { key: 'Brown', text: 'Brown', value: 'Brown', label: { color: 'brown', empty: true, circular: true } },
+      { key: 'Grey', text: 'Grey', value: 'Grey', label: { color: 'grey', empty: true, circular: true } },
+      { key: 'Black', text: 'Black', value: 'Black', label: { color: 'black', empty: true, circular: true } }
     ]
 
     return (
@@ -65,24 +46,6 @@ class TicketCardList extends React.Component{
             <i className="icon add circle" />Add Ticket
           </div>
         </Link>
-        <br />
-        <br />
-        <Dropdown
-          selection
-          options={priOptions}
-          onChange={(e)=>this.setState({sort:e.target.innerText})}
-          placeholder="Filter by Priority" />
-        <span> </span>
-        <Dropdown
-          selection
-          options={statOptions}
-          onChange={(e)=>this.setState({sortStat:e.target.innerText})}
-          placeholder="Filter by Status" />
-        <br />
-        <br />
-        <div className="ui three cards">
-          {this.eachTicket()}
-        </div>
       </Fragment>
     )
   }
@@ -92,4 +55,4 @@ const mapStateToProps = ({...props}) => {
   return {...props}
 }
 
-export default withAuth(connect(mapStateToProps)(TicketCardList))
+export default withAuth(connect(mapStateToProps)(TicketsList))
