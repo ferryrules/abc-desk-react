@@ -30,7 +30,7 @@ class TicketCardList extends React.Component{
               <Card.Meta>{tic.category}</Card.Meta>
               <Divider />
               <Card.Description>
-                {tic.description.length > 30 ? tic.description.substr(0,30).concat(' ...') : tic.description}
+                {tic.description.length > 50 ? tic.description.substr(0,50).concat(' ...') : tic.description}
               </Card.Description>
             <Divider />
               <b>Status: </b><Label color={tic.ticket_status === "Open" ? 'purple' : tic.ticket_status === "Pending" ? 'blue' : 'grey'}>{tic.ticket_status}</Label>

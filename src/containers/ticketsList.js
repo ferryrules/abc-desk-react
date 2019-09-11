@@ -9,7 +9,7 @@ import TicketCardList from '../views/ticketCardList.js'
 class TicketsView extends Component {
 
   state = {
-    view: 'Cards'
+    view: 'Table'
   }
 
   render() {
